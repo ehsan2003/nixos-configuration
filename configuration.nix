@@ -1,1 +1,0 @@
-configuration.laptop.nix
