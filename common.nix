@@ -87,14 +87,36 @@
   home-manager.users.ehsan= { pkgs, ... }: {
     home.stateVersion = "22.11";
     home.file.i3Config = import ./i3-config.nix {pkgs = pkgs;};
-    programs.bash.enable = true ;
-    programs.rofi.theme = "Adapta-Nokto" ;
-    programs.rofi.enable = true ;
-    programs.firefox.enable=true;
-    programs.firefox.profiles.default.search.default = "DuckDuckGo";
-    programs.firefox.profiles.default.settings = {
-      "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org" ;
+    programs = {
+      bash.enable = true ;      
+      
+      helix = {
+        enable = true ;
+        settings = {
+          theme = "tokyonight" ;
+        };
+      };      
+      
+      rofi = {
+        enable = true ;
+        theme = "Adapta-Nokto" ;
+      };
+
+      git = {
+        enable = true ;
+        userName = "ehsan" ;
+        userEmail = "ehsan2003.2003.382@gmail.com";
+      };
+      
+      firefox = {
+        enable=true;      
+        profiles.default.search.default = "DuckDuckGo";    
+        profiles.default.settings = {
+          "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org" ;
+        };
+      };      
     };
+    
   };
   environment.shells = with pkgs; [ zsh ]; 
   # List packages installed in system profile. To search, run:
