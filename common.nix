@@ -107,14 +107,7 @@
         userName = "ehsan" ;
         userEmail = "ehsan2003.2003.382@gmail.com";
       };
-      
-      firefox = {
-        enable=true;      
-        profiles.default.search.default = "DuckDuckGo";    
-        profiles.default.settings = {
-          "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org" ;
-        };
-      };      
+                 
     };
     
   };
