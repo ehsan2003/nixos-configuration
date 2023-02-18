@@ -12,11 +12,12 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-#  boot.loader.systemd-boot.enable = true;
+ # boot.loader.systemd-boot.enable = true;
   boot.loader.grub.device="nodev";
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber=true;
 
+  boot.cleanTmpDir = true ;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Pick only one of the below networking options.
@@ -91,7 +92,14 @@
   home-manager.users.ehsan= { pkgs, ... }: {
     home.stateVersion = "22.11";
     home.file.i3Config = import ./i3-config.nix {pkgs = pkgs;};
-    programs.bash.enable = true;
+    programs.bash.enable = true ;
+    programs.rofi.theme = "Adapta-Nokto" ;
+    programs.rofi.enable = true ;
+    programs.firefox.enable=true;
+    programs.firefox.profiles.default.search.default = "DuckDuckGo";
+    programs.firefox.profiles.default.settings = {
+      "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org" ;
+    };
   };
   environment.shells = with pkgs; [ zsh ]; 
   # List packages installed in system profile. To search, run:
