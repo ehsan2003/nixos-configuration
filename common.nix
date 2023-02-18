@@ -123,21 +123,25 @@
 
   # $ nix search wget
    environment.systemPackages = with pkgs; [
+     # editors
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     helix
+     neovim
+
+     # Netowrk
      wget
      curl
-     tdesktop
+     aria2
+     clash
+
+     # Programming
      nodejs
      yarn
-     neovim
-     qv2ray
-     chromium
      python39
      git
-     aria2
+
+     # Window manager and utils
      rofi
-     clash
-     patchelf
      xorg.xmodmap
      libnotify
      dunst 
@@ -147,11 +151,22 @@
      rofi
      flameshot
      i3status
-     nitrogen
-     tor-browser-bundle-bin
+    
+     # Absolute Utils
      killall 
      htop
-     helix
+    
+     # Sane Applications
+     tdesktop
+     chromium
+     tor-browser-bundle-bin
+
+     # media stuff
+     obs-studio
+     ffmpeg
+     vlc 
+     smplayer
+    
   ];
   virtualisation.docker.enable = true;
   programs.zsh.enable = true; 
