@@ -16,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Pick only one of the below networking options.
-#  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
@@ -25,7 +25,9 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+  ];
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -56,10 +58,7 @@
   services.xserver.windowManager.i3.enable = true;
   # Configure keymap in X11
   services.xserver.layout = "us,ir";
- services.xserver.xkbOptions = 
-  "eurosign:e,caps:escape, grp:shifts_toggle";
-#  "caps:escape" # map caps to escape.
-# ];
+  services.xserver.xkbOptions = "eurosign:e,caps:escape, grp:shifts_toggle";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -84,8 +83,16 @@
   };
 
   home-manager.users.ehsan= { pkgs, ... }: {
+    home.shellAliases = {
+      v = "nvim";
+    };
     home.stateVersion = "22.11";
     home.file.i3Config = import ./i3-config.nix {pkgs = pkgs;};
+    home.file.astroNvim = {
+      enable =  true; 
+      source = (fetchGit {url ="https://github.com/AstroNvim/AstroNvim";}).outPath;
+      target = ".config/nvim";
+    };
     programs = {
       bash.enable = true ;      
       
@@ -100,7 +107,12 @@
         enable = true ;
         theme = "Adapta-Nokto" ;
       };
-
+      alacritty = {
+        enable = true; 
+        settings = {
+          font.size = 18; 
+        };
+      };
       git = {
         enable = true ;
         userName = "ehsan" ;
@@ -131,7 +143,11 @@
      yarn
      python39
      git
+     gcc
+     cargo
+     rustc
 
+     alacritty
      # Window manager and utils
      rofi
      xorg.xmodmap
@@ -158,10 +174,14 @@
      ffmpeg
      vlc 
      smplayer
+     mplayer
     
   ];
   virtualisation.docker.enable = true;
   programs.zsh.enable = true; 
+  programs.zsh.shellAliases = {
+    v = "nvim";
+  };
   programs.zsh.ohMyZsh = {
     enable = true;
     plugins = [ "git" "python" "man" "vi-mode" ];
