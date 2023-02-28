@@ -93,6 +93,12 @@
       source = (fetchGit {url ="https://github.com/AstroNvim/AstroNvim";}).outPath;
       target = ".config/nvim";
     };
+    home.file.astroNvimConfig = {
+      enable =  true; 
+      text = builtins.readFile ./astronvim.init.lua;
+      target = ".config/astronvim/lua/user/init.lua";
+    };
+
     programs = {
       bash.enable = true ;      
       
