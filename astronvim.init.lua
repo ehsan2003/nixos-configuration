@@ -310,14 +310,6 @@ local config = {
 		-- use mason-lspconfig to configure LSP installations
 		["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
 			ensure_installed = { 
-    		"autopep8",
-    		"css-lsp",
-    		"emmet-ls",
-    		"prettier",
-    		"pyright",
-    		"svelte-language-server",
-    		"tailwindcss-language-server",
-    		"typescript-language-server",
 			},
 		},
 		-- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
