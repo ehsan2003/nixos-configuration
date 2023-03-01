@@ -82,7 +82,7 @@
     ];
   };
 
-  home-manager.users.ehsan= { pkgs, ... }: {
+  home-manager.users.ehsan =  {
     home.shellAliases = {
       v = "nvim";
     };
@@ -115,9 +115,6 @@
       };
       alacritty = {
         enable = true; 
-        settings = {
-          font.size = 18; 
-        };
       };
       git = {
         enable = true ;

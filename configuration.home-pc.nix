@@ -5,5 +5,6 @@
 
   boot.loader.systemd-boot.enable = true;
   
+  home-manager.users.ehsan.programs.alacritty.settings.font.size=18;
   services.xserver.dpi = 120 ;
 }
