@@ -98,7 +98,7 @@
       text = builtins.readFile ./astronvim.init.lua;
       target = ".config/astronvim/lua/user/init.lua";
     };
-
+    
     programs = {
       bash.enable = true ;      
       
@@ -127,7 +127,9 @@
   };
   environment.shells = with pkgs; [ zsh ]; 
   # List packages installed in system profile. To search, run:
-
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+      "discord"
+    ];
   # $ nix search wget
    environment.systemPackages = with pkgs; [
      # editors
@@ -171,8 +173,11 @@
      htop
      unzip
      ripgrep
+     jcal
+
     
      # Sane Applications
+     discord
      tdesktop
      chromium
      tor-browser-bundle-bin
