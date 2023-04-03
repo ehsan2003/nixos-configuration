@@ -149,6 +149,9 @@
      gcc
      cargo
      rustc
+     deno
+     rust-analyzer
+
 
      alacritty
      # Window manager and utils
@@ -166,6 +169,8 @@
      # Absolute Utils
      killall 
      htop
+     unzip
+     ripgrep
     
      # Sane Applications
      tdesktop
