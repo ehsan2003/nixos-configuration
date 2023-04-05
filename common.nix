@@ -142,6 +142,7 @@
      curl
      aria2
      clash
+     openvpn
 
      # Programming
      nodejs
@@ -213,6 +214,7 @@
   # List services that you want to enable:
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
