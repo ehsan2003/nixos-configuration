@@ -23,9 +23,9 @@
   time.timeZone = "Asia/Tehran";
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://localhost:1080";
+  networking.proxy.default = "http://localhost:1080";
   services.openvpn.servers = {
-    officeVPN  = { 
+    vpn  = { 
       config = '' config /etc/openvpn/client.conf ''; 
       updateResolvConf= true;
     };
