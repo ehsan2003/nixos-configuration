@@ -23,8 +23,13 @@
   time.timeZone = "Asia/Tehran";
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  # networking.proxy.default = "http://localhost:1080";
+  services.openvpn.servers = {
+    officeVPN  = { 
+      config = '' config /etc/openvpn/client.conf ''; 
+      updateResolvConf= true;
+    };
+  };
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
   ];
