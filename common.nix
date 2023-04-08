@@ -26,6 +26,7 @@
   networking.proxy.default = "http://localhost:1080";
   services.openvpn.servers = {
     vpn  = { 
+      autoStart = false;
       config = '' config /etc/openvpn/client.conf ''; 
       updateResolvConf= true;
     };
