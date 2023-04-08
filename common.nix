@@ -43,7 +43,16 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+  systemd.services.xray = {
+    enable = true; 
+    description = "xray core";
+    after = ["network.target"];
+    serviceConfig = {
+      Restart="always";
+      ExecStart="${pkgs.xray}/bin/xray run -config /etc/xray/config.json";
+    };
+    wantedBy = ["multi-user.target"];
+  };
   systemd.services.clash = {
     enable = true; 
     description = "clash tunnel";
@@ -148,6 +157,7 @@
      aria2
      clash
      openvpn
+     xray
 
      # Programming
      nodejs
