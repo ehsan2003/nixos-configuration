@@ -3,21 +3,24 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
- 
+
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      "${(fetchTarball https://github.com/nix-community/home-manager/archive/master.tar.gz)}/nixos"
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    "${
+      (fetchTarball
+        "https://github.com/nix-community/home-manager/archive/master.tar.gz")
+    }/nixos"
+  ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.cleanTmpDir = true ;
+  boot.cleanTmpDir = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = ["ntfs"];
+  boot.supportedFilesystems = [ "ntfs" ];
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Asia/Tehran";
@@ -25,15 +28,14 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://localhost:1080";
   services.openvpn.servers = {
-    vpn  = { 
+    vpn = {
       autoStart = false;
-      config = '' config /etc/openvpn/client.conf ''; 
-      updateResolvConf= true;
+      config = "config /etc/openvpn/client.conf ";
+      updateResolvConf = true;
     };
   };
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
-  ];
+  fonts.fonts = with pkgs;
+    [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) ];
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -45,24 +47,24 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   systemd.services.xray = {
-    enable = true; 
+    enable = true;
     description = "xray core";
-    after = ["network.target"];
+    after = [ "network.target" ];
     serviceConfig = {
-      Restart="always";
-      ExecStart="${pkgs.xray}/bin/xray run -config /etc/xray/config.json";
+      Restart = "always";
+      ExecStart = "${pkgs.xray}/bin/xray run -config /etc/xray/config.json";
     };
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
   };
   systemd.services.clash = {
-    enable = true; 
+    enable = true;
     description = "clash tunnel";
-    after = ["network.target"];
+    after = [ "network.target" ];
     serviceConfig = {
-      Restart="always";
-      ExecStart="${pkgs.clash}/bin/clash -d /etc/clash";
+      Restart = "always";
+      ExecStart = "${pkgs.clash}/bin/clash -d /etc/clash";
     };
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
   };
 
   # Enable the GNOME Desktop Environment.
@@ -83,7 +85,7 @@
   hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-   services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = pkgs.zsh;
@@ -93,137 +95,126 @@
     packages = with pkgs; [
       firefox
       thunderbird
-      
+
     ];
   };
 
-  home-manager.users.ehsan =  {
-    home.shellAliases = {
-      v = "nvim";
-    };
+  home-manager.users.ehsan = {
+    home.shellAliases = { v = "nvim"; };
     home.stateVersion = "22.11";
-    home.file.i3Config = import ./i3-config.nix {pkgs = pkgs;};
+    home.file.i3Config = import ./i3-config.nix { pkgs = pkgs; };
     home.file.astroNvim = {
-      enable =  true; 
-      source = (fetchGit {url ="https://github.com/AstroNvim/AstroNvim";}).outPath;
+      enable = true;
+      source =
+        (fetchGit { url = "https://github.com/AstroNvim/AstroNvim"; }).outPath;
       target = ".config/nvim";
     };
     home.file.astroNvimConfig = {
-      enable =  true; 
+      enable = true;
       text = builtins.readFile ./astronvim.init.lua;
       target = ".config/astronvim/lua/user/init.lua";
     };
-    
+
     programs = {
-      bash.enable = true ;      
-      
+      bash.enable = true;
+
       helix = {
-        enable = true ;
-        settings = {
-          theme = "tokyonight" ;
-        };
-      };      
-      
+        enable = true;
+        settings = { theme = "tokyonight"; };
+      };
+
       rofi = {
-        enable = true ;
-        theme = "Adapta-Nokto" ;
+        enable = true;
+        theme = "Adapta-Nokto";
       };
-      alacritty = {
-        enable = true; 
-      };
+      alacritty = { enable = true; };
       git = {
-        enable = true ;
-        userName = "ehsan" ;
+        enable = true;
+        userName = "ehsan";
         userEmail = "ehsan2003.2003.382@gmail.com";
       };
-                 
+
     };
-    
+
   };
   nix.settings.experimental-features = "nix-command flakes";
-  environment.shells = with pkgs; [ zsh ]; 
+  environment.shells = with pkgs; [ zsh ];
   # List packages installed in system profile. To search, run:
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-      "discord"
-    ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (pkgs.lib.getName pkg) [ "discord" ];
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-     # editors
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     helix
-     neovim
+  environment.systemPackages = with pkgs; [
+    # editors
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    helix
+    neovim
 
-     # Netowrk
-     wget
-     curl
-     aria2
-     clash
-     openvpn
-     xray
+    # Netowrk
+    wget
+    curl
+    aria2
+    clash
+    openvpn
+    xray
 
-     # Programming
-     nodejs
-     yarn
-     python39
-     git
-     gcc
-     cargo
-     rustc
-     deno
-     rust-analyzer
-     nil
-     nixfmt
-     rustfmt
+    # Programming
+    nodejs
+    yarn
+    python39
+    git
+    gcc
+    cargo
+    rustc
+    deno
+    rust-analyzer
+    nil
+    nixfmt
+    rustfmt
 
+    alacritty
+    # Window manager and utils
+    rofi
+    xorg.xmodmap
+    libnotify
+    dunst
+    translate-shell
+    xsel
+    dunst
+    rofi
+    flameshot
+    i3status
 
+    # Absolute Utils
+    killall
+    htop
+    unzip
+    ripgrep
+    jcal
+    xarchiver
 
-     alacritty
-     # Window manager and utils
-     rofi
-     xorg.xmodmap
-     libnotify
-     dunst 
-     translate-shell
-     xsel
-     dunst
-     rofi
-     flameshot
-     i3status
-    
-     # Absolute Utils
-     killall 
-     htop
-     unzip
-     ripgrep
-     jcal
-     xarchiver
+    # Sane Applications
+    discord
+    tdesktop
+    chromium
+    tor-browser-bundle-bin
 
-    
-     # Sane Applications
-     discord
-     tdesktop
-     chromium
-     tor-browser-bundle-bin
+    # media stuff
+    obs-studio
+    ffmpeg
+    vlc
+    smplayer
+    mplayer
 
-     # media stuff
-     obs-studio
-     ffmpeg
-     vlc 
-     smplayer
-     mplayer
-    
   ];
   virtualisation.docker.enable = true;
-  programs.zsh.enable = true; 
-  programs.zsh.shellAliases = {
-    v = "nvim";
-  };
+  programs.zsh.enable = true;
+  programs.zsh.shellAliases = { v = "nvim"; };
   programs.zsh.ohMyZsh = {
     enable = true;
     plugins = [ "git" "python" "man" "vi-mode" ];
     theme = "robbyrussell";
-  }; 
-  
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
