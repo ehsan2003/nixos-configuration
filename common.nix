@@ -23,7 +23,7 @@
   time.timeZone = "Asia/Tehran";
 
   # Configure network proxy if necessary
-  networking.proxy.default = "http://localhost:1080";
+  # networking.proxy.default = "http://localhost:1080";
   services.openvpn.servers = {
     vpn  = { 
       autoStart = false;
@@ -140,6 +140,7 @@
     };
     
   };
+  nix.settings.experimental-features = "nix-command flakes";
   environment.shells = with pkgs; [ zsh ]; 
   # List packages installed in system profile. To search, run:
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
@@ -170,6 +171,10 @@
      rustc
      deno
      rust-analyzer
+     nil
+     nixfmt
+     rustfmt
+
 
 
      alacritty
@@ -191,6 +196,7 @@
      unzip
      ripgrep
      jcal
+     xarchiver
 
     
      # Sane Applications
@@ -230,7 +236,6 @@
   # List services that you want to enable:
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
