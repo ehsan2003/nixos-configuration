@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -21,7 +20,10 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable =
     true; # Easiest to use and most distros use this by default.
-
+  programs.git.config = {
+    init = { defaultBranch = "main"; };
+    url = { "https://github.com/" = { insteadOf = [ "gh:" "github:" ]; }; };
+  };
   # Set your time zone.
   time.timeZone = "Asia/Tehran";
 
@@ -53,6 +55,16 @@
     serviceConfig = {
       Restart = "always";
       ExecStart = "${pkgs.xray}/bin/xray run -config /etc/xray/config.json";
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
+  systemd.services.singbox = {
+    enable = true;
+    description = "sing box proxy stuff";
+    after = [ "network.target" ];
+    serviceConfig = {
+      Restart = "always";
+      ExecStart = "${pkgs.sing-box}/bin/sing-box run -c /etc/singbox/config.json";
     };
     wantedBy = [ "multi-user.target" ];
   };
@@ -129,6 +141,12 @@
       };
       alacritty = { enable = true; };
       git = {
+        extraConfig = {
+          init = { defaultBranch = "main"; };
+          url = {
+            "https://github.com/" = { insteadOf = [ "gh:" "github:" ]; };
+          };
+        };
         enable = true;
         userName = "ehsan";
         userEmail = "ehsan2003.2003.382@gmail.com";
