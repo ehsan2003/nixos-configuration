@@ -13,7 +13,7 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   # Pick only one of the below networking options.
@@ -102,6 +102,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = pkgs.zsh;
   users.users.ehsan = {
+    initialHashedPassword = "";
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -174,6 +175,9 @@
     clash
     openvpn
     xray
+    clash-verge
+    clash-meta
+    sing-box
 
     # Programming
     nodejs
@@ -224,6 +228,8 @@
     mplayer
 
   ];
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
   programs.zsh.enable = true;
   programs.zsh.shellAliases = { v = "nvim"; };
