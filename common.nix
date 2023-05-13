@@ -3,17 +3,20 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
+let 
+  unstable  = import <nixos-unstable> {};
+in
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     "${
       (fetchTarball
-        "https://github.com/nix-community/home-manager/archive/master.tar.gz")
+        "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz")
     }/nixos"
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.tmp.cleanOnBoot = true;
+ # boot.tmp.cleanOnBoot = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   # Pick only one of the below networking options.
@@ -64,7 +67,7 @@
     after = [ "network.target" ];
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${pkgs.sing-box}/bin/sing-box run -c /etc/singbox/config.json";
+      ExecStart = "${unstable.sing-box}/bin/sing-box run -c /etc/singbox/config.json";
     };
     wantedBy = [ "multi-user.target" ];
   };
@@ -117,13 +120,12 @@
     home.stateVersion = "22.11";
     home.file.i3Config = import ./i3-config.nix { pkgs = pkgs; };
     home.file.astroNvim = {
-      enable = true;
       source =
         (fetchGit { url = "https://github.com/AstroNvim/AstroNvim"; }).outPath;
       target = ".config/nvim";
     };
     home.file.astroNvimConfig = {
-      enable = true;
+      # enabled = true;
       text = builtins.readFile ./astronvim.init.lua;
       target = ".config/astronvim/lua/user/init.lua";
     };
@@ -175,9 +177,9 @@
     clash
     openvpn
     xray
-    clash-verge
-    clash-meta
-    sing-box
+    unstable.clash-verge
+    unstable.clash-meta
+    unstable.sing-box
 
     # Programming
     nodejs
@@ -185,13 +187,13 @@
     python39
     git
     gcc
-    cargo
-    rustc
-    deno
-    rust-analyzer
+    unstable.cargo
+    unstable.rustc
+    unstable.deno
+    unstable.rust-analyzer
     nil
     nixfmt
-    rustfmt
+    unstable.rustfmt
 
     alacritty
     # Window manager and utils
