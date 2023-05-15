@@ -16,7 +16,7 @@ in
   ];
 
   # Use the systemd-boot EFI boot loader.
- # boot.tmp.cleanOnBoot = true;
+  boot.tmp.cleanOnBoot = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   # Pick only one of the below networking options.
@@ -42,13 +42,14 @@ in
   fonts.fonts = with pkgs;
     [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) ];
   # Select internationalisation properties.
+  i18n.inputMethod.enabled = "fcitx5"; 
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
-
+  
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   systemd.services.xray = {
@@ -72,7 +73,7 @@ in
     wantedBy = [ "multi-user.target" ];
   };
   systemd.services.clash = {
-    enable = true;
+    enable = false;
     description = "clash tunnel";
     after = [ "network.target" ];
     serviceConfig = {
@@ -116,6 +117,11 @@ in
   };
 
   home-manager.users.ehsan = {
+    nixpkgs.overlays = [
+      (self: super: {
+        fcitx-engines = pkgs.fcitx5;
+      })
+    ];
     home.shellAliases = { v = "nvim"; };
     home.stateVersion = "22.11";
     home.file.i3Config = import ./i3-config.nix { pkgs = pkgs; };
