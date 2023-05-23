@@ -16,7 +16,7 @@ in
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.tmp.cleanOnBoot = true;
+  boot.cleanTmpDir = true 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   # Pick only one of the below networking options.
@@ -178,7 +178,6 @@ in
   environment.systemPackages = with pkgs; [
     # editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    helix
     neovim
 
     # Netowrk
@@ -205,6 +204,9 @@ in
     nil
     nixfmt
     unstable.rustfmt
+    docker-compose
+    cloc
+    nix-output-monitor
 
     alacritty
     # Window manager and utils
