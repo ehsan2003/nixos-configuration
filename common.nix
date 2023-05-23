@@ -98,8 +98,13 @@ in
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.enable = true;
 
+  hardware.pulseaudio = {
+    enable = true;
+    # extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
@@ -255,6 +260,7 @@ in
   #   enableSSHSupport = true;
   # };
   hardware.bluetooth.enable = true;
+
   services.blueman.enable = true;
   # List services that you want to enable:
   # Enable the OpenSSH daemon.
