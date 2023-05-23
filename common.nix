@@ -16,7 +16,7 @@ in
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.cleanTmpDir = true 
+  boot.cleanTmpDir = true ;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   # Pick only one of the below networking options.
