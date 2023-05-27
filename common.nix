@@ -102,7 +102,7 @@ in
 
   hardware.pulseaudio = {
     enable = true;
-    # extraModules = [ pkgs.pulseaudio-modules-bt ];
+    extraConfig = "load-module module-combine-sink";
     package = pkgs.pulseaudioFull;
   };
   # Enable touchpad support (enabled default in most desktopManager).
