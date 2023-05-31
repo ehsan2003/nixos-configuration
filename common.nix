@@ -3,10 +3,8 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let 
-  unstable  = import <nixos-unstable> {};
-in
-{
+let unstable = import <nixos-unstable> { };
+in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     "${
@@ -16,7 +14,7 @@ in
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.cleanTmpDir = true ;
+  boot.cleanTmpDir = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   # Pick only one of the below networking options.
@@ -42,14 +40,14 @@ in
   fonts.fonts = with pkgs;
     [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) ];
   # Select internationalisation properties.
-  i18n.inputMethod.enabled = "fcitx5"; 
+  i18n.inputMethod.enabled = "fcitx5";
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
-  
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   systemd.services.xray = {
@@ -68,7 +66,8 @@ in
     after = [ "network.target" ];
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${unstable.sing-box}/bin/sing-box run -c /etc/singbox/config.json";
+      ExecStart =
+        "${unstable.sing-box}/bin/sing-box run -c /etc/singbox/config.json";
     };
     wantedBy = [ "multi-user.target" ];
   };
@@ -122,11 +121,7 @@ in
   };
 
   home-manager.users.ehsan = {
-    nixpkgs.overlays = [
-      (self: super: {
-        fcitx-engines = pkgs.fcitx5;
-      })
-    ];
+    nixpkgs.overlays = [ (self: super: { fcitx-engines = pkgs.fcitx5; }) ];
     home.shellAliases = { v = "nvim"; };
     home.stateVersion = "22.11";
     home.file.i3Config = import ./i3-config.nix { pkgs = pkgs; };
@@ -247,7 +242,11 @@ in
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
   programs.zsh.enable = true;
-  programs.zsh.shellAliases = { v = "nvim"; };
+  programs.zsh.shellAliases = {
+    v = "nvim";
+    sp = "export HTTPS_PROXY=http://localhost:1080;";
+    ssp = "sudo HTTPS_PROXY=http://localhost:1080 -s";
+  };
   programs.zsh.ohMyZsh = {
     enable = true;
     plugins = [ "git" "python" "man" "vi-mode" ];
@@ -259,8 +258,7 @@ in
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
   #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  #   enableSSHSupport = true; };
   hardware.bluetooth.enable = true;
 
   services.blueman.enable = true;
