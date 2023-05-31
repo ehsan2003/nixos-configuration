@@ -231,7 +231,7 @@ in
 
     # Sane Applications
     discord
-    tdesktop
+    unstable.tdesktop
     chromium
     tor-browser-bundle-bin
 
