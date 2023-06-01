@@ -207,6 +207,7 @@ in {
     translate-shell
     xsel
     dunst
+    dmenu
     rofi
     flameshot
     i3status
