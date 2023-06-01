@@ -139,11 +139,6 @@ in {
     programs = {
       bash.enable = true;
 
-      helix = {
-        enable = true;
-        settings = { theme = "tokyonight"; };
-      };
-
       rofi = {
         enable = true;
         theme = "Adapta-Nokto";
