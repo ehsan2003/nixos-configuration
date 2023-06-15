@@ -1,23 +1,15 @@
-
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-{
-  imports = [];
-
+{ config, pkgs, ... }: {
+  imports = [ ];
   fonts.fonts = with pkgs;
-    [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) ];
-  # Select internationalisation properties.
-  i18n.inputMethod.enabled = "fcitx5";
+    [
+      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+    ]; # Select internationalisation properties. i18n.inputMethod.enabled = "fcitx5";
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    # keyMap = "us";
     useXkbConfig = true; # use xkbOptions in tty.
   };
-  
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   # Enable the GNOME Desktop Environment.
@@ -25,8 +17,7 @@
   # services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.windowManager.i3.enable = true;
-  # Configure keymap in X11
+  services.xserver.windowManager.i3.enable = true; # Configure keymap in X11
   services.xserver.layout = "us,ir";
   services.xserver.xkbOptions = "eurosign:e,caps:escape, grp:shifts_toggle";
 
@@ -59,4 +50,4 @@
     flameshot
     i3status
   ];
- }
+}

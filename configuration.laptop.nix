@@ -7,33 +7,29 @@
   boot.loader.grub.useOSProber = true;
 
   users.users.test = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-      packages = with pkgs; [
-        firefox
-        thunderbird
-        
-      ];
-  };
-  home-manager.users.test =  {
-      home.shellAliases = {
-        v = "nvim";
-      };
-      home.stateVersion = "22.11";
-      # home.file.i3Config = import ./i3-config.nix {pkgs = pkgs;};
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      firefox
+      thunderbird
 
-      programs = {
-        bash.enable = true ;      
-        
-        rofi = {
-          enable = true ;
-          theme = "Adapta-Nokto" ;
-        };
-        alacritty = {
-          enable = true; 
-        };
+    ];
+  };
+  home-manager.users.test = {
+    home.shellAliases = { v = "nvim"; };
+    home.stateVersion = "22.11";
+    # home.file.i3Config = import ./i3-config.nix {pkgs = pkgs;};
+
+    programs = {
+      bash.enable = true;
+
+      rofi = {
+        enable = true;
+        theme = "Adapta-Nokto";
       };
-      
+      alacritty = { enable = true; };
+    };
+
   };
 
   services.xserver.displayManager.sessionCommands =

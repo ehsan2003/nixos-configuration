@@ -7,17 +7,16 @@ in {
   boot.tmp.cleanOnBoot = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
-  # Pick only one of the below networking options.
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable =
     true; # Easiest to use and most distros use this by default.
-  
-  # Set your time zone.
+
   time.timeZone = "Asia/Tehran";
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ehsan = {
-    hashedPassword = "$y$j9T$2nOFoeEIw1pVXxpVrAvNb1$LRGyoksEO8Z8G36xU4d3Jdm8BIm9hYfmWZpK8SQQK3D";
+    hashedPassword =
+      "$y$j9T$2nOFoeEIw1pVXxpVrAvNb1$LRGyoksEO8Z8G36xU4d3Jdm8BIm9hYfmWZpK8SQQK3D";
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -31,20 +30,18 @@ in {
     nixpkgs.overlays = [ (self: super: { fcitx-engines = pkgs.fcitx5; }) ];
     home.shellAliases = { v = "nvim"; };
     home.stateVersion = "22.11";
- };
+  };
   nix.settings.experimental-features = "nix-command flakes";
-  # List packages installed in system profile. To search, run:
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (pkgs.lib.getName pkg) [ "discord" ];
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # Sane Applications
+    xarchiver
     discord
     unstable.tdesktop
     chromium
     tor-browser-bundle-bin
   ];
-  
+
   services.openssh.enable = true;
   programs.mosh.enable = true;
   # Open ports in the firewall.

@@ -2,9 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-{
-  imports = [];
+{ config, pkgs, ... }: {
+  imports = [ ];
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
@@ -24,8 +23,8 @@
     unzip
     ripgrep
     jcal
-    xarchiver
     v4l-utils
+    github-cli
   ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
