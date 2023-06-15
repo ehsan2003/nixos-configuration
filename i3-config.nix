@@ -4,7 +4,7 @@ let
   notitrans-fa = (import ./lib/notitrans-fa.nix { pkgs = pkgs; });
   notitrans-en = (import ./lib/notitrans-en.nix { pkgs = pkgs; });
   notitrans-dict = (import ./lib/notitrans-dict.nix { pkgs = pkgs; });
-  google-search = (import ./lib/google-search.nix { pkgs = pkgs; });
+  search-select = (import ./lib/search-select.nix { pkgs = pkgs; });
 in {
   target = ".config/i3/config";
   text = ''
@@ -208,7 +208,7 @@ in {
 
     bindsym $mod+t exec "${notitrans-fa}/bin/notitrans-fa"
     bindsym $mod+y exec "${notitrans-en}/bin/notitrans-en"
-    bindsym $mod+g exec "${google-search}/bin/google-search"
+    bindsym $mod+g exec "${search-select}/bin/search-select"
     bindsym $mod+x exec "${notitrans-dict}/bin/notitrans-dict"
 
     bindsym $mod+c exec "${pkgs.dunst}/bin/dunstctl history-pop"

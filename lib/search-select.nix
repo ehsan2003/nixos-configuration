@@ -1,10 +1,10 @@
 { pkgs, ... }:
 with pkgs;
 writeShellApplication {
-  name = "google-search";
+  name = "search-select";
   runtimeInputs = [ firefox xsel ];
   text = ''
     text=$(xsel -o)
-    firefox --new-tab "https://www.google.com/search?q=$text"  
+    firefox --search "$text"  
   '';
 }
