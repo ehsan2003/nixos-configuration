@@ -8,6 +8,10 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
 
+  boot.loader.grub.device = "nodev";
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.useOSProber = true;
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable =
     true; # Easiest to use and most distros use this by default.
@@ -16,14 +20,9 @@ in {
 
   users.users.ehsan = {
     hashedPassword =
-      "$y$j9T$2nOFoeEIw1pVXxpVrAvNb1$LRGyoksEO8Z8G36xU4d3Jdm8BIm9hYfmWZpK8SQQK3D";
+      "$y$j9T$2nOFoeEIw1pVXxpVrAvNb1$LRGyoksEO8Z8G36xU4d3Jdm8BIm9hYfmWZpK8SQQK3D"; # ehsan
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      firefox
-      thunderbird
-
-    ];
   };
 
   home-manager.users.ehsan = {
@@ -34,13 +33,7 @@ in {
   nix.settings.experimental-features = "nix-command flakes";
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (pkgs.lib.getName pkg) [ "discord" ];
-  environment.systemPackages = with pkgs; [
-    xarchiver
-    discord
-    unstable.tdesktop
-    chromium
-    tor-browser-bundle-bin
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   services.openssh.enable = true;
   programs.mosh.enable = true;

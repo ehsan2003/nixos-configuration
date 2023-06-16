@@ -1,4 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: 
+let unstable = import <nixos-unstable> { };
+in {
   imports = [ ];
   fonts.fonts = with pkgs;
     [
@@ -49,5 +51,13 @@
     rofi
     flameshot
     i3status
+
+    firefox
+    xarchiver
+    discord
+    unstable.tdesktop
+    chromium
+    tor-browser-bundle-bin
+
   ];
 }
