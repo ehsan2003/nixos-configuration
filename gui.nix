@@ -49,5 +49,13 @@
     rofi
     flameshot
     i3status
+
+    firefox
+    xarchiver
+    discord
+    unstable.tdesktop
+    chromium
+    tor-browser-bundle-bin
+
   ];
 }
