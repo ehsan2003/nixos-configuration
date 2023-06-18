@@ -4,6 +4,8 @@
     ./common.nix
   ];
 
+  isoImage.squashfsCompression = "gzip -Xcompression-level 1";
+  isoImage.compressImage = false;
   # use the latest Linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 

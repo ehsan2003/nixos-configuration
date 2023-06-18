@@ -33,7 +33,17 @@ in {
   nix.settings.experimental-features = "nix-command flakes";
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (pkgs.lib.getName pkg) [ "discord" ];
-  environment.systemPackages = with pkgs; [ ];
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball
+      "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+        inherit pkgs;
+      };
+  };
+  environment.systemPackages = with pkgs; [
+    (import ./lib/setup.nix { inherit pkgs; })
+    (import ./lib/restore.nix { inherit pkgs; })
+    (import ./lib/backup.nix { inherit pkgs; })
+  ];
 
   services.openssh.enable = true;
   programs.mosh.enable = true;
