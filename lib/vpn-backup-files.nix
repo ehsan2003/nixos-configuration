@@ -1,1 +1,1 @@
-[ "/etc/openvpn/" "/etc/singbox/" ]
+[ "/etc/openvpn/" "/etc/proxy/" ]

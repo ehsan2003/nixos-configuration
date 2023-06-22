@@ -12,17 +12,23 @@ in {
       updateResolvConf = true;
     };
   };
-  systemd.services.singbox = {
+  
+  systemd.services.proxy = {
     enable = true;
-    description = "sing box proxy stuff";
+    description = "main proxy for system";
     after = [ "network.target" ];
     serviceConfig = {
       Restart = "always";
-      ExecStart =
-        "${unstable.sing-box}/bin/sing-box run -c /etc/singbox/config.json";
+      ExecStart = "/etc/proxy/main.sh";
     };
+    path = with pkgs ; [
+      clash
+      xray
+      unstable.sing-box
+    ];
     wantedBy = [ "multi-user.target" ];
   };
+
   programs.zsh.shellAliases.sp = "export HTTPS_PROXY=http://localhost:1080;";
   programs.zsh.shellAliases.ssp = "sudo HTTPS_PROXY=http://localhost:1080 -s";
 
