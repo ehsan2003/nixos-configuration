@@ -10,7 +10,7 @@ in {
   };
   environment.systemPackages = with pkgs; [
     obs-studio
-    ffmpeg
+    ffmpeg-full
     vlc
     smplayer
     mplayer

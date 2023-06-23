@@ -9,8 +9,8 @@
     ./programming.nix
     ./gui.nix
     ./shell.nix
-    ./utils.nix
     ./hardware-configuration.nix
+    ./utils.nix
     "${
       (fetchTarball
         "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz")

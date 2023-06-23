@@ -12,7 +12,7 @@ in {
       updateResolvConf = true;
     };
   };
-  
+
   systemd.services.proxy = {
     enable = true;
     description = "main proxy for system";
@@ -21,11 +21,7 @@ in {
       Restart = "always";
       ExecStart = "/etc/proxy/main.sh";
     };
-    path = with pkgs ; [
-      clash
-      xray
-      unstable.sing-box
-    ];
+    path = with pkgs; [ clash xray unstable.sing-box ];
     wantedBy = [ "multi-user.target" ];
   };
 
