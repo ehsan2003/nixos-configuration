@@ -4,6 +4,12 @@
     ./common.nix
   ];
 
+  environment.etc.proxy = {
+    enable =  true;
+    mode = "0755";
+    source = /etc/proxy/main.sh;
+    target="proxy/main.sh";
+  };
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
   isoImage.compressImage = false;
   # use the latest Linux kernel
