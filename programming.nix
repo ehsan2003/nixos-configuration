@@ -31,14 +31,21 @@ in {
     unstable.cargo
     unstable.rustc
     unstable.deno
-    unstable.rust-analyzer
-    nil
     nixfmt
     unstable.rustfmt
     docker-compose
     cloc
     nix-output-monitor
 
+    unstable.rust-analyzer
+    pyright
+    nil
+    nodePackages.typescript-language-server
+    nodePackages.typescript
+    nodePackages.prettier
+    llvmPackages_15.clang-unwrapped
+    lua-language-server
+    stylua
   ];
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ehsan" ];
