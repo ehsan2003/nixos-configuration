@@ -32,6 +32,7 @@ in {
     clash
     openvpn
     xray
+    v2ray
     unstable.clash-verge
     unstable.clash-meta
     unstable.sing-box
