@@ -23,6 +23,9 @@
     unzip
     ripgrep
     jcal
+    jq
+    ddgr
+    pup
     v4l-utils
     github-cli
   ];
