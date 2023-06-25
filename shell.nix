@@ -8,6 +8,10 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   # $ nix search wget
+  environment.variables ={
+    EDITOR="nvim";
+    VISUAL="nvim";
+  };
   environment.systemPackages = with pkgs; [
     # editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -22,6 +26,8 @@
     htop
     unzip
     ripgrep
+    fd
+    bat
     jcal
     jq
     ddgr
