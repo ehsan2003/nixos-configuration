@@ -50,7 +50,7 @@ in {
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
-  programs.zsh.shellAliases.v = "nvim";
+  environment.shellAliases.v = "nvim";
   programs.git.config = {
     init = { defaultBranch = "main"; };
     url = { "https://github.com/" = { insteadOf = [ "gh:" "github:" ]; }; };

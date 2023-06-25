@@ -27,7 +27,6 @@ in {
 
   home-manager.users.ehsan = {
     nixpkgs.overlays = [ (self: super: { fcitx-engines = pkgs.fcitx5; }) ];
-    home.shellAliases = { v = "nvim"; };
     home.stateVersion = "22.11";
   };
   nix.settings.experimental-features = "nix-command flakes";
