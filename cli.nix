@@ -32,6 +32,7 @@
     jq
     ddgr
     pup
+    tmux
     v4l-utils
     github-cli
   ];
