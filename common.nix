@@ -8,7 +8,7 @@
     ./media.nix
     ./programming.nix
     ./gui.nix
-    ./shell.nix
+    ./cli.nix
     ./hardware-configuration.nix
     ./utils.nix
     "${
