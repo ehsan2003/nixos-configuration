@@ -9,6 +9,8 @@ writeShellApplication rec {
       -H 'content-type: application/json' \
       -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36' \
       --data-raw "$data" \
-      --compressed 2>/dev/null| jq '.delta' --join-output 
+      --compressed \
+      --silent \
+      | jq '.delta' --join-output 
   '';
 }
