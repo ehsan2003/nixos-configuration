@@ -35,6 +35,8 @@
     tmux
     v4l-utils
     github-cli
+    (import ./lib/ask.nix {inherit pkgs;})
+
   ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
