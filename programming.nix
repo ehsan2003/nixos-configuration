@@ -18,6 +18,9 @@ in {
         enable = true;
         userName = "ehsan";
         userEmail = "ehsan2003.2003.382@gmail.com";
+        extraConfig = {
+          init = { defaultBranch = "main"; };
+        };
       };
     };
   };
@@ -53,6 +56,5 @@ in {
   environment.shellAliases.v = "nvim";
   programs.git.config = {
     init = { defaultBranch = "main"; };
-    url = { "https://github.com/" = { insteadOf = [ "gh:" "github:" ]; }; };
   };
 }
