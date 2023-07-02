@@ -2,7 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: 
+  let urls= (import ./lib/uri-short.nix pkgs);
+in {
   imports = [ ];
 
   environment.shells = with pkgs; [ zsh ];
@@ -36,6 +38,7 @@
     v4l-utils
     github-cli
     (import ./lib/ask.nix {inherit pkgs;})
+    (urls "mathcha" "https://mathcha.io/editor")
 
   ];
   programs.zsh.enable = true;
