@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-let unstable = import <nixos-unstable> { };
-in {
+{ config, pkgs, ... }: {
   imports = [ ];
 
   # Use the systemd-boot EFI boot loader.
@@ -53,10 +51,10 @@ in {
 
   services.openssh.enable = true;
   programs.mosh.enable = true;
-  nix.gc = { 
+  nix.gc = {
     automatic = true;
-    dates="weekly";
-    persistent =true;
+    dates = "weekly";
+    persistent = true;
     options = "--delete-older-than 30d";
   };
   # Open ports in the firewall.

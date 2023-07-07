@@ -2,17 +2,17 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: 
-  let urls= (import ./lib/uri-short.nix pkgs);
+{ pkgs, ... }:
+let urls = (import ./lib/uri-short.nix pkgs);
 in {
   imports = [ ];
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   # $ nix search wget
-  environment.variables ={
-    EDITOR="nvim";
-    VISUAL="nvim";
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
   environment.systemPackages = with pkgs; [
     # editors
@@ -37,7 +37,7 @@ in {
     tmux
     v4l-utils
     github-cli
-    (import ./lib/ask.nix {inherit pkgs;})
+    (import ./lib/ask.nix { inherit pkgs; })
     (urls "mathcha" "https://mathcha.io/editor")
 
   ];

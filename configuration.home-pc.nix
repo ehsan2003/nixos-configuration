@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   imports = [ ./common.nix ];
   networking.hostName = "nixos-home-desktop"; # Define your hostname.
 
