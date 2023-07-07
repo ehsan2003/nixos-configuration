@@ -18,9 +18,7 @@ in {
         enable = true;
         userName = "ehsan";
         userEmail = "ehsan2003.2003.382@gmail.com";
-        extraConfig = {
-          init = { defaultBranch = "main"; };
-        };
+        extraConfig = { init = { defaultBranch = "main"; }; };
       };
     };
   };
@@ -54,7 +52,5 @@ in {
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
   environment.shellAliases.v = "nvim";
-  programs.git.config = {
-    init = { defaultBranch = "main"; };
-  };
+  programs.git.config = { init = { defaultBranch = "main"; }; };
 }

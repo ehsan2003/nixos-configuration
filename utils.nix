@@ -53,10 +53,10 @@ in {
 
   services.openssh.enable = true;
   programs.mosh.enable = true;
-  nix.gc = { 
+  nix.gc = {
     automatic = true;
-    dates="weekly";
-    persistent =true;
+    dates = "weekly";
+    persistent = true;
     options = "--delete-older-than 30d";
   };
   # Open ports in the firewall.

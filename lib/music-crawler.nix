@@ -1,4 +1,3 @@
-
 { pkgs, ... }:
 pkgs.writeShellApplication {
   name = "music-link";

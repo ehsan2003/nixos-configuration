@@ -2,7 +2,7 @@
 with pkgs;
 writeShellApplication rec {
   name = "ask";
-  runtimeInputs = [curl jq  ];
+  runtimeInputs = [ curl jq ];
   text = ''
     data=$(echo "$@" | jq -sR '{prompt:.,options:{}}')
     curl 'https://chatbot.theb.ai/api/chat-process' \
