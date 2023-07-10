@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-let unstable = import <nixos-unstable> { };
-in {
+{ config, pkgs, ... }: {
   imports = [ ];
 
   # Use the systemd-boot EFI boot loader.
@@ -38,7 +36,7 @@ in {
         inherit pkgs;
       };
   };
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     (import ./lib/setup.nix { inherit pkgs; })
     (import ./lib/restore.nix { inherit pkgs; })
     (import ./lib/backup.nix { inherit pkgs; })
@@ -53,6 +51,12 @@ in {
 
   services.openssh.enable = true;
   programs.mosh.enable = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    persistent = true;
+    options = "--delete-older-than 30d";
+  };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 with pkgs;
 let backupFiles = import ./vpn-backup-files.nix;
-in writeShellApplication rec {
+in writeShellApplication {
   name = "backup";
   runtimeInputs = [ ];
   text = ''

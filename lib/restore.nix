@@ -1,6 +1,6 @@
 { pkgs, ... }:
 with pkgs;
-writeShellApplication rec {
+writeShellApplication {
   name = "restore-backup";
   runtimeInputs = [ ];
   text = ''

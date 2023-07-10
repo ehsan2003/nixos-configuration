@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-let unstable = import <nixos-unstable> { };
-in {
+{ pkgs, ... }: {
   imports = [ ];
   sound.enable = true;
   hardware.pulseaudio = {
@@ -9,8 +7,8 @@ in {
     package = pkgs.pulseaudioFull;
   };
   environment.systemPackages = with pkgs; [
-    (import ./lib/music-crawler.nix {inherit pkgs;})
-    (import ./lib/music-play.nix {inherit pkgs;})
+    (import ./lib/music-crawler.nix { inherit pkgs; })
+    (import ./lib/music-play.nix { inherit pkgs; })
     obs-studio
     ffmpeg-full
     vlc
