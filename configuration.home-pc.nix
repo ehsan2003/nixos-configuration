@@ -21,6 +21,16 @@ in {
     EOF
   '';
 
+  services.create_ap = {
+    enable = true;
+    settings = {
+      INTERNET_IFACE = "enp6s0";
+      WIFI_IFACE = "wlp5s0";
+      SSID = "Home";
+      PASSPHRASE = "e1234567";
+    };
+  };
+
   # Make sure opengl is enabled
   hardware.opengl = {
     enable = true;
