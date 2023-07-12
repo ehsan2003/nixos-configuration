@@ -25,8 +25,8 @@ in {
     wantedBy = [ "multi-user.target" ];
   };
 
-  environment.shellAliases.sp = "export HTTPS_PROXY=socks5://localhost:1080;";
-  environment.shellAliases.ssp = "sudo HTTPS_PROXY=socks5://localhost:1080 -s";
+  environment.shellAliases.sp = "export https_proxy=http://localhost:1080;";
+  environment.shellAliases.ssp = "sudo https_proxy=http://localhost:1080 -s";
 
   environment.systemPackages = with pkgs; [
     clash
