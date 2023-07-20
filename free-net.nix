@@ -13,6 +13,17 @@ in {
     };
   };
 
+  systemd.services.v2raya = {
+    enable = true;
+    description = "v2rayA gui client";
+    after = [ "network.target" ];
+    serviceConfig = {
+      Restart = "always";
+      ExecStart = "${unstable.v2raya}/bin/v2rayA";
+    };
+    wantedBy = [ "multi-user.target" ];
+
+  };
   systemd.services.proxy = {
     enable = true;
     description = "main proxy for system";
@@ -21,7 +32,7 @@ in {
       Restart = "always";
       ExecStart = "/etc/proxy/main.sh";
     };
-    path = with pkgs; [ clash xray unstable.sing-box ];
+    path = with pkgs; [ clash xray unstable.sing-box unstable.v2raya ];
     wantedBy = [ "multi-user.target" ];
   };
 
@@ -36,5 +47,6 @@ in {
     unstable.clash-verge
     unstable.clash-meta
     unstable.sing-box
+    unstable.v2raya
   ];
 }
