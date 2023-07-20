@@ -21,6 +21,7 @@ in {
       Restart = "always";
       ExecStart = "${unstable.v2raya}/bin/v2rayA";
     };
+    path = with pkgs; [ iptables bash ];
     wantedBy = [ "multi-user.target" ];
 
   };
