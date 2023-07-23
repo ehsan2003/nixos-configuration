@@ -50,6 +50,7 @@
     options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
   '';
 
+  programs.nix-ld.enable = true;
   services.openssh.enable = true;
   programs.mosh.enable = true;
   nix.gc = {

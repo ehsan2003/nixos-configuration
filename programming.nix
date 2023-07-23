@@ -51,6 +51,11 @@ in {
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings = {
+    features = {
+      buildkit = false;
+    };
+  };
   environment.shellAliases.v = "nvim";
   programs.git.config = { init = { defaultBranch = "main"; }; };
 }
