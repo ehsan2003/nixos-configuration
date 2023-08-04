@@ -48,5 +48,4 @@ in {
     package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
   };
 
-
 }

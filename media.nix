@@ -20,7 +20,6 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-
   environment.shellAliases.ytt = "proxychains4 -q yt";
 
 }
