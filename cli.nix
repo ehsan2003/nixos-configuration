@@ -37,6 +37,7 @@ in {
     tmux
     v4l-utils
     github-cli
+    chatgpt-cli
     (import ./lib/ask.nix { inherit pkgs; })
     (urls "mathcha" "https://mathcha.io/editor")
 

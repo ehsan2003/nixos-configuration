@@ -29,13 +29,6 @@ in {
   };
 
   # NVIDIA drivers are unfree.
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "discord"
-    ];
-
   # Tell Xorg to use the nvidia driver
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -54,5 +47,6 @@ in {
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
   };
+
 
 }

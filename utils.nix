@@ -28,8 +28,6 @@
     home.stateVersion = "22.11";
   };
   nix.settings.experimental-features = "nix-command flakes";
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (pkgs.lib.getName pkg) [ "discord" ];
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball
       "https://github.com/nix-community/NUR/archive/master.tar.gz") {
@@ -49,7 +47,7 @@
   boot.extraModprobeConfig = ''
     options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
   '';
-
+  nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
   services.openssh.enable = true;
   programs.mosh.enable = true;

@@ -51,11 +51,15 @@ in {
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
-  virtualisation.docker.daemon.settings = {
-    features = {
-      buildkit = false;
-    };
-  };
+  virtualisation.docker.package = let
+    pkgs = import (builtins.fetchGit {
+      # Descriptive name to make the store path easier to identify                
+      name = "with-docker-20.10.23";
+      url = "https://github.com/NixOS/nixpkgs/";
+      ref = "refs/heads/nixpkgs-unstable";
+      rev = "8ad5e8132c5dcf977e308e7bf5517cc6cc0bf7d8";
+    }) { };
+  in pkgs.docker;
   environment.shellAliases.v = "nvim";
   programs.git.config = { init = { defaultBranch = "main"; }; };
 }

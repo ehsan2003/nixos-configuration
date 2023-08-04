@@ -14,7 +14,24 @@
     vlc
     smplayer
     mplayer
+    gupnp
+    yewtube
+    subdl
   ];
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+
+
+  environment.shellAliases.ytt = "proxychains4 -q yt";
+
+systemd.services.gupnpd = {
+    description = "GUPnP daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.gupnp}/bin/gupnpd";
+      Restart = "on-failure";
+    };
+  };
 }

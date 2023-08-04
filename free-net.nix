@@ -36,6 +36,18 @@ in {
     path = with pkgs; [ clash xray unstable.sing-box unstable.v2raya ];
     wantedBy = [ "multi-user.target" ];
   };
+  programs.proxychains = {
+    enable =true;
+    proxies = {
+      main= {
+        type="socks5";
+        enable = true;
+        host="127.0.0.1";
+        port=1080;
+      };
+    };
+    
+  };
 
   environment.shellAliases.sp = "export https_proxy=http://localhost:1080;";
   environment.shellAliases.ssp = "sudo https_proxy=http://localhost:1080 -s";
