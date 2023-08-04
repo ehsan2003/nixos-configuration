@@ -40,15 +40,6 @@ in {
     chatgpt-cli
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
-    (pkgs.python39Packages.buildPythonPackage rec {
-      pname = "hey-gpt";
-      version = "1.0.0";
-      doCheck = false;
-      src = pkgs.python39Packages.fetchPypi {
-        inherit pname version;
-        sha256 = "1qnavwpnbwjyl0470zfrpwhswmgxlj2r8z0x3mazx39idivn8w5b";
-      };
-    })
   ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
