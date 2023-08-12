@@ -40,6 +40,7 @@ in {
     chatgpt-cli
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
+    (urls "meet" "https://meet.google.com/")
   ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
