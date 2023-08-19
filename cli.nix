@@ -4,6 +4,10 @@
 
 { pkgs, ... }:
 let urls = (import ./lib/uri-short.nix pkgs);
+nix-alien-pkgs = import (
+    builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master"
+  ) { };
+
 in {
   imports = [ ];
 
@@ -38,11 +42,12 @@ in {
     v4l-utils
     github-cli
     chatgpt-cli
+    nix-alien-pkgs.nix-alien
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
     (urls "meet" "https://meet.google.com/")
   ];
-  programs.zsh.enable = true;
+ programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
     enable = true;
     plugins = [ "git" "python" "man" "vi-mode" "docker" "docker-compose" ];
