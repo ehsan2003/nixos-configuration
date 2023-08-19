@@ -22,6 +22,10 @@ in {
       };
     };
   };
+  nixpkgs.overlays = [
+    (import "${fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz"}/overlay.nix")
+  ];
+   
   environment.systemPackages = with pkgs; [
     neovim
     (vscode-with-extensions.override {
@@ -49,16 +53,19 @@ in {
     python39
     git
     gcc
-    unstable.cargo
-    unstable.rustc
     unstable.deno
     nixfmt
-    unstable.rustfmt
     docker-compose
     cloc
     nix-output-monitor
-
-    unstable.rust-analyzer
+    rust-analyzer-nightly
+    (fenix.complete.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
     pyright
     nil
     nodePackages.typescript-language-server
@@ -72,15 +79,7 @@ in {
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
-  virtualisation.docker.package = let
-    pkgs = import (builtins.fetchGit {
-      # Descriptive name to make the store path easier to identify                
-      name = "with-docker-20.10.23";
-      url = "https://github.com/NixOS/nixpkgs/";
-      ref = "refs/heads/nixpkgs-unstable";
-      rev = "8ad5e8132c5dcf977e308e7bf5517cc6cc0bf7d8";
-    }) { };
-  in pkgs.docker;
+  virtualisation.docker.package = unstable.docker_24;
   environment.shellAliases.v = "nvim";
   programs.git.config = { init = { defaultBranch = "main"; }; };
 }
