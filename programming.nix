@@ -58,6 +58,9 @@ in {
     docker-compose
     cloc
     nix-output-monitor
+
+    insomnia
+    cargo-watch
     rust-analyzer-nightly
     (fenix.complete.withComponents [
       "cargo"

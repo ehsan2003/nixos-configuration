@@ -46,6 +46,26 @@ in {
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
     (urls "meet" "https://meet.google.com/")
+    (urls "claude" "https://claude.ai/")
+    (rustPlatform.buildRustPackage {
+      pname = "praytimes-cli";
+      version = "1.0.0";
+
+      src = fetchFromGitHub {
+        owner = "basemax";
+        repo = "praytimesrust";
+        rev = "c2e527029314309be3286fa72fdedd3f06e7fcd0";
+        sha256 = "sha256-BC+dj+av/MqoMbVrP77creJBOPnWHMAZTYdnIPagqgQ=";
+      };
+
+   cargoSha256 = "sha256-k3xyhv6cKsc9BXviKX7DdCeHTDlx0QFSOw/G6WqVX7I=";
+
+      meta = with pkgs.lib; {
+        description = "A rust based praytimes calculator";
+        homepage = "https://github.com/basemax/praytimesrust";
+        license = licenses.gpl3;
+      };
+    })
   ];
  programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
