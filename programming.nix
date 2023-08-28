@@ -62,7 +62,7 @@ in {
     insomnia
     cargo-watch
     rust-analyzer-nightly
-    (fenix.complete.withComponents [
+    (fenix.stable.withComponents [
       "cargo"
       "clippy"
       "rust-src"
