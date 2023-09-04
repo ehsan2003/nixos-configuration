@@ -59,7 +59,7 @@ in {
         sha256 = "sha256-qOKPXKERkWBePusM/YG9OoTmWHznSJUltYTWKTUJ9q8=" ;
       };
 
-   cargoSha256 = pkgs.lib.fakeHash ;
+   cargoSha256 = "sha256-PWQc4VKxtxi7/PFvPLauTGwYF0DorFdFJzz0UsJY7GU=";
 
       meta = with pkgs.lib; {
         description = "A rust based praytimes calculator";
