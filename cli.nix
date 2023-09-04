@@ -48,17 +48,17 @@ in {
     (urls "meet" "https://meet.google.com/")
     (urls "claude" "https://claude.ai/")
     (rustPlatform.buildRustPackage {
-      pname = "praytimes-cli";
+      pname = "praytimes-kit";
       version = "1.0.0";
 
       src = fetchFromGitHub {
         owner = "basemax";
         repo = "praytimesrust";
-        rev = "c2e527029314309be3286fa72fdedd3f06e7fcd0";
-        sha256 = "sha256-BC+dj+av/MqoMbVrP77creJBOPnWHMAZTYdnIPagqgQ=";
+        rev = "2c3eb40c4d4bf7a3c3bf484e1a5400a8c4b9a381";
+        sha256 = "sha256-qOKPXKERkWBePusM/YG9OoTmWHznSJUltYTWKTUJ9q8=" ;
       };
 
-   cargoSha256 = "sha256-k3xyhv6cKsc9BXviKX7DdCeHTDlx0QFSOw/G6WqVX7I=";
+   cargoSha256 = pkgs.lib.fakeHash ;
 
       meta = with pkgs.lib; {
         description = "A rust based praytimes calculator";
