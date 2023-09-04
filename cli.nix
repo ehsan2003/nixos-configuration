@@ -42,6 +42,7 @@ in {
     v4l-utils
     github-cli
     chatgpt-cli
+    nethogs
     nix-alien-pkgs.nix-alien
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
