@@ -61,6 +61,9 @@ in {
   systemd.services.praytimes = {
     enable = true;
     description = "praytimes";
+    environment = {
+      PRAYTIMES_LOG = "info";
+    };
     restartTriggers = [ configFile ];
     serviceConfig = {
       Restart = "always";
