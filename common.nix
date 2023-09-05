@@ -10,6 +10,7 @@
     ./cli.nix
     ./hardware-configuration.nix
     ./utils.nix
+    ./secrets.nix
     "${
       (fetchTarball
         "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz")

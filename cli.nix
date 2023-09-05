@@ -3,13 +3,15 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, ... }:
-let urls = (import ./lib/uri-short.nix pkgs);
-nix-alien-pkgs = import (
-    builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master"
-  ) { };
+let
+  urls = (import ./lib/uri-short.nix pkgs);
+  nix-alien-pkgs = import (builtins.fetchTarball
+    "https://github.com/thiagokokada/nix-alien/tarball/master") { };
 
 in {
-  imports = [ ];
+  imports = [ 
+    ./praytimes.nix
+  ];
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
@@ -18,6 +20,7 @@ in {
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
+  
   environment.systemPackages = with pkgs; [
     # editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -48,27 +51,10 @@ in {
     (urls "poe" "https://poe.com")
     (urls "meet" "https://meet.google.com/")
     (urls "claude" "https://claude.ai/")
-    (rustPlatform.buildRustPackage {
-      pname = "praytimes-kit";
-      version = "1.0.0";
 
-      src = fetchFromGitHub {
-        owner = "basemax";
-        repo = "praytimesrust";
-        rev = "2c3eb40c4d4bf7a3c3bf484e1a5400a8c4b9a381";
-        sha256 = "sha256-qOKPXKERkWBePusM/YG9OoTmWHznSJUltYTWKTUJ9q8=" ;
-      };
-
-   cargoSha256 = "sha256-PWQc4VKxtxi7/PFvPLauTGwYF0DorFdFJzz0UsJY7GU=";
-
-      meta = with pkgs.lib; {
-        description = "A rust based praytimes calculator";
-        homepage = "https://github.com/basemax/praytimesrust";
-        license = licenses.gpl3;
-      };
-    })
+    praytimes-kit
   ];
- programs.zsh.enable = true;
+  programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
     enable = true;
     plugins = [ "git" "python" "man" "vi-mode" "docker" "docker-compose" ];
