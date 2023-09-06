@@ -12,24 +12,24 @@ let
       commands = [
         {
           praytime = "dhuhr";
-          time_diff = 180;
-          cmd = ''notify-send adhan "Its $TYPE at $TIME + $DIFF"'';
+          time_diff = 300;
+          cmd = ''notify-send adhan "its time for dhuhr prayer ( it was at $TIME )"'';
         }
         {
           praytime = "maghrib";
-          time_diff = 180;
+          time_diff = 300;
           cmd = ''
-            notify-send adhan "Its $TYPE at $TIME + $DIFF the darkness is coming ..."'';
+            notify-send adhan "Its time for maghrib prayer (it was at $TIME )"'';
         }
         {
           praytime = "sunset";
           time_diff = -480;
-          cmd = ''notify-send adhan "Its nearly $TYPE expect it on ($TIME) "'';
+          cmd = ''notify-send sunset "Its nearly sunset expect it on ($TIME) "'';
         }
         {
           praytime = "midnight";
           time_diff = -480;
-          cmd = ''notify-send adhan "Its nearly $TYPE expect it on ($TIME) "'';
+          cmd = ''notify-send midnight "Its nearly midnight expect it on ($TIME) "'';
         }
       ];
 
@@ -58,12 +58,14 @@ in {
       };
     });
   };
-  systemd.services.praytimes = {
+  systemd.user.services.praytimes = {
     enable = true;
     description = "praytimes";
     environment = {
       PRAYTIMES_LOG = "info";
+      DISPLAY=":0";
     };
+    path = [pkgs.bashInteractive pkgs.libnotify pkgs.dbus];
     restartTriggers = [ configFile ];
     serviceConfig = {
       Restart = "always";
