@@ -4,7 +4,7 @@ let
     name = "praytimes.json";
     destination = "/etc/praytimes/praytimes.json";
     text = builtins.toJSON {
-      location = with config.location ;{
+      location = with config.location; {
         inherit latitude;
         inherit longitude;
       };
@@ -13,7 +13,8 @@ let
         {
           praytime = "dhuhr";
           time_diff = 300;
-          cmd = ''notify-send adhan "its time for dhuhr prayer ( it was at $TIME )"'';
+          cmd = ''
+            notify-send adhan "its time for dhuhr prayer ( it was at $TIME )"'';
         }
         {
           praytime = "maghrib";
@@ -24,12 +25,14 @@ let
         {
           praytime = "sunset";
           time_diff = -480;
-          cmd = ''notify-send sunset "Its nearly sunset expect it on ($TIME) "'';
+          cmd =
+            ''notify-send sunset "Its nearly sunset expect it on ($TIME) "'';
         }
         {
           praytime = "midnight";
           time_diff = -480;
-          cmd = ''notify-send midnight "Its nearly midnight expect it on ($TIME) "'';
+          cmd = ''
+            notify-send midnight "Its nearly midnight expect it on ($TIME) "'';
         }
       ];
 
@@ -63,9 +66,9 @@ in {
     description = "praytimes";
     environment = {
       PRAYTIMES_LOG = "info";
-      DISPLAY=":0";
+      DISPLAY = ":0";
     };
-    path = [pkgs.bashInteractive pkgs.libnotify pkgs.dbus];
+    path = [ pkgs.bashInteractive pkgs.libnotify pkgs.dbus ];
     restartTriggers = [ configFile ];
     serviceConfig = {
       Restart = "always";
