@@ -65,6 +65,7 @@ in {
       PRAYTIMES_LOG = "info";
       DISPLAY=":0";
     };
+    wantedBy = [ "default.target" ];
     path = [pkgs.bashInteractive pkgs.libnotify pkgs.dbus];
     restartTriggers = [ configFile ];
     serviceConfig = {
@@ -72,7 +73,6 @@ in {
       ExecStart =
         "${pkgs.praytimes-kit}/bin/praytimes-kit daemon ${configFile}/etc/praytimes/praytimes.json";
     };
-    wantedBy = [ "multi-user.target" ];
   };
 
   environment.shellAliases.pt =
