@@ -11,7 +11,7 @@ in {
     size = 128;
   };
 
-  home-manager.users.ehsan.programs.alacritty.settings.font.size = 14;
+  home-manager.users.ehsan.programs.alacritty.settings.font.size = 12;
   services.xserver.dpi = dpi;
   home-manager.users.ehsan.programs.rofi.extraConfig."dpi" = dpi;
   console.font = pkgs.lib.mkForce "Lat2-Terminus32";
