@@ -54,6 +54,7 @@ in {
 
     praytimes-kit
     zip
+    tree
   ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
