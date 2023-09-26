@@ -87,6 +87,7 @@ in {
     };
 
   };
+  services.redshift.enable = true;
   environment.systemPackages = with pkgs; [
     alacritty
     # Window manager and utils

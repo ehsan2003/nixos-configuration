@@ -51,6 +51,8 @@ in {
     (urls "claude" "https://claude.ai/")
 
     praytimes-kit
+    zip
+    tree
   ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
