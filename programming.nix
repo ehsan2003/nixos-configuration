@@ -28,6 +28,7 @@ in {
    
   environment.systemPackages = with pkgs; [
     neovim
+    neovide
     (vscode-with-extensions.override {
         vscode = vscodium;
         vscodeExtensions = with vscode-extensions; [
@@ -83,6 +84,6 @@ in {
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
   virtualisation.docker.package = unstable.docker_24;
-  environment.shellAliases.v = "nvim";
+  environment.shellAliases.v = "neovide";
   programs.git.config = { init = { defaultBranch = "main"; }; };
 }
