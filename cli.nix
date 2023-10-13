@@ -9,9 +9,7 @@ let
     "https://github.com/thiagokokada/nix-alien/tarball/master") { };
 
 in {
-  imports = [ 
-    ./praytimes.nix
-  ];
+  imports = [ ./praytimes.nix ];
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
@@ -20,7 +18,7 @@ in {
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
-  
+
   environment.systemPackages = with pkgs; [
     # editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.

@@ -27,13 +27,13 @@ in {
   services.xserver.libinput.enable = true;
 
   home-manager.users.ehsan = {
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Materia-dark";
-      package = pkgs.materia-theme;
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Materia-dark";
+        package = pkgs.materia-theme;
+      };
     };
-  };
     home.file.i3Config = import ./i3-config.nix { pkgs = pkgs; };
     programs = {
       rofi = {
@@ -87,6 +87,7 @@ in {
     };
 
   };
+  services.redshift.enable = true;
   environment.systemPackages = with pkgs; [
     alacritty
     # Window manager and utils
