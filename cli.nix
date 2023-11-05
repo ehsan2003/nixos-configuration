@@ -53,6 +53,8 @@ in {
     praytimes-kit
     zip
     tree
+    imagemagick
+    chntpw
   ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {

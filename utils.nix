@@ -22,6 +22,12 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
+  users.users.noob = {
+    hashedPassword =
+      "$y$j9T$1lhUWp7X8XkYRnaj1gQZ./$kowb2rHIy3IxBRBUU5Cxgi8kLDeEJCRh9qWFCJlPQ82"; # noob
+    isNormalUser = true;
+    extraGroups = [ "networkmanager" ]; # Enable ‘sudo’ for the user.
+  };
 
   home-manager.users.ehsan = {
     nixpkgs.overlays = [ (self: super: { fcitx-engines = pkgs.fcitx5; }) ];

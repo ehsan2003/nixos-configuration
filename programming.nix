@@ -56,6 +56,7 @@ in {
     git
     gcc
     unstable.deno
+    unstable.bun
     nixfmt
     docker-compose
     cloc

@@ -109,6 +109,7 @@ in {
     unstable.tdesktop
     chromium
     tor-browser-bundle-bin
+    spotify
 
   ];
 }
