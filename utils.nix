@@ -1,4 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let secrets = import ./lib/secrets.nix pkgs; in
+{
   imports = [ ];
 
   # Use the systemd-boot EFI boot loader.
@@ -35,8 +37,10 @@
   };
   nix.settings.experimental-features = "nix-command flakes";
   nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball
-      "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+    nur = import
+      (builtins.fetchTarball
+        "https://github.com/nix-community/NUR/archive/master.tar.gz")
+      {
         inherit pkgs;
       };
   };
@@ -46,7 +50,7 @@
     (import ./lib/backup.nix { inherit pkgs; })
     pkgs.linux-wifi-hotspot
   ];
-  environment.defaultPackages = [pkgs.zap];
+  environment.defaultPackages = [ pkgs.zap ];
 
   boot.extraModulePackages = with config.boot.kernelPackages;
     [ v4l2loopback.out ];
@@ -63,6 +67,10 @@
     dates = "weekly";
     persistent = true;
     options = "--delete-older-than 30d";
+  };
+  location = {
+    longitude = secrets.location.longitude;
+    latitude = secrets.location.latitude;
   };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -1,4 +1,4 @@
 hardware-configuration.nix
 configuration.nix
 result
-secrets.nix
+secrets.json

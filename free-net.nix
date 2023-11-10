@@ -1,6 +1,10 @@
 { pkgs, ... }:
-let unstable = import <nixos-unstable> { };
-in {
+let
+  unstable = import <nixos-unstable> { };
+  secrets = import ./lib/secrets.nix pkgs;
+  proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
+in
+{
   imports = [ ];
 
   # Configure network proxy if necessary
@@ -8,7 +12,7 @@ in {
   services.openvpn.servers = {
     vpn = {
       autoStart = false;
-      config = "config /etc/openvpn/client.conf ";
+      config = secrets.openvpn;
       updateResolvConf = true;
     };
   };
@@ -31,7 +35,7 @@ in {
     after = [ "network.target" ];
     serviceConfig = {
       Restart = "always";
-      ExecStart = "/etc/proxy/main.sh";
+      ExecStart = "${proxyFile}/bin/start-proxy";
     };
     path = with pkgs; [ clash xray unstable.sing-box unstable.v2raya ];
     wantedBy = [ "multi-user.target" ];
