@@ -8,7 +8,6 @@
     ./programming.nix
     ./gui.nix
     ./cli.nix
-    ./hardware-configuration.nix
     ./utils.nix
     "${
       (fetchTarball

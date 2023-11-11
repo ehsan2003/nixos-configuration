@@ -1,7 +1,11 @@
 { config, lib, pkgs, ... }:
 let dpi = 250;
-in {
-  imports = [ ./common.nix ];
+in
+{
+  imports = [
+    ./common.nix
+    ./hardware-configuration.home-pc.nix
+  ];
   networking.hostName = "nixos-home-desktop"; # Define your hostname.
 
   home-manager.users.ehsan.home.pointerCursor = {
@@ -20,4 +24,4 @@ in {
       Xft.dpi: ${toString dpi}  
     EOF
   '';
-  }
+}

@@ -60,6 +60,7 @@ let secrets = import ./lib/secrets.nix pkgs; in
   '';
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
+  services.atd.enable = true;
   services.openssh.enable = true;
   programs.mosh.enable = true;
   nix.gc = {
@@ -72,6 +73,7 @@ let secrets = import ./lib/secrets.nix pkgs; in
     longitude = secrets.location.longitude;
     latitude = secrets.location.latitude;
   };
+  environment.variables.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
