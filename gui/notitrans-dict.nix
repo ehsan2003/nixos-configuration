@@ -1,7 +1,4 @@
-
-
-{ pkgs, ... }:
-with pkgs;
+{ writeShellApplication, translate-shell, xsel, libnotify }:
 writeShellApplication {
   name = "notitrans-dict";
   runtimeInputs = [ translate-shell xsel libnotify ];

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-with pkgs;
+{ writeShellApplication, firefox, xsel }:
 writeShellApplication {
   name = "search-select";
   runtimeInputs = [ firefox xsel ];

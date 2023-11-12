@@ -1,11 +1,10 @@
-{ pkgs, ... }:
-with pkgs;
+{ writeShellApplication, translate-shell, xsel, libnotify }:
 writeShellApplication {
-  name = "notitrans-fa";
+  name = "notitrans-en";
   runtimeInputs = [ translate-shell xsel libnotify ];
   text = ''
     text=$(xsel -o)
-    brief=$(trans :fa -no-bidi -no-ansi "$text")
+    brief=$(trans :en -no-ansi "$text")
     notify-send "$text" "$brief"
   '';
 }

@@ -1,5 +1,4 @@
 { pkgs, unstable, ... }:
-# let a = builtins.trace unstable.legacyPackages.${"x86_64-linux"} unstable; in
 {
   imports = [ ];
   fonts.fonts = with pkgs;

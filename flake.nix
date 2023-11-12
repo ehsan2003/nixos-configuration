@@ -30,11 +30,11 @@
         };
       in
       {
-        "nixos-laptop" = nixpkgs.lib.nixosSystem {
+        nixos-laptop = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
           modules = [ ./configuration.laptop.nix ];
         };
-        "nixos-home-desktop" = nixpkgs.lib.nixosSystem {
+        nixos-home-desktop = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
           modules = [ ./configuration.home-pc.nix ];
         };

@@ -7,7 +7,7 @@
     # Include the results of the hardware scan.
     ./media.nix
     ./programming.nix
-    ./gui.nix
+    ./gui
     ./cli.nix
     ./utils.nix
     ./free-net.nix
