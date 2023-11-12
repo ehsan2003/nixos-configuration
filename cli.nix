@@ -3,10 +3,8 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, nix-alien, config, ... }:
-let
-  urls = (import ./lib/uri-short.nix pkgs);
-in
-{
+let urls = (import ./lib/uri-short.nix pkgs);
+in {
   imports = [ ./praytimes.nix ];
 
   environment.shells = with pkgs; [ zsh ];

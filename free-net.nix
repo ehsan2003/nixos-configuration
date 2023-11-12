@@ -2,8 +2,7 @@
 let
   secrets = import ./lib/secrets.nix pkgs;
   proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
-in
-{
+in {
   imports = [ ];
 
   # Configure network proxy if necessary

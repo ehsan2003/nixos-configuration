@@ -1,6 +1,6 @@
 { config, pkgs, nur, ... }:
-let secrets = import ./lib/secrets.nix pkgs; in
-{
+let secrets = import ./lib/secrets.nix pkgs;
+in {
   imports = [ ];
 
   # Use the systemd-boot EFI boot loader.

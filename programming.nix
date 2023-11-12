@@ -1,10 +1,8 @@
-{ pkgs, fenix, unstable, astroNvim, ... }:
-{
+{ pkgs, fenix, unstable, astroNvim, ... }: {
   imports = [ ];
   home-manager.users.ehsan = {
     home.file.astroNvim = {
-      source =
-        astroNvim.outPath;
+      source = astroNvim.outPath;
       target = ".config/nvim";
     };
     home.file.astroNvimConfig = {
@@ -21,9 +19,7 @@
       };
     };
   };
-  nixpkgs.overlays = [
-    fenix.overlays.default
-  ];
+  nixpkgs.overlays = [ fenix.overlays.default ];
 
   environment.systemPackages = with pkgs; [
     neovim
