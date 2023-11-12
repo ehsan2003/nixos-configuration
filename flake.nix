@@ -47,6 +47,7 @@
   # The `@` syntax here is used to alias the attribute set of the
   # inputs's parameter, making it convenient to use inside the function.
   outputs = { self, nixpkgs, ... }@inputs: {
+    packages."x86_64-linux".iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
     nixosConfigurations = {
       # By default, NixOS will try to refer the nixosConfiguration with
       # its hostname, so the system named `nixos-test` will use this one.
@@ -79,6 +80,17 @@
         };
         modules = [
           ./configuration.home-pc.nix
+        ];
+      };
+      iso = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+
+        specialArgs = inputs // {
+          unstable = inputs.unstable.legacyPackages.${system};
+        };
+        modules = [
+          ./iso.nix
         ];
       };
     };
