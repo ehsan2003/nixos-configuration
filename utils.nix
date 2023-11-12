@@ -1,6 +1,4 @@
-{ config, pkgs, nur, ... }:
-let secrets = import ./lib/secrets.nix pkgs;
-in
+{ config, pkgs, nur, secrets, ... }:
 {
   imports = [ ];
 
