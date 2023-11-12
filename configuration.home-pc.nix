@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 let dpi = 250;
 in
 {
   imports = [
     ./common.nix
-    ./hardware-configuration.home-pc.nix
+    /etc/nixos/hardware-configuration.nix
   ];
   networking.hostName = "nixos-home-desktop"; # Define your hostname.
 
