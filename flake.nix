@@ -59,15 +59,26 @@
       # Run the following command in the flake's directory to
       # deploy this configuration on any NixOS system:
       #   sudo nixos-rebuild switch --flake .#nixos-test
-      "nixos-home-desktop" = nixpkgs.lib.nixosSystem rec {
+      "nixos-laptop" = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
 
-        
+
         specialArgs = inputs // {
           unstable = inputs.unstable.legacyPackages.${system};
         };
         modules = [
-                 ./configuration.home-pc.nix
+          ./configuration.laptop.nix
+        ];
+      };
+      "nixos-home-desktop" = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+
+        specialArgs = inputs // {
+          unstable = inputs.unstable.legacyPackages.${system};
+        };
+        modules = [
+          ./configuration.home-pc.nix
         ];
       };
     };
