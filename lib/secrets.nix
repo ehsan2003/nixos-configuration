@@ -1,1 +1,1 @@
-pkgs: pkgs.lib.importJSON ../secrets.json
+pkgs: pkgs.lib.importJSON /etc/secrets.json
