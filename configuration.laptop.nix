@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./common.nix ];
+  imports = [ ./common.nix ./hardware-configuration.laptop.nix ];
   networking.hostName = "nixos-laptop"; # Define your hostname.
 
   services.xserver.displayManager.sessionCommands =
