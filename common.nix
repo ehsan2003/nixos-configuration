@@ -8,7 +8,7 @@
     ./media.nix
     ./programming.nix
     ./gui
-    ./cli.nix
+    ./cli
     ./utils.nix
     ./free-net.nix
     home-manager.nixosModules.default
