@@ -44,7 +44,6 @@
   environment.systemPackages = [
     pkgs.linux-wifi-hotspot
   ];
-  environment.defaultPackages = [ pkgs.zap ];
 
   boot.extraModulePackages = with config.boot.kernelPackages;
     [ v4l2loopback.out ];
