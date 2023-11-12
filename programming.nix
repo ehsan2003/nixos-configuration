@@ -61,7 +61,7 @@
     insomnia
     cargo-watch
     rust-analyzer
-    (fenix.stable.withComponents [
+    (pkgs.fenix.stable.withComponents [
       "cargo"
       "clippy"
       "rust-src"
@@ -81,7 +81,7 @@
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
-  # virtualisation.docker.package = unstable.docker_24;
+  virtualisation.docker.package = unstable.docker_24;
   environment.shellAliases.v = "neovide";
   programs.git.config = { init = { defaultBranch = "main"; }; };
 }

@@ -5,12 +5,12 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./free-net.nix
     ./media.nix
     ./programming.nix
     ./gui.nix
     ./cli.nix
     ./utils.nix
+    ./free-net.nix
     home-manager.nixosModules.default
   ];
   # Open ports in the firewall.

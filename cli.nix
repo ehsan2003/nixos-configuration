@@ -5,7 +5,6 @@
 { pkgs, nix-alien, config, ... }:
 let
   urls = (import ./lib/uri-short.nix pkgs);
-  nix-alien = nix-alien.packages.${config.system}.nix-alien;
 in
 {
   imports = [ ./praytimes.nix ];
@@ -43,7 +42,7 @@ in
     github-cli
     chatgpt-cli
     nethogs
-    nix-alien
+    nix-alien.packages.${"x86_64-linux"}.nix-alien
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
     (urls "meet" "https://meet.google.com/")
