@@ -1,6 +1,7 @@
 { config, pkgs, nur, ... }:
 let secrets = import ./lib/secrets.nix pkgs;
-in {
+in
+{
   imports = [ ];
 
   # Use the systemd-boot EFI boot loader.
@@ -43,9 +44,6 @@ in {
     };
   };
   environment.systemPackages = [
-    (import ./lib/setup.nix { inherit pkgs; })
-    (import ./lib/restore.nix { inherit pkgs; })
-    (import ./lib/backup.nix { inherit pkgs; })
     pkgs.linux-wifi-hotspot
   ];
   environment.defaultPackages = [ pkgs.zap ];
