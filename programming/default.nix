@@ -1,4 +1,4 @@
-{ pkgs, fenix, unstable, astroNvim, ... }: {
+{ pkgs, fenix, unstable, ... }: {
   imports = [ ./editors.nix ];
   # git 
   home-manager.users.ehsan = {
