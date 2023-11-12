@@ -21,33 +21,27 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-    packages."x86_64-linux".iso =
-      inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
-    nixosConfigurations = {
-      "nixos-laptop" = nixpkgs.lib.nixosSystem rec {
+    packages."x86_64-linux".iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
+    nixosConfigurations =
+      let
         system = "x86_64-linux";
-
         specialArgs = inputs // {
           unstable = inputs.unstable.legacyPackages.${system};
         };
-        modules = [ ./configuration.laptop.nix ];
-      };
-      "nixos-home-desktop" = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-
-        specialArgs = inputs // {
-          unstable = inputs.unstable.legacyPackages.${system};
+      in
+      {
+        "nixos-laptop" = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./configuration.laptop.nix ];
         };
-        modules = [ ./configuration.home-pc.nix ];
-      };
-      iso = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-
-        specialArgs = inputs // {
-          unstable = inputs.unstable.legacyPackages.${system};
+        "nixos-home-desktop" = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./configuration.home-pc.nix ];
         };
-        modules = [ ./iso.nix ];
+        iso = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./iso.nix ];
+        };
       };
-    };
   };
 }
