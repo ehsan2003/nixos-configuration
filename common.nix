@@ -1,18 +1,17 @@
+{ home-manager, ... }:
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./free-net.nix
     ./media.nix
     ./programming.nix
     ./gui.nix
     ./cli.nix
     ./utils.nix
-    "${
-      (fetchTarball
-        "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz")
-    }/nixos"
+    home-manager.nixosModules.default
   ];
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

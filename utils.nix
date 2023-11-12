@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nur, ... }:
 let secrets = import ./lib/secrets.nix pkgs; in
 {
   imports = [ ];
@@ -37,12 +37,10 @@ let secrets = import ./lib/secrets.nix pkgs; in
   };
   nix.settings.experimental-features = "nix-command flakes";
   nixpkgs.config.packageOverrides = pkgs: {
-    nur = import
-      (builtins.fetchTarball
-        "https://github.com/nix-community/NUR/archive/master.tar.gz")
-      {
-        inherit pkgs;
-      };
+    nur = import nur {
+      inherit pkgs;
+      nurpkgs = pkgs;
+    };
   };
   environment.systemPackages = [
     (import ./lib/setup.nix { inherit pkgs; })

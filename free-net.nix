@@ -1,6 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 let
-  unstable = import <nixos-unstable> { };
   secrets = import ./lib/secrets.nix pkgs;
   proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
 in

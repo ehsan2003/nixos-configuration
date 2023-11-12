@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-let unstable = import <nixos-unstable> { };
-in {
+{ pkgs, unstable, ... }:
+{
   imports = [ ];
   fonts.fonts = with pkgs;
     [

@@ -2,13 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, nix-alien, config, ... }:
 let
   urls = (import ./lib/uri-short.nix pkgs);
-  nix-alien-pkgs = import (builtins.fetchTarball
-    "https://github.com/thiagokokada/nix-alien/tarball/master") { };
-
-in {
+  nix-alien = nix-alien.packages.${config.system}.nix-alien;
+in
+{
   imports = [ ./praytimes.nix ];
 
   environment.shells = with pkgs; [ zsh ];
@@ -44,7 +43,7 @@ in {
     github-cli
     chatgpt-cli
     nethogs
-    nix-alien-pkgs.nix-alien
+    nix-alien
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
     (urls "meet" "https://meet.google.com/")

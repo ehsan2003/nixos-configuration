@@ -1,13 +1,12 @@
-{ pkgs, ... }:
-let unstable = import <nixos-unstable> { };
-in {
+{ pkgs, fenix, unstable, astroNvim, ... }:
+{
   imports = [ ];
   home-manager.users.ehsan = {
-    home.file.astroNvim = {
-      source =
-        (fetchGit { url = "https://github.com/AstroNvim/AstroNvim"; }).outPath;
-      target = ".config/nvim";
-    };
+    # home.file.astroNvim = {
+    #   source =
+    #     astroNvim.outPath;
+    #   target = ".config/nvim";
+    # };
     home.file.astroNvimConfig = {
       text = builtins.readFile ./astronvim.init.lua;
       target = ".config/astronvim/lua/user/init.lua";
@@ -23,10 +22,7 @@ in {
     };
   };
   nixpkgs.overlays = [
-    (import "${
-        fetchTarball
-        "https://github.com/nix-community/fenix/archive/main.tar.gz"
-      }/overlay.nix")
+    fenix.overlays.default
   ];
 
   environment.systemPackages = with pkgs; [
@@ -85,7 +81,7 @@ in {
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
-  virtualisation.docker.package = unstable.docker_24;
+  # virtualisation.docker.package = unstable.docker_24;
   environment.shellAliases.v = "neovide";
   programs.git.config = { init = { defaultBranch = "main"; }; };
 }
