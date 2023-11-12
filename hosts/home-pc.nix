@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let dpi = 250;
 in {
-  imports = [ ./common.nix /etc/nixos/hardware-configuration.nix ];
+  imports = [ ../common.nix /etc/nixos/hardware-configuration.nix ];
   networking.hostName = "nixos-home-desktop"; # Define your hostname.
 
   home-manager.users.ehsan.home.pointerCursor = {

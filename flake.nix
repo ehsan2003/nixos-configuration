@@ -33,15 +33,15 @@
       {
         nixos-laptop = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
-          modules = [ ./configuration.laptop.nix ];
+          modules = [ ./hosts/laptop.nix ];
         };
         nixos-home-desktop = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
-          modules = [ ./configuration.home-pc.nix ];
+          modules = [ ./hosts/home-pc.nix ];
         };
         iso = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
-          modules = [ ./iso.nix ];
+          modules = [ ./hosts/iso.nix ];
         };
       };
   };
