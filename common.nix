@@ -6,7 +6,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./media.nix
-    ./programming.nix
+    ./programming
     ./gui
     ./cli
     ./utils.nix
