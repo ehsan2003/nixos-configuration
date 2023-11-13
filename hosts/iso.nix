@@ -3,6 +3,12 @@
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix"
     ../common.nix
   ];
+  environment.etc.secrets = {
+    enable = true;
+    source = /etc/secrets.json;
+    target = "secrets.json";
+  };
+
   home-manager.users.ehsan.home.file.nixos-configuration = {
     source = ../.;
     target = "nixos-configuration";
