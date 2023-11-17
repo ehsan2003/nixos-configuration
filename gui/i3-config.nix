@@ -65,6 +65,7 @@ in
 
     # start dmenu (a program launcher)
     bindsym $mod+d exec --no-startup-id rofi -show run
+    bindsym $mod+n exec --no-startup-id rofi -show 
     # A more modern dmenu replacement is rofi:
     # bindcode $mod+40 exec "${pkgs.rofi}/bin/rofi -modi drun,run -show drun"
     # There also is i3-dmenu-desktop which only displays applications shipping a
