@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config,fenix, ... }:
 let
   configFile = pkgs.writeTextFile {
     name = "praytimes.json";
@@ -38,21 +38,25 @@ let
 
     };
   };
-in {
+in
+{
 
   nixpkgs.config.packageOverrides = pkgs: {
-    praytimes-kit = (pkgs.rustPlatform.buildRustPackage {
+    
+    praytimes-kit = ((pkgs.makeRustPlatform {
+      inherit (fenix.packages.x86_64-linux.stable) cargo rustc;
+    }).buildRustPackage {
       pname = "praytimes-kit";
-      version = "1.0.0";
+      version = "1.1.0";
 
       src = pkgs.fetchFromGitHub {
         owner = "basemax";
         repo = "praytimesrust";
-        rev = "2c3eb40c4d4bf7a3c3bf484e1a5400a8c4b9a381";
-        sha256 = "sha256-qOKPXKERkWBePusM/YG9OoTmWHznSJUltYTWKTUJ9q8=";
+        rev = "1fc8e65679736b422b614f3470b0a97f6df5053a";
+        sha256 = "sha256-mi3RS+7cv5mTLxMkJtOFd6OtVAxFLt1LkhsKgTYlLmM=";
       };
 
-      cargoSha256 = "sha256-PWQc4VKxtxi7/PFvPLauTGwYF0DorFdFJzz0UsJY7GU=";
+      cargoSha256 = "sha256-R3CRYp5AYUWjTOnAtXlNWo0rwZVX2v42tsOOWGmzjAo=";
 
       meta = with pkgs.lib; {
         description = "A rust based praytimes calculator";
