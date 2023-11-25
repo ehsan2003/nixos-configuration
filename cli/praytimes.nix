@@ -1,4 +1,4 @@
-{ pkgs, config,fenix, ... }:
+{ pkgs, config, fenix, ... }:
 let
   configFile = pkgs.writeTextFile {
     name = "praytimes.json";
@@ -42,7 +42,8 @@ in
 {
 
   nixpkgs.config.packageOverrides = pkgs: {
-    
+    praytimes-config = configFile;
+
     praytimes-kit = ((pkgs.makeRustPlatform {
       inherit (fenix.packages.x86_64-linux.stable) cargo rustc;
     }).buildRustPackage {

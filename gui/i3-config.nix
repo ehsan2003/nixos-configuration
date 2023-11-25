@@ -200,7 +200,7 @@ in
     # my customizations
     bar {
         mode hide
-        status_command i3status
+        status_command ${pkgs.i3status-rust}/bin/i3status-rs  ~/.config/i3status-rust/config-bottom.toml
     }
     default_border none
 
