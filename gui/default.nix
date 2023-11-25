@@ -54,11 +54,7 @@
 
               {
                 block = "net";
-                format = "$icon $ip via {$ssid($signal_strength)|Wired connection}^icon_net_down$speed_down.eng(prefix:K)^icon_net_up$speed_up.eng(prefix:K)";
-                click = [{
-                  button = "left";
-                  cmd = "nm-connection-editor";
-                }];
+                format = "$icon $ip - {$ssid($signal_strength)|Wired connection} ^icon_net_down$speed_down.eng(prefix:K) ^icon_net_up$speed_up.eng(prefix:K)";
               }
             ] ++
             (if (config.system == "nixos-laptop") then [{ block = "battery"; format = "$icon $percentage {$time |}"; format_missing = ""; }] else [ ]) ++
@@ -75,25 +71,11 @@
               {
                 block = "memory";
                 format = " $icon $mem_used_percents.eng(w:1) ";
-                interval = 30;
+                interval = 10;
                 warning_mem = 70;
                 critical_mem = 90;
               }
-              {
-                block = "custom";
-                command = "${pkgs.praytimes-kit}/bin/praytimes-kit next --config ${pkgs.praytimes-config}/etc/praytimes/praytimes.json";
-                interval = 10;
-              }
-              {
-                block = "custom";
-                command = "${pkgs.jcal}/bin/jdate '+%D'";
-                interval = 60;
-              }
-              {
-                block = "time";
-                interval = 1;
-                format = "$timestamp.datetime(f:'%F %T')";
-              }
+
             ] ++
             (
               if (config.networking.hostName == "nixos-laptop") then
@@ -114,8 +96,10 @@
               {
                 block = "service_status";
                 service = "openvpn-vpn";
-                active_format = "vpn ^icon_net_vpn ";
-                inactive_format = "vpn off ^icon_net_vpn ";
+                active_format = " ^icon_net_vpn ";
+                inactive_format = " ^icon_net_vpn ";
+                active_state = "Good";
+                inactive_state = "Warning";
               }
               {
                 block = "sound";
@@ -129,11 +113,20 @@
                 command = "${pkgs.xkb-switch}/bin/xkb-switch";
                 interval = 1;
               }
-
+              {
+                block = "custom";
+                command = "${pkgs.praytimes-kit}/bin/praytimes-kit next --config ${pkgs.praytimes-config}/etc/praytimes/praytimes.json";
+                interval = 10;
+              }
+              {
+                block = "time";
+                interval = 1;
+                format = "$timestamp.datetime(f:'%F %T')";
+              }
             ];
             settings = {
               theme = {
-                theme = "modern";
+                theme = "space-villain";
               };
             };
             icons = "awesome5";
