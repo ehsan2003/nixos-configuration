@@ -47,16 +47,6 @@
           bottom = {
             blocks = [
               {
-                block = "time";
-                interval = 1;
-                format = "$timestamp.datetime(f:'%F %T')";
-              }
-              {
-                block = "custom";
-                command = "${pkgs.praytimes-kit}/bin/praytimes-kit next --config ${pkgs.praytimes-config}/etc/praytimes/praytimes.json";
-                interval = 10;
-              }
-              {
                 block = "music";
                 format = " $icon {$combo.str(max_w:20,rot_interval:0.5) $prev $play $next |}";
                 interface_name_exclude = [ ".*kdeconnect.*" "mpd" ];
@@ -66,7 +56,7 @@
                 interval = 1;
                 click = [{
                   button = "left";
-                  cmd = "gnome-system-monitor";
+                  cmd = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.htop}/bin/htop";
                 }];
               }
               {
@@ -86,7 +76,23 @@
               }
             ] ++
             (if (config.system == "nixos-laptop") then [{ block = "battery"; format = "$icon $percentage {$time |}"; format_missing = ""; }] else [ ]) ++
+
             [
+             {
+                block = "custom";
+                command = "${pkgs.praytimes-kit}/bin/praytimes-kit next --config ${pkgs.praytimes-config}/etc/praytimes/praytimes.json";
+                interval = 10;
+              }
+              {
+                block = "custom";
+                command = "${pkgs.jcal}/bin/jdate '+%D'";
+                interval = 60;
+              }
+              {
+                block = "time";
+                interval = 1;
+                format = "$timestamp.datetime(f:'%F %T')";
+              }
               {
                 block = "sound";
                 click = [{
@@ -99,6 +105,7 @@
                 command = "${pkgs.xkb-switch}/bin/xkb-switch";
                 interval = 1;
               }
+
             ];
             settings = {
               theme = {
