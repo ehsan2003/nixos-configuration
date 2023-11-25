@@ -51,6 +51,19 @@
                 format = " $icon {$combo.str(max_w:20,rot_interval:0.5) $prev $play $next |}";
                 interface_name_exclude = [ ".*kdeconnect.*" "mpd" ];
               }
+
+              {
+                block = "net";
+                format = "$icon $ip via {$ssid($signal_strength)|Wired connection}^icon_net_down$speed_down.eng(prefix:K)^icon_net_up$speed_up.eng(prefix:K)";
+                click = [{
+                  button = "left";
+                  cmd = "nm-connection-editor";
+                }];
+              }
+            ] ++
+            (if (config.system == "nixos-laptop") then [{ block = "battery"; format = "$icon $percentage {$time |}"; format_missing = ""; }] else [ ]) ++
+
+            [
               {
                 block = "cpu";
                 interval = 1;
@@ -67,18 +80,6 @@
                 critical_mem = 90;
               }
               {
-                block = "net";
-                format = "$icon $ip via {$ssid($signal_strength)|Wired connection} ^icon_net_down $speed_down.eng(prefix:K) ^icon_net_up $speed_up.eng(prefix:K) ";
-                click = [{
-                  button = "left";
-                  cmd = "nm-connection-editor";
-                }];
-              }
-            ] ++
-            (if (config.system == "nixos-laptop") then [{ block = "battery"; format = "$icon $percentage {$time |}"; format_missing = ""; }] else [ ]) ++
-
-            [
-             {
                 block = "custom";
                 command = "${pkgs.praytimes-kit}/bin/praytimes-kit next --config ${pkgs.praytimes-config}/etc/praytimes/praytimes.json";
                 interval = 10;
