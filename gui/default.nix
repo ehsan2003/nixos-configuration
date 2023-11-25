@@ -94,6 +94,23 @@
                 interval = 1;
                 format = "$timestamp.datetime(f:'%F %T')";
               }
+            ] ++
+            (
+              if (config.networking.hostName == "nixos-laptop") then
+                [
+                  {
+                    block = "battery";
+                    device = "DisplayDevice";
+                    driver = "upower";
+                    format = "$icon $percentage {$time |}";
+                  }
+                  {
+                    block = "backlight";
+                  }
+                ]
+              else [ ]
+            ) ++
+            [
               {
                 block = "sound";
                 click = [{
