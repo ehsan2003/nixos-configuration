@@ -84,4 +84,7 @@ in
 
   environment.shellAliases.pt =
     "${pkgs.praytimes-kit}/bin/praytimes-kit calculate --config  ${configFile}/etc/praytimes/praytimes.json";
+
+  environment.shellAliases.pn =
+    "${pkgs.praytimes-kit}/bin/praytimes-kit next --config  ${configFile}/etc/praytimes/praytimes.json";
 }
