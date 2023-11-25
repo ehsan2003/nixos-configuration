@@ -85,7 +85,21 @@
                 }];
               }
             ] ++
-            (if (config.system == "nixos-laptop") then [{ block = "battery"; format = "$icon $percentage {$time |}"; format_missing = ""; }] else [ ]) ++
+            (
+              if (config.networking.hostName == "nixos-laptop") then 
+              [
+              { 
+                block = "battery";
+                device = "DisplayDevice";
+                driver = "upower";
+                format = "$icon $percentage {$time |}"; 
+              }
+              {
+                block = "backlight";
+              }
+              ]
+              else [ ]
+            ) ++
             [
               {
                 block = "sound";
