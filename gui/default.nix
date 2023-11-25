@@ -112,6 +112,12 @@
             ) ++
             [
               {
+                block = "service_status";
+                service = "openvpn-vpn";
+                active_format = "vpn ^icon_net_vpn ";
+                inactive_format = "vpn off ^icon_net_vpn ";
+              }
+              {
                 block = "sound";
                 click = [{
                   button = "left";
