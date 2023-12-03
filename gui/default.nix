@@ -1,7 +1,7 @@
 { pkgs, unstable, ... }:
 {
   imports = [ ./i3status-rust.nix ];
-  fonts.fonts = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) ];
+  fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) ];
   # Select internationalisation properties. i18n.inputMethod.enabled = "fcitx5";
   i18n.defaultLocale = "en_US.UTF-8";
   console = {

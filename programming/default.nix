@@ -40,5 +40,4 @@
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "ehsan" ];
   virtualisation.docker.enable = true;
-  virtualisation.docker.package = unstable.docker_24;
 }

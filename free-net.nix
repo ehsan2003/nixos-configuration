@@ -35,7 +35,7 @@ in
       Restart = "always";
       ExecStart = "${proxyFile}/bin/start-proxy";
     };
-    path = with pkgs; [ clash xray unstable.sing-box unstable.v2raya ];
+    path = with pkgs; [ xray unstable.sing-box unstable.v2raya ];
     wantedBy = [ "multi-user.target" ];
   };
   programs.proxychains = {
@@ -55,12 +55,9 @@ in
   environment.shellAliases.ssp = "sudo https_proxy=http://localhost:1080 -s";
 
   environment.systemPackages = with pkgs; [
-    clash
     openvpn
     xray
     v2ray
-    unstable.clash-verge
-    unstable.clash-meta
     unstable.sing-box
     unstable.v2raya
   ];
