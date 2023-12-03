@@ -17,7 +17,7 @@
   environment.systemPackages = with pkgs; [
     nodejs
     yarn
-    python39
+    python310
     git
     gcc
     unstable.deno
