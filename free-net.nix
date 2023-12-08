@@ -38,6 +38,8 @@ in
     path = with pkgs; [ xray unstable.sing-box unstable.v2raya ];
     wantedBy = [ "multi-user.target" ];
   };
+
+  programs.clash-verge.enable= true;
   programs.proxychains = {
     enable = true;
     proxies = {
