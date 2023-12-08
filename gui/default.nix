@@ -102,6 +102,7 @@
     flameshot
     i3status
 
+    # firefox
     xarchiver
     discord
     unstable.tdesktop
