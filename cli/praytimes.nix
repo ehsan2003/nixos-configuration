@@ -1,5 +1,7 @@
 { pkgs, config, fenix, ... }:
 let
+  adhanFile = ./adhan.mp3;
+  playAdhan = "${pkgs.vlc}/bin/vlc ${adhanFile}";
   configFile = pkgs.writeTextFile {
     name = "praytimes.json";
     destination = "/etc/praytimes/praytimes.json";
@@ -14,13 +16,25 @@ let
           praytime = "dhuhr";
           time_diff = 300;
           cmd = ''
-            notify-send adhan "its time for dhuhr prayer ( it was at $TIME )"'';
+            notify-send adhan "its time for dhuhr prayer ( it was at $TIME )"
+          '';
+        }
+        {
+          praytime = "dhuhr";
+          time_diff = 0;
+          cmd = playAdhan;
         }
         {
           praytime = "maghrib";
           time_diff = 300;
           cmd = ''
-            notify-send adhan "Its time for maghrib prayer (it was at $TIME )"'';
+            notify-send adhan "Its time for maghrib prayer (it was at $TIME )"
+          '';
+        }
+        {
+          praytime = "maghrib";
+          time_diff = 0;
+          cmd = playAdhan;
         }
         {
           praytime = "sunset";
