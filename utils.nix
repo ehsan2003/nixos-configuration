@@ -1,4 +1,4 @@
-{ config, pkgs, nur, secrets, ... }:
+{ config, nixpkgs,pkgs, nur, secrets, ... }:
 {
   imports = [ ];
 
@@ -52,6 +52,7 @@
     options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
   '';
   nixpkgs.config.allowUnfree = true;
+  nix.registry.nixpkgs.flake = nixpkgs;
   programs.nix-ld.enable = true;
   services.atd.enable = true;
   services.openssh.enable = true;
