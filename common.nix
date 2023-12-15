@@ -5,6 +5,7 @@
     ./programming
     ./gui
     ./cli
+    ./praytimes
     ./utils.nix
     ./free-net.nix
     home-manager.nixosModules.default

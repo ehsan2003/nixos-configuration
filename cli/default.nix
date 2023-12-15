@@ -1,8 +1,8 @@
-{ pkgs, nix-alien, config, ... }:
+{ pkgs, nix-alien, ... }:
 let urls = (import ./uri-short.nix pkgs);
 in
 {
-  imports = [ ./praytimes.nix ];
+  imports = [ ];
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
