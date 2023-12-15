@@ -44,6 +44,10 @@
           inherit specialArgs system;
           modules = [ ./hosts/home-pc.nix ];
         };
+        usb = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./hosts/usb.nix ];
+        };
         iso = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
           modules = [ ./hosts/iso.nix ];
