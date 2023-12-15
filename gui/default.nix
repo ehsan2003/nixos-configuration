@@ -1,6 +1,6 @@
 { pkgs, unstable, ... }:
 {
-  imports = [ ./i3status-rust.nix ];
+  imports = [ ./i3status-rust.nix ./firefox.nix ];
   fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) ];
   # Select internationalisation properties. i18n.inputMethod.enabled = "fcitx5";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -40,49 +40,6 @@
       alacritty = {
         enable = true;
       };
-      firefox = {
-        enable = true;
-        package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
-          extraPolicies = {
-            CaptivePortal = false;
-            DisableFirefoxStudies = true;
-            DisablePocket = true;
-            DisableTelemetry = true;
-            DisableFirefoxAccounts = false;
-            NoDefaultBookmarks = true;
-            OfferToSaveLogins = true;
-            OfferToSaveLoginsDefault = true;
-            PasswordManagerEnabled = true;
-            FirefoxHome = {
-              Search = true;
-              Pocket = false;
-              Snippets = false;
-              TopSites = false;
-              Highlights = false;
-            };
-            UserMessaging = {
-              ExtensionRecommendations = false;
-              SkipOnboarding = true;
-            };
-          };
-        };
-        profiles.default = {
-          name = "default";
-          path = "default";
-          id = 0;
-
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            tridactyl
-            switchyomega
-          ];
-          isDefault = true;
-          search.default = "DuckDuckGo";
-          search.force = true;
-          settings = {
-            "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
-          };
-        };
-      };
     };
 
   };
@@ -102,7 +59,6 @@
     flameshot
     i3status
 
-    firefox
     xarchiver
     discord
     unstable.tdesktop
