@@ -22,6 +22,7 @@
 
   outputs = { self, nixpkgs, ... }@inputs: {
     packages."x86_64-linux".iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
+    packages."x86_64-linux".usb = inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
     nixosConfigurations =
       let
         system = "x86_64-linux";

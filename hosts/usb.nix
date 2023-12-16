@@ -1,6 +1,9 @@
-{ pkgs, lib, ... }: {
-  imports = [ ./base.nix ];
+{ pkgs, lib, modulesPath, ... }: {
+  imports = [
+    (modulesPath + "/installer/sd-card/sd-image-x86_64.nix")
+    ../common.nix
+  ];
   networking.hostName = "nixos-usb"; # Define your hostname.
-  boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
+  sdImage.compressImage = false;
+  sdImage.firmwareSize = 500;
 }
