@@ -21,12 +21,9 @@
     git
     gcc
     unstable.deno
-    unstable.bun
     docker-compose
     cloc
 
-    zap
-    insomnia
     cargo-watch
     (pkgs.fenix.stable.withComponents [
       "cargo"
