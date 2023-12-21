@@ -48,6 +48,7 @@ in
     tree
     imagemagick
     chntpw
+    zellij
   ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
