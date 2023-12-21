@@ -1,9 +1,14 @@
-{ pkgs, lib, modulesPath, ... }: {
+{ pkgs, lib, modulesPath, disko, ... }: {
   imports = [
-    (modulesPath + "/installer/sd-card/sd-image-x86_64.nix")
+    "${modulesPath}/profiles/all-hardware.nix"
+    "${modulesPath}/profiles/base.nix"
     ../common.nix
+    disko.nixosModules.disko
   ];
+  boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
+  boot.loader.grub.efiInstallAsRemovable = true;
   networking.hostName = "nixos-usb"; # Define your hostname.
-  sdImage.compressImage = false;
-  sdImage.firmwareSize = 500;
-}
+  # boot.initrd.kernelModules = [ "uat" ];
+  # checkout the example folder for how to configure different disko layouts
+
+} // import ./usb-disko.nix
