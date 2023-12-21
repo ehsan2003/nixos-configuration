@@ -1,6 +1,9 @@
 {
   description = "Ehsan's system configuration";
   inputs = {
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     fenix = {
@@ -22,6 +25,7 @@
 
   outputs = { self, nixpkgs, ... }@inputs: {
     packages."x86_64-linux".iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
+    packages."x86_64-linux".usb = inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
     nixosConfigurations =
       let
         system = "x86_64-linux";
@@ -46,7 +50,9 @@
         };
         usb = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
-          modules = [ ./hosts/usb.nix ];
+          modules = [ 
+            ./hosts/usb.nix 
+          ];
         };
         iso = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
