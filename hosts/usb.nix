@@ -5,6 +5,8 @@
     ../common.nix
     disko.nixosModules.disko
   ];
+
+  services.xserver.desktopManager.xfce.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
   boot.loader.grub.efiInstallAsRemovable = true;
   networking.hostName = "nixos-usb"; # Define your hostname.
