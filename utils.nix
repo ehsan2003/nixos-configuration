@@ -55,7 +55,6 @@
   programs.nix-ld.enable = true;
   services.atd.enable = true;
   services.openssh.enable = true;
-  programs.mosh.enable = true;
   nix.gc = {
     automatic = true;
     dates = "weekly";
