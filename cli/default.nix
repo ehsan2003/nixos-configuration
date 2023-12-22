@@ -43,7 +43,6 @@ in
     (urls "meet" "https://meet.google.com/")
     (urls "claude" "https://claude.ai/")
 
-    praytimes-kit
     zip
     tree
     imagemagick
