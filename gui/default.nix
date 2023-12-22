@@ -60,12 +60,8 @@
     i3status
 
     xarchiver
-    discord
     unstable.tdesktop
-    chromium
     qutebrowser
-    tor-browser-bundle-bin
-    spotify
 
   ];
 }
