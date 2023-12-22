@@ -6,6 +6,9 @@
     disko.nixosModules.disko
   ];
 
+  nix.optimise.automatic = true;
+  nix.optimise.dates=["12:00"];
+  nix.gc.options = "--delete-older-than 7d";
   services.xserver.desktopManager.xfce.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
   boot.loader.grub.efiInstallAsRemovable = true;
