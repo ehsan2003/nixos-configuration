@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 {
   fonts.packages = with pkgs;
     [
       font-awesome
     ];
   home-manager.users.ehsan.programs.i3status-rust = {
+    package = unstable.i3status-rust;
     enable = true;
     bars = {
       bottom = {
