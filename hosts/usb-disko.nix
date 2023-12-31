@@ -2,7 +2,7 @@
   disko.devices = {
     disk = {
       disko = {
-        device = "/dev/disk/by-id/usb-ASolid_USB_49349808-0:0";
+        device = "/dev/usb";
         type = "disk";
         content = {
           type = "gpt";
