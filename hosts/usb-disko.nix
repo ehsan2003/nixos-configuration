@@ -20,8 +20,16 @@
                 mountpoint = "/boot";
               };
             };
-            luks = {
+            root = {
               size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
+            };
+            luks = {
+              size = "5G";
               content = {
                 type = "luks";
                 name = "crypted";
@@ -30,7 +38,7 @@
                 content = {
                   type = "filesystem";
                   format = "ext4";
-                  mountpoint = "/";
+                  mountpoint = "/home";
                 };
               };
             };
