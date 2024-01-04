@@ -39,7 +39,7 @@ in
     wantedBy = [ "multi-user.target" ];
   };
 
-  programs.clash-verge.enable= true;
+  programs.clash-verge.enable = true;
   programs.proxychains = {
     enable = true;
     proxies = {
@@ -55,7 +55,11 @@ in
 
   environment.shellAliases.sp = "export https_proxy=http://localhost:1080;";
   environment.shellAliases.ssp = "sudo https_proxy=http://localhost:1080 -s";
-
+  services.tor = {
+    enable = true;
+    client.enable = true;
+    torsocks.enable = true;
+  };
   environment.systemPackages = with pkgs; [
     openvpn
     xray
