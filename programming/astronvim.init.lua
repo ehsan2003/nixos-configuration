@@ -79,6 +79,7 @@ return {
 		},
 		-- enable servers that you already have installed without mason
 		servers = {
+			"hls",
 			"rust_analyzer",
 			"pyright",
 			"tsserver",
