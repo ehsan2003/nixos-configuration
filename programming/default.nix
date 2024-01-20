@@ -18,7 +18,6 @@
     nodejs
     yarn
     python310
-    ghc
     git
     gcc
     unstable.deno

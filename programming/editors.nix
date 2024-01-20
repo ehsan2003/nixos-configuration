@@ -12,7 +12,6 @@
     nodePackages.prettier
     llvmPackages_15.clang-unwrapped
     lua-language-server
-    haskell-language-server
     stylua
 
   ];
