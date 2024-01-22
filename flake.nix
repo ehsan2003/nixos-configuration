@@ -6,6 +6,10 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,41 +27,53 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    packages."x86_64-linux".iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
-    packages."x86_64-linux".usb = inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
-    nixosConfigurations =
-      let
-        system = "x86_64-linux";
-        specialArgs = inputs // {
-          unstable = inputs.unstable.legacyPackages.${system};
-          secrets = nixpkgs.lib.importJSON /etc/secrets.json;
-        };
-      in
-      {
-        base = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/base.nix ];
-        };
+  outputs = { self, nixpkgs, nixvim, ... }@inputs:
+    let
 
-        nixos-laptop = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/laptop.nix ];
-        };
-        nixos-home-desktop = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/home-pc.nix ];
-        };
-        usb = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ 
-            ./hosts/usb.nix 
-          ];
-        };
-        iso = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/iso.nix ];
-        };
+      system = "x86_64-linux";
+      nixvim' = nixvim.legacyPackages.${system};
+      nvim = nixvim'.makeNixvimWithModule {
+        pkgs = nixpkgs.legacyPackages.${system};
+        module = import ./programming/nixvim;
+        
       };
-  };
+    in
+    {
+      packages."x86_64-linux".nvim = nvim;
+      packages."x86_64-linux".iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
+      packages."x86_64-linux".usb = inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
+      nixosConfigurations =
+        let
+          system = "x86_64-linux";
+          specialArgs = inputs // {
+            unstable = inputs.unstable.legacyPackages.${system};
+            secrets = nixpkgs.lib.importJSON /etc/secrets.json;
+          };
+        in
+        {
+          base = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/base.nix ];
+          };
+
+          nixos-laptop = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/laptop.nix ];
+          };
+          nixos-home-desktop = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/home-pc.nix ];
+          };
+          usb = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [
+              ./hosts/usb.nix
+            ];
+          };
+          iso = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/iso.nix ];
+          };
+        };
+    };
 }

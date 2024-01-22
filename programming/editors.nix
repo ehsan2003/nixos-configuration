@@ -1,5 +1,8 @@
-{ astroNvim, pkgs, ... }:
+{ astroNvim, pkgs, nixvim, ... }:
 {
+  imports = [
+    nixvim.nixosModules.nixvim
+  ];
   environment.systemPackages = with pkgs;[
     neovim
     neovide
@@ -16,10 +19,10 @@
 
   ];
   home-manager.users.ehsan = {
-    home.file.astroNvim = {
-      source = astroNvim.outPath;
-      target = ".config/nvim";
-    };
+    # home.file.astroNvim = {
+    #   source = astroNvim.outPath;
+    #   target = ".config/nvim";
+    # };
     home.file.astroNvimConfig = {
       text = builtins.readFile ./astronvim.init.lua;
       target = ".config/astronvim/lua/user/init.lua";
