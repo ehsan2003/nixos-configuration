@@ -1,33 +1,16 @@
-{ astroNvim, pkgs, nixvim, ... }:
+{ astroNvim, pkgs, nixvim, ... }@inputs:
+let
+  system = "x86_64-linux";
+  nixvim' = nixvim.legacyPackages.${system};
+  nvim = nixvim'.makeNixvimWithModule {
+    pkgs = pkgs;
+    module = import ./nixvim;
+
+  };
+in
 {
-  imports = [
-    nixvim.nixosModules.nixvim
-  ];
-  environment.systemPackages = with pkgs;[
-    neovim
-    neovide
-    rust-analyzer
-    nixfmt
-    pyright
-    nil
-    nodePackages.typescript-language-server
-    nodePackages.typescript
-    nodePackages.prettier
-    llvmPackages_15.clang-unwrapped
-    lua-language-server
-    stylua
-
-  ];
+  environment.systemPackages = [ pkgs.neovide nvim ];
   home-manager.users.ehsan = {
-    # home.file.astroNvim = {
-    #   source = astroNvim.outPath;
-    #   target = ".config/nvim";
-    # };
-    home.file.astroNvimConfig = {
-      text = builtins.readFile ./astronvim.init.lua;
-      target = ".config/astronvim/lua/user/init.lua";
-    };
-
     programs = {
       git = {
         enable = true;

@@ -35,7 +35,6 @@
       nvim = nixvim'.makeNixvimWithModule {
         pkgs = nixpkgs.legacyPackages.${system};
         module = import ./programming/nixvim;
-        
       };
     in
     {

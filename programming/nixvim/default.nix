@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, fenix, ... }:
 {
 
   config = {
@@ -112,7 +112,14 @@
     plugins.lsp = {
       enable = true;
       servers.tsserver.enable = true;
-      servers.rust-analyzer.enable = true;
+
+      servers.rust-analyzer = {
+        enable = true;
+        cargoPackage = fenix.stable.cargo;
+        rustcPackage = fenix.stable.rustc;
+        installCargo = false;
+        installRustc = false;
+      };
       servers.html.enable = true;
       servers.tailwindcss.enable = true;
       servers.svelte.enable = true;
