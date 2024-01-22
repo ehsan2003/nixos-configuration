@@ -1,11 +1,10 @@
-{ astroNvim, pkgs, nixvim, ... }@inputs:
+{ astroNvim, pkgs, nixvim, unstable, ... }@inputs:
 let
   system = "x86_64-linux";
   nixvim' = nixvim.legacyPackages.${system};
   nvim = nixvim'.makeNixvimWithModule {
     pkgs = pkgs;
     module = import ./nixvim;
-
   };
 in
 {

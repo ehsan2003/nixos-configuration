@@ -1,10 +1,9 @@
 { pkgs, fenix, ... }:
 {
-
   config = {
-    plugins.bufferline = {
-      enable = true;
-    };
+    plugins.bufferline.enable = true;
+    plugins.markdown-preview.enable = true;
+
     clipboard.providers.xclip.enable = true;
     clipboard.register = "unnamedplus";
     plugins.which-key.enable = true;
@@ -25,9 +24,13 @@
     plugins.auto-save.enable = true;
     plugins.comment-nvim.enable = true;
     plugins.comment-nvim.toggler.line = "<leader>/";
-    extraPlugins = with pkgs.vimPlugins ; [ smart-splits-nvim ];
+    extraPlugins = with pkgs.vimPlugins ; [ smart-splits-nvim friendly-snippets ];
     plugins.toggleterm.enable = true;
     plugins.luasnip.enable = true;
+    plugins.luasnip.fromVscode = [
+      { }
+    ];
+
     plugins.cmp_luasnip.enable = true;
     plugins.auto-session.enable = true;
     plugins.lualine.enable = true;
@@ -45,6 +48,8 @@
       };
     };
 
+    plugins.lspkind.enable = true;
+    plugins.lspkind.mode = "symbol";
     plugins.nvim-cmp = {
       enable = true;
       sources = [
@@ -70,14 +75,32 @@
         documentation = {
           maxHeight = "math.floor(40 * (40 / vim.o.lines))";
           maxWidth = "math.floor((40 * 2) * (vim.o.columns / (40 * 2 * 16 / 9)))";
-          border = [ "" "" "" " " "" "" "" " " ];
-          winhighlight = "FloatBorder:NormalFloat";
+          border = "rounded";
+          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
         };
       };
 
       snippet.expand = "luasnip";
       mapping = {
         "<CR>" = "cmp.mapping.confirm({ select = false })";
+        "<C-u>" = ''cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" })'';
+        "<C-d>" = ''cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" })'';
+        "<C-Space>" = ''cmp.mapping.complete()'';
+        "<S-Tab>" = {
+          modes = [ "i" "s" ];
+          action = ''
+            function(fallback)
+              local luasnip=require("luasnip")
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end 
+          '';
+        };
         "<Tab>" = {
           modes = [ "i" "s" ];
           action = ''
@@ -123,6 +146,7 @@
       servers.html.enable = true;
       servers.tailwindcss.enable = true;
       servers.svelte.enable = true;
+      servers.emmet_ls.enable = true;
       servers.pyright.enable = true;
       servers.ccls.enable = true;
       servers.rnix-lsp.enable = true;
@@ -131,14 +155,32 @@
 
     keymaps = [
       {
-        key = "<leader>tf";
-        action = "<Cmd>ToggleTerm direction=float<CR>";
+        key = "<leader>/";
+        action = ''<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>'';
+        mode = "v";
+      }
+      {
+        key = "<leader>/";
+        action = ''function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end'';
+        lua = true;
         mode = "n";
       }
 
       {
+        key = "<leader>tf";
+        action = "<Cmd>ToggleTerm direction=float<CR>";
+        mode = "n";
+      }
+      {
         key = "<leader>th";
         action = "<Cmd>ToggleTerm size=10 direction=horizontal<CR>";
+        mode = "n";
+      }
+      {
+        key = "K";
+        action = "function () vim.lsp.buf.hover() end";
+        options.desc = "Hover symbol details";
+        lua = true;
         mode = "n";
       }
       {
