@@ -42,7 +42,7 @@
     plugins.auto-save.enable = true;
     plugins.comment-nvim.enable = true;
     plugins.comment-nvim.toggler.line = "<leader>/";
-    extraPlugins = with pkgs.vimPlugins ; [ smart-splits-nvim friendly-snippets ];
+    extraPlugins = with pkgs.vimPlugins ; [ smart-splits-nvim friendly-snippets dressing-nvim ];
     plugins.toggleterm.enable = true;
     plugins.auto-session.enable = true;
     plugins.auto-session.bypassSessionSaveFileTypes = [ "neo-tree" ];

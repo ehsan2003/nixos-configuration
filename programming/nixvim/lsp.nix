@@ -104,6 +104,20 @@
   };
   keymaps = [
     {
+      key = "<leader>la";
+      action = ''function() vim.lsp.buf.code_action() end'';
+      options.desc = "Code action";
+      lua = true;
+      mode = "v";
+    }
+    {
+      key = "<leader>la";
+      action = ''function() vim.lsp.buf.code_action() end'';
+      options.desc = "Code action";
+      lua = true;
+      mode = "n";
+    }
+    {
       key = "gd";
       action = ''function() require("telescope.builtin").lsp_definitions() end'';
       options.desc = "Go to definition";
