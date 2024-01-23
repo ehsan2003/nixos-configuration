@@ -81,7 +81,6 @@
       };
     };
     cmp-nvim-lsp.enable = true;
-    lsp-lines.enable = true;
     lsp = {
       enable = true;
       servers.tsserver.enable = true;
