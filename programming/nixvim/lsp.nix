@@ -1,6 +1,15 @@
 { pkgs, fenix, ... }:
 {
   plugins = {
+    none-ls = {
+      enable = true;
+      sources.code_actions.eslint.enable = true;
+      sources.diagnostics.eslint.enable = true;
+      sources.diagnostics.eslint.enable = true;
+      sources.formatting.prettier.enable = true;
+      sources.formatting.rustfmt.enable = true;
+
+    };
     luasnip.enable = true;
     luasnip.fromVscode = [
       { }
