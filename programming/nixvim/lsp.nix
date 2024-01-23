@@ -147,7 +147,20 @@
     }
     {
       key = "<leader>lG";
-      action = "function() vim.lsp.buf.workspace_symbol() end";
+      action = ''
+        function()
+          vim.ui.input({ prompt = "Symbol Query:" }, function(query)
+            if query then
+              -- word under cursor if given query is empty
+              if query == "" then query = vim.fn.expand "<cword>" end
+              require("telescope.builtin").lsp_workspace_symbols {
+                query = query,
+                prompt_title = ("Find word (%s)"):format(query),
+              }
+            end
+          end)
+        end
+      '';
       options.desc = "Search workspace symbols";
       lua = true;
       mode = "n";
