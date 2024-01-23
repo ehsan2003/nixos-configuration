@@ -1,6 +1,6 @@
 { pkgs, fenix, ... }:
 {
-  imports = [ ./lsp.nix ];
+  imports = [ ./lsp.nix ./terminal.nix ];
   config = {
     plugins.bufferline.enable = true;
     plugins.markdown-preview.enable = true;
@@ -43,7 +43,6 @@
     plugins.comment-nvim.enable = true;
     plugins.comment-nvim.toggler.line = "<leader>/";
     extraPlugins = with pkgs.vimPlugins ; [ smart-splits-nvim friendly-snippets dressing-nvim ];
-    plugins.toggleterm.enable = true;
     plugins.auto-session.enable = true;
     plugins.auto-session.bypassSessionSaveFileTypes = [ "neo-tree" ];
     plugins.lualine.enable = true;
@@ -68,8 +67,6 @@
       incrementalSelection.keymaps.nodeDecremental = "<A-l>";
       incrementalSelection.keymaps.nodeIncremental = "<A-h>";
     };
-
-
 
     keymaps = [
       {
@@ -101,46 +98,7 @@
         mode = "n";
       }
 
-      {
-        key = "<leader>tf";
-        action = "<Cmd>ToggleTerm direction=float<CR>";
-        mode = "n";
-      }
-      {
-        key = "<leader>th";
-        action = "<Cmd>ToggleTerm size=10 direction=horizontal<CR>";
-        mode = "n";
-      }
 
-      {
-        key = "<leader>tv";
-        action = "<Cmd>ToggleTerm size=80 direction=vertical<CR>";
-        mode = "n";
-      }
-
-      {
-        key = "<F7>";
-        action = "<Cmd>ToggleTerm<CR>";
-        mode = "n";
-      }
-
-      {
-        key = "<F7>";
-        action = "<Cmd>ToggleTerm<CR>";
-        mode = "t";
-      }
-
-      {
-        key = "<C-'>";
-        action = "<Cmd>ToggleTerm<CR>";
-        mode = "n";
-      }
-
-      {
-        key = "<C-'>";
-        action = "<Cmd>ToggleTerm<CR>";
-        mode = "t";
-      }
       {
         # Default mode is "" which means normal-visual-op
         key = "<leader>e";
