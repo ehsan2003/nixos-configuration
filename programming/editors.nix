@@ -1,4 +1,4 @@
-{ astroNvim, pkgs, nixvim, unstable, ... }@inputs:
+{ pkgs, nixvim, unstable, ... }@inputs:
 let
   system = "x86_64-linux";
   nixvim' = nixvim.legacyPackages.${system};

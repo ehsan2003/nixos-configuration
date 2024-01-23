@@ -14,10 +14,6 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    astroNvim = {
-      url = "github:AstroNvim/AstroNvim";
-      flake = false;
-    };
 
     nur.url = "github:nix-community/NUR";
     nix-alien.url = "github:thiagokokada/nix-alien";

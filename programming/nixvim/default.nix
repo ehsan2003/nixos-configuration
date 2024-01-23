@@ -3,6 +3,7 @@
   imports = [ ./lsp.nix ./terminal.nix ];
   config = {
     plugins.bufferline.enable = true;
+    plugins.hardtime.enable = true;
     plugins.markdown-preview.enable = true;
 
     clipboard.providers.xclip.enable = true;
