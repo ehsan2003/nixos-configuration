@@ -85,7 +85,7 @@
     lsp = {
       enable = true;
       servers.tsserver.enable = true;
-
+      servers.bashls.enable = true;
       servers.rust-analyzer = {
         enable = true;
         cargoPackage = fenix.stable.cargo;
@@ -202,4 +202,8 @@
       mode = "n";
     }
   ];
+  extraConfigLua = ''
+    local cmp=require('cmp')
+    cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done { tex = false })
+  '';
 }

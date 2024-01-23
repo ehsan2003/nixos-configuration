@@ -8,10 +8,16 @@
     clipboard.providers.xclip.enable = true;
     clipboard.register = "unnamedplus";
     plugins.which-key.enable = true;
+    plugins.which-key.registrations = {
+      "<leader>f" = "Find";
+      "<leader>t" = "Terminal";
+      "<leader>l" = "Lsp";
+      "<leader>g" = "Git";
+    };
     colorschemes.tokyonight.enable = true;
     globals.mapleader = " ";
     plugins.neo-tree.enable = true;
-    plugins.neo-tree.filesystem.filteredItems.hideHidden = false;
+    plugins.neo-tree.filesystem.filteredItems.hideHidden = true;
 
     options.shiftwidth = 2; # Tab width should be 2
     options.expandtab = true; # Tab width should be 2
@@ -22,7 +28,15 @@
     options.signcolumn = "yes:1";
     options.cursorline = true;
 
+    plugins.inc-rename.enable = true;
     plugins.noice.enable = true;
+    plugins.noice.presets = {
+      bottom_search = true;
+      command_palette = true;
+      long_message_to_split = true;
+      inc_rename = false;
+      lsp_doc_border = false;
+    };
 
     plugins.nvim-autopairs.enable = true;
     plugins.auto-save.enable = true;
@@ -31,6 +45,7 @@
     extraPlugins = with pkgs.vimPlugins ; [ smart-splits-nvim friendly-snippets ];
     plugins.toggleterm.enable = true;
     plugins.auto-session.enable = true;
+    plugins.auto-session.bypassSessionSaveFileTypes = [ "neo-tree" ];
     plugins.lualine.enable = true;
     plugins.telescope = {
       enable = true;
@@ -58,13 +73,30 @@
 
     keymaps = [
       {
+        key = "]g";
+        action = ''<cmd>Gitsigns prev_hunk<cr>'';
+        mode = "n";
+      }
+      {
+        key = "[g";
+        action = ''<cmd>Gitsigns next_hunk<cr>'';
+        mode = "n";
+      }
+      {
+        key = "<leader>gd";
+        action = ''<cmd>Gitsigns diffthis<cr>'';
+        mode = "n";
+      }
+      {
         key = "<leader>/";
         action = ''<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>'';
+        options.desc="Comment visual text";
         mode = "v";
       }
       {
         key = "<leader>/";
         action = ''function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end'';
+        options.desc="Comment line";
         lua = true;
         mode = "n";
       }
@@ -113,6 +145,7 @@
         # Default mode is "" which means normal-visual-op
         key = "<leader>e";
         action = "<Cmd>Neotree toggle<CR>";
+        options.desc= "Explorer";
       }
       {
         key = "<leader>q";
@@ -122,6 +155,7 @@
       {
         key = "<leader>c";
         action = "<Cmd>bdelete<Cr>";
+        options.desc= "exit buffer";
       }
       {
         key = "H";
