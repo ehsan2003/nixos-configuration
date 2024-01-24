@@ -45,6 +45,7 @@ in
 
     zip
     tree
+    ncdu
     imagemagick
     chntpw
     zellij
