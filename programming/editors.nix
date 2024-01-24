@@ -3,7 +3,7 @@ let
   system = "x86_64-linux";
   nixvim' = nixvim.legacyPackages.${system};
   nvim = nixvim'.makeNixvimWithModule {
-    pkgs = pkgs;
+    pkgs = unstable;
     module = import ./nixvim;
   };
 in

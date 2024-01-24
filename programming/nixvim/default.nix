@@ -27,6 +27,7 @@
     options.cmdheight = 0;
     options.signcolumn = "yes:1";
     options.cursorline = true;
+    options.undofile = true;
 
     plugins.noice.enable = true;
     plugins.noice.presets = {

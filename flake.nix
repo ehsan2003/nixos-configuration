@@ -7,8 +7,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "unstable";
     };
     fenix = {
       url = "github:nix-community/fenix";
@@ -29,7 +29,7 @@
       system = "x86_64-linux";
       nixvim' = nixvim.legacyPackages.${system};
       nvim = nixvim'.makeNixvimWithModule {
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = inputs.unstable.legacyPackages.${system};
         module = import ./programming/nixvim;
       };
     in
