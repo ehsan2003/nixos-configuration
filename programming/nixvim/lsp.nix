@@ -4,9 +4,9 @@
     none-ls = {
       enable = true;
       sources.code_actions.eslint.enable = true;
-      sources.diagnostics.eslint.enable = true;
-      sources.formatting.prettier.enable = true;
-      sources.formatting.rustfmt.enable = true;
+      # sources.diagnostics.eslint.enable = true;
+      # sources.formatting.prettier.enable = true;
+      # sources.formatting.rustfmt.enable = true;
 
     };
     luasnip.enable = true;
@@ -92,6 +92,7 @@
     lsp = {
       enable = true;
       servers.tsserver.enable = true;
+      servers.prismals.enable = true;
       servers.bashls.enable = true;
       servers.rust-analyzer = {
         enable = true;
