@@ -8,6 +8,8 @@
     clipboard.providers.xclip.enable = true;
     clipboard.register = "unnamedplus";
     plugins.which-key.enable = true;
+    plugins.yanky.enable = true;
+    plugins.yanky.highlight.timer = 100;
     plugins.which-key.registrations = {
       "<leader>f" = "Find";
       "<leader>t" = "Terminal";
@@ -54,6 +56,11 @@
     plugins.telescope = {
       enable = true;
       keymaps = {
+        "<leader>fr" = {
+          desc = "registers";
+          action = "registers";
+
+        };
         "<leader>fw" = {
           desc = "search";
           action = "live_grep";
