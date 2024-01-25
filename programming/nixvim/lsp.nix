@@ -14,6 +14,7 @@
     luasnip.fromVscode = [
       { }
     ];
+    friendly-snippets.enable = true;
 
     cmp_luasnip.enable = true;
 
