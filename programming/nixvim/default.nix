@@ -19,7 +19,7 @@
     colorschemes.tokyonight.enable = true;
     globals.mapleader = " ";
     plugins.neo-tree.enable = true;
-    plugins.neo-tree.filesystem.filteredItems.hideHidden = true;
+    plugins.neo-tree.filesystem.filteredItems.visible = true;
 
     options.shiftwidth = 2; # Tab width should be 2
     options.expandtab = true; # Tab width should be 2
@@ -69,6 +69,18 @@
           desc = "file finder";
           action = "find_files";
         };
+      };
+
+      defaults.sorting_strategy = "ascending";
+      defaults.layout_config = {
+        horizontal = {
+          prompt_position = "top";
+          preview_width = 0.55;
+        };
+        vertical = { mirror = false; };
+        width = 0.87;
+        height = 0.80;
+        preview_cutoff = 120;
       };
     };
     plugins.gitsigns.enable = true;
