@@ -92,6 +92,7 @@
     lsp = {
       enable = true;
       servers.tsserver.enable = true;
+      servers.cssls.enable = true;
       servers.prismals.enable = true;
       servers.bashls.enable = true;
       servers.rust-analyzer = {

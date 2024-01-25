@@ -28,8 +28,12 @@
     options.signcolumn = "yes:1";
     options.cursorline = true;
     options.undofile = true;
+    options.wrap = false;
+    options.guifont = "FiraCode Nerd Font:h12";
+    options.hlsearch = false;
 
     plugins.noice.enable = true;
+    plugins.hmts.enable = true;
     plugins.noice.presets = {
       bottom_search = true;
       command_palette = true;
