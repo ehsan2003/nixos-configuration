@@ -5,8 +5,9 @@
       enable = true;
       sources.code_actions.eslint.enable = true;
       # sources.diagnostics.eslint.enable = true;
-      # sources.formatting.prettier.enable = true;
-      # sources.formatting.rustfmt.enable = true;
+      sources.formatting.prettier.enable = true;
+      sources.formatting.prettier.disableTsServerFormatter = true;
+      sources.formatting.rustfmt.enable = true;
 
     };
     luasnip.enable = true;
