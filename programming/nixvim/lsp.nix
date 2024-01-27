@@ -1,5 +1,9 @@
 { pkgs, fenix, ... }:
 {
+  plugins.markdown-preview.enable = true;
+  plugins.vimtex.enable = true;
+  plugins.vimtex.installTexLive = true;
+  plugins.nvim-autopairs.enable = true;
   plugins = {
     none-ls = {
       enable = true;
@@ -110,7 +114,7 @@
       servers.emmet_ls.enable = true;
       servers.pyright.enable = true;
       servers.ccls.enable = true;
-      servers.rnix-lsp.enable = true;
+      servers.nixd.enable = true;
     };
   };
   keymaps = [
