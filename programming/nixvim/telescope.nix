@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   plugins.telescope = {
     enable = true;
     keymaps = {
@@ -26,7 +25,7 @@
       };
       vertical = { mirror = false; };
       width = 0.87;
-      height = 0.80;
+      height = 0.8;
       preview_cutoff = 120;
     };
   };

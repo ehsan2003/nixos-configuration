@@ -52,8 +52,7 @@ let
 
     };
   };
-in
-{
+in {
 
   nixpkgs.config.packageOverrides = pkgs: {
     praytimes-config = configFile;
@@ -96,7 +95,7 @@ in
         "${pkgs.praytimes-kit}/bin/praytimes-kit daemon ${configFile}/etc/praytimes/praytimes.json";
     };
   };
-  environment.systemPackages = with pkgs;[ praytimes-kit ];
+  environment.systemPackages = with pkgs; [ praytimes-kit ];
 
   environment.shellAliases.pt =
     "${pkgs.praytimes-kit}/bin/praytimes-kit calculate --config  ${configFile}/etc/praytimes/praytimes.json";

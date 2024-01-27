@@ -1,5 +1,5 @@
-{pkgs,...}:
-{
+{ pkgs, ... }: {
+  config = {
     colorschemes.tokyonight.enable = true;
     globals.mapleader = " ";
     clipboard.providers.xclip.enable = true;
@@ -17,4 +17,5 @@
     options.guifont = "FiraCode Nerd Font:h12";
     options.hlsearch = false;
 
+  };
 }

@@ -1,8 +1,5 @@
-{ pkgs, fenix, ... }:
-{
+{ pkgs, fenix, ... }: {
   plugins.markdown-preview.enable = true;
-  plugins.vimtex.enable = true;
-  plugins.vimtex.installTexLive = true;
   plugins.nvim-autopairs.enable = true;
   plugins = {
     none-ls = {
@@ -12,12 +9,11 @@
       sources.formatting.prettier.enable = true;
       sources.formatting.prettier.disableTsServerFormatter = true;
       sources.formatting.rustfmt.enable = true;
+      sources.formatting.nixfmt.enable = true;
 
     };
     luasnip.enable = true;
-    luasnip.fromVscode = [
-      { }
-    ];
+    luasnip.fromVscode = [ { } ];
     friendly-snippets.enable = true;
 
     cmp_luasnip.enable = true;
@@ -27,20 +23,30 @@
     nvim-cmp = {
       enable = true;
       sources = [
-        { name = "nvim_lsp"; priority = 1000; }
-        { name = "luasnip"; priority = 750; }
+        {
+          name = "nvim_lsp";
+          priority = 1000;
+        }
+        {
+          name = "luasnip";
+          priority = 750;
+        }
         {
           name = "buffer";
           priority = 500;
           option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
         }
-        { name = "path"; priority = 250; }
+        {
+          name = "path";
+          priority = 250;
+        }
       ];
 
       window = {
         completion = {
           border = "rounded";
-          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
+          winhighlight =
+            "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
           scrolloff = 0;
           colOffset = 0;
           sidePadding = 1;
@@ -48,9 +54,11 @@
         };
         documentation = {
           maxHeight = "math.floor(40 * (40 / vim.o.lines))";
-          maxWidth = "math.floor((40 * 2) * (vim.o.columns / (40 * 2 * 16 / 9)))";
+          maxWidth =
+            "math.floor((40 * 2) * (vim.o.columns / (40 * 2 * 16 / 9)))";
           border = "rounded";
-          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
+          winhighlight =
+            "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
         };
       };
 
@@ -59,7 +67,7 @@
         "<CR>" = "cmp.mapping.confirm({ select = false })";
         "<C-u>" = ''cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" })'';
         "<C-d>" = ''cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" })'';
-        "<C-Space>" = ''cmp.mapping.complete()'';
+        "<C-Space>" = "cmp.mapping.complete()";
         "<S-Tab>" = {
           modes = [ "i" "s" ];
           action = ''
@@ -120,21 +128,22 @@
   keymaps = [
     {
       key = "<leader>la";
-      action = ''function() vim.lsp.buf.code_action() end'';
+      action = "function() vim.lsp.buf.code_action() end";
       options.desc = "Code action";
       lua = true;
       mode = "v";
     }
     {
       key = "<leader>la";
-      action = ''function() vim.lsp.buf.code_action() end'';
+      action = "function() vim.lsp.buf.code_action() end";
       options.desc = "Code action";
       lua = true;
       mode = "n";
     }
     {
       key = "gd";
-      action = ''function() require("telescope.builtin").lsp_definitions() end'';
+      action =
+        ''function() require("telescope.builtin").lsp_definitions() end'';
       options.desc = "Go to definition";
       lua = true;
       mode = "n";
@@ -169,7 +178,8 @@
     }
     {
       key = "gy";
-      action = ''function() require("telescope.builtin").lsp_type_definitions() end'';
+      action =
+        ''function() require("telescope.builtin").lsp_type_definitions() end'';
       options.desc = "Definition of current type";
       lua = true;
       mode = "n";

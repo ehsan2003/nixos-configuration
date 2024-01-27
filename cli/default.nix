@@ -1,7 +1,6 @@
 { pkgs, nix-alien, ... }:
 let urls = (import ./uri-short.nix pkgs);
-in
-{
+in {
   imports = [ ];
 
   environment.shells = with pkgs; [ zsh ];

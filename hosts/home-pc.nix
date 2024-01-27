@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let dpi = 250;
-in
-{
+in {
   imports = [ ./base.nix ];
   networking.hostName = "nixos-home-desktop"; # Define your hostname.
 
@@ -26,9 +25,7 @@ in
     EOF
   '';
   services.serviio.enable = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "dcraw-9.28.0"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [ "dcraw-9.28.0" ];
 
 }
 

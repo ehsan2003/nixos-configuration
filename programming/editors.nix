@@ -6,8 +6,7 @@ let
     pkgs = unstable;
     module = import ./nixvim;
   };
-in
-{
+in {
   environment.systemPackages = [ pkgs.neovide nvim ];
   home-manager.users.ehsan = {
     programs = {

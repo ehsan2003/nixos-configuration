@@ -1,7 +1,9 @@
-{ pkgs, unstable, ... }:
-{
+{ pkgs, unstable, ... }: {
   imports = [ ./i3status-rust.nix ./firefox.nix ];
-  fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; }) vazir-code-font ];
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+    vazir-code-font
+  ];
   # Select internationalisation properties. i18n.inputMethod.enabled = "fcitx5";
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -37,9 +39,7 @@
         enable = true;
         theme = "Adapta-Nokto";
       };
-      alacritty = {
-        enable = true;
-      };
+      alacritty = { enable = true; };
     };
 
   };
