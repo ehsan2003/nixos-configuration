@@ -4,8 +4,6 @@
   plugins = {
     none-ls = {
       enable = true;
-      sources.code_actions.eslint.enable = true;
-      # sources.diagnostics.eslint.enable = true;
       sources.formatting.prettier.enable = true;
       sources.formatting.prettier.disableTsServerFormatter = true;
       sources.formatting.rustfmt.enable = true;
@@ -105,7 +103,18 @@
     cmp-nvim-lsp.enable = true;
     lsp = {
       enable = true;
-      servers.tsserver.enable = true;
+      servers.eslint.enable = true;
+
+      servers.denols = {
+        enable = true;
+        rootDir =
+          ''require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
+      };
+      servers.tsserver = {
+        enable = true;
+        extraOptions = { single_file_support = false; };
+        rootDir = ''require('lspconfig').util.root_pattern("package.json")'';
+      };
       servers.cssls.enable = true;
       servers.prismals.enable = true;
       servers.bashls.enable = true;

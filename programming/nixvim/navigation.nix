@@ -4,7 +4,7 @@
     {
       # Default mode is "" which means normal-visual-op
       key = "<leader>e";
-      action = "<Cmd>Neotree toggle<CR>";
+      action = "<Cmd>Neotree toggle reveal<CR>";
       options.desc = "Explorer";
     }
     {

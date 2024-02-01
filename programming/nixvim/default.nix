@@ -6,7 +6,7 @@
     ./options.nix
     ./navigation.nix
     ./gitsigns.nix
-    ./layout.nix
+    ./ui.nix
     ./comment.nix
     ./treesitter.nix
   ];

@@ -11,6 +11,7 @@
   plugins.lualine.enable = true;
   plugins.neo-tree.enable = true;
   plugins.neo-tree.filesystem.filteredItems.visible = true;
+
   plugins.noice.enable = true;
   plugins.noice.presets = {
     bottom_search = true;
