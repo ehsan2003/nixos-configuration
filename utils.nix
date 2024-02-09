@@ -1,5 +1,4 @@
-{ config, nixpkgs, pkgs, unstable_input, nur, secrets, ... }:
-{
+{ config, nixpkgs, pkgs, unstable_input, nur, secrets, ... }: {
   imports = [ ];
 
   # Use the systemd-boot EFI boot loader.
@@ -41,14 +40,22 @@
       nurpkgs = pkgs;
     };
   };
-  environment.systemPackages = [
-    pkgs.linux-wifi-hotspot
-  ];
+  environment.systemPackages = [ pkgs.linux-wifi-hotspot pkgs.ollama ];
 
-  
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
   services.atd.enable = true;
+  systemd.user.services.ollama = {
+    environment = { https_proxy = "http://localhost:1081"; };
+    enable = true;
+    description = "ollama server";
+    after = [ "network.target" ];
+    serviceConfig = {
+      Restart = "always";
+      ExecStart = "${pkgs.ollama}/bin/ollama serve";
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
   services.openssh.enable = true;
   nix.gc = {
     automatic = true;

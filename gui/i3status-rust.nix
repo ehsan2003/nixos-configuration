@@ -32,7 +32,7 @@
               click = [{
                 button = "left";
                 cmd =
-                  "${pkgs.alacritty}/bin/alacritty -e ${pkgs.htop}/bin/htop";
+                  "${pkgs.alacritty}/bin/alacritty -e ${pkgs.btop}/bin/htop";
               }];
             }
             {

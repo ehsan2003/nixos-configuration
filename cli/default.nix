@@ -23,7 +23,7 @@ in {
 
     # Absolute Utils
     killall
-    htop
+    btop
     unzip
     ripgrep
     fd
