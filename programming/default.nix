@@ -23,6 +23,7 @@
     unstable.deno
     docker-compose
     cloc
+    postgresql_16
 
     cargo-watch
     (pkgs.fenix.stable.withComponents [
