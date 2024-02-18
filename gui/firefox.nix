@@ -25,6 +25,19 @@
         };
       };
     };
+    profiles.spotify = {
+      name = "spotify";
+      path = "spotify";
+      id = 1;
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [ switchyomega ];
+      isDefault = false;
+      search.default = "DuckDuckGo";
+      search.force = true;
+      settings = {
+        "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+        "browser.startup.homepage" = "https://open.spotify.com";
+      };
+    };
     profiles.default = {
       name = "default";
       path = "default";
