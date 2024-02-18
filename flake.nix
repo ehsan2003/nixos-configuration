@@ -42,7 +42,7 @@
           system = "x86_64-linux";
           specialArgs = inputs // {
             unstable = inputs.unstable.legacyPackages.${system};
-            secrets = nixpkgs.lib.importJSON /etc/secrets.json;
+            secrets = import /etc/secrets.nix;
           };
         in
         {
