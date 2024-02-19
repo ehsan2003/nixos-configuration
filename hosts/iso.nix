@@ -5,8 +5,8 @@
   ];
   environment.etc.secrets = {
     enable = true;
-    source = /etc/secrets.json;
-    target = "secrets.json";
+    source = /etc/secrets.nix;
+    target = "secrets.nix";
   };
 
   home-manager.users.ehsan.home.file.nixos-configuration = {
