@@ -7,6 +7,7 @@
       sources.formatting.prettier.enable = true;
       sources.formatting.prettier.disableTsServerFormatter = true;
       sources.formatting.rustfmt.enable = true;
+      sources.formatting.black.enable = true;
       sources.formatting.nixfmt.enable = true;
 
     };

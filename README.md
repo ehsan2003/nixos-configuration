@@ -4,7 +4,7 @@ Here is an improved README with more details about using the NixOS configuration
 
 This repository contains my personal NixOS configuration files. Before using this configuration, you will need:
 
-- A `/etc/secrets.json` file containing sensitive information like API keys. There are 4 required keys:
+- A `/etc/secrets.nix` file containing sensitive information like API keys. There are 4 required keys:
   - `openvpn` - OpenVPN configuration
   - `proxy` - A shell script that runs a proxy on port 1080
   - `OPENAI_API_KEY` - OpenAI's API key
@@ -39,7 +39,7 @@ sudo nixos-rebuild switch --flake .#iso --impure # For the ISO file
 - mount needed partitions to /mnt and /mnt/boot ( and any other partition )
 - generate nixos configuration
 - ** copy /mnt/nixos/hardware-configuration.nix to /etc/nixos/hardware-configuration.nix **
-- ** add secrets.json file **
+- ** add secrets.nix file **
 - run `sudo nixos-install --flake github:ehsan2003/nixos-configuration#<system-name> --impure`
 - wait for installation
 
