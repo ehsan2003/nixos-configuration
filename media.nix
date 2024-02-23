@@ -14,6 +14,8 @@
     mplayer
     yewtube
     subdl
+    popcorntime
+    nodePackages.webtorrent-cli
   ];
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
