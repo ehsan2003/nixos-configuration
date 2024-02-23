@@ -1,4 +1,4 @@
-{ pkgs, nix-alien, ... }:
+{ pkgs, nix-alien, secrets, ... }:
 let urls = (import ./uri-short.nix pkgs);
 in {
   imports = [ ];
@@ -11,6 +11,8 @@ in {
     VISUAL = "nvim";
   };
 
+  services.atd.enable = true;
+  environment.variables.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
   environment.systemPackages = with pkgs; [
     # editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.

@@ -1,7 +1,7 @@
 { pkgs, modulesPath, lib, ... }: {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix"
-    ../common.nix
+    ../default.nix
   ];
   environment.etc.secrets = {
     enable = true;

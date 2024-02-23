@@ -1,5 +1,5 @@
 { pkgs, unstable, ... }: {
-  imports = [ ./i3status-rust.nix ./firefox.nix ];
+  imports = [ ./i3status-rust.nix ./firefox.nix ./media.nix ];
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
     vazir-code-font

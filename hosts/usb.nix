@@ -3,7 +3,7 @@
   imports = [
     "${modulesPath}/profiles/all-hardware.nix"
     "${modulesPath}/profiles/base.nix"
-    ../common.nix
+    ../default.nix
     disko.nixosModules.disko
   ];
 

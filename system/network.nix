@@ -3,6 +3,7 @@ let proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
 in {
   imports = [ ];
 
+  networking.networkmanager.enable = true;
   # Configure network proxy if necessary
   # networking.proxy.default = "http://localhost:1080";
   services.openvpn.servers = {

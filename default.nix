@@ -1,12 +1,10 @@
 { home-manager, ... }: {
   imports = [
-    ./media.nix
     ./programming
     ./gui
     ./cli
     ./praytimes
-    ./utils.nix
-    ./free-net.nix
+    ./system
     home-manager.nixosModules.default
   ];
   # This value determines the NixOS release from which the default
