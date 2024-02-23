@@ -32,43 +32,40 @@
         pkgs = inputs.unstable.legacyPackages.${system};
         module = import ./programming/nixvim;
       };
-    in
-    {
+    in {
       packages."x86_64-linux".nvim = nvim;
-      packages."x86_64-linux".iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
-      packages."x86_64-linux".usb = inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
-      nixosConfigurations =
-        let
-          system = "x86_64-linux";
-          specialArgs = inputs // {
-            unstable = inputs.unstable.legacyPackages.${system};
-            secrets = import /etc/secrets.nix;
-          };
-        in
-        {
-          base = nixpkgs.lib.nixosSystem {
-            inherit specialArgs system;
-            modules = [ ./hosts/base.nix ];
-          };
-
-          nixos-laptop = nixpkgs.lib.nixosSystem {
-            inherit specialArgs system;
-            modules = [ ./hosts/laptop.nix ];
-          };
-          nixos-home-desktop = nixpkgs.lib.nixosSystem {
-            inherit specialArgs system;
-            modules = [ ./hosts/home-pc.nix ];
-          };
-          usb = nixpkgs.lib.nixosSystem {
-            inherit specialArgs system;
-            modules = [
-              ./hosts/usb.nix
-            ];
-          };
-          iso = nixpkgs.lib.nixosSystem {
-            inherit specialArgs system;
-            modules = [ ./hosts/iso.nix ];
-          };
+      packages."x86_64-linux".iso =
+        inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
+      packages."x86_64-linux".usb =
+        inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
+      nixosConfigurations = let
+        system = "x86_64-linux";
+        specialArgs = inputs // {
+          unstable = inputs.unstable.legacyPackages.${system};
+          secrets = import /etc/secrets.nix;
         };
+      in {
+        base = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./hosts/base.nix ];
+        };
+
+        nixos-laptop = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./hosts/laptop.nix ];
+        };
+        nixos-home-desktop = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./hosts/home-pc.nix ];
+        };
+        usb = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./hosts/usb.nix ];
+        };
+        iso = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./hosts/iso.nix ];
+        };
+      };
     };
 }

@@ -1,8 +1,6 @@
 { pkgs, unstable, secrets, ... }:
-let
-  proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
-in
-{
+let proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
+in {
   imports = [ ];
 
   # Configure network proxy if necessary

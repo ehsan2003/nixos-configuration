@@ -1,5 +1,4 @@
-{ home-manager, ... }:
-{
+{ home-manager, ... }: {
   imports = [
     ./media.nix
     ./programming
