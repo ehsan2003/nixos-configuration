@@ -7,6 +7,7 @@
     package = pkgs.pulseaudioFull;
   };
   environment.systemPackages = with pkgs; [
+    mkvtoolnix
     obs-studio
     ffmpeg-full
     vlc
