@@ -9,7 +9,7 @@
       sources.formatting.rustfmt.enable = true;
       sources.formatting.black.enable = true;
       sources.formatting.nixfmt.enable = true;
-
+      sources.formatting.beautysh.enable = true;
     };
     luasnip.enable = true;
     luasnip.fromVscode = [ { } ];
