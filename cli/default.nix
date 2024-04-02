@@ -13,6 +13,9 @@ in {
 
   services.atd.enable = true;
   environment.variables.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
+
+  home-manager.users.ehsan.programs.taskwarrior.enable = true;
+
   environment.systemPackages = with pkgs; [
     # editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
