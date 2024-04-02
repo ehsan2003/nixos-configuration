@@ -59,7 +59,6 @@
     flameshot
     i3status
 
-    spotify
     xarchiver
     unstable.tdesktop
     qutebrowser
