@@ -17,6 +17,7 @@ let
           time_diff = 300;
           cmd = ''
             notify-send adhan "its time for dhuhr prayer ( it was at $TIME )"
+            task add tag:chore namaz due:1hrs
           '';
         }
         {
@@ -29,6 +30,7 @@ let
           time_diff = 300;
           cmd = ''
             notify-send adhan "Its time for maghrib prayer (it was at $TIME )"
+            task add tag:chore namaz due:1hrs
           '';
         }
         {
@@ -86,7 +88,7 @@ in {
       PRAYTIMES_LOG = "info";
       DISPLAY = ":0";
     };
-    path = [ pkgs.bashInteractive pkgs.libnotify pkgs.dbus ];
+    path = [ pkgs.bashInteractive pkgs.libnotify pkgs.dbus pkgs.taskwarrior ];
     wantedBy = [ "default.target" ];
     restartTriggers = [ configFile ];
     serviceConfig = {
