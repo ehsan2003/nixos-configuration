@@ -26,6 +26,16 @@ in {
     wantedBy = [ "multi-user.target" ];
 
   };
+  systemd.services.tun = {
+    enable = true;
+    description = "proxy tunneler";
+    after = [ "network.target" ];
+    serviceConfig = {
+      Restart = "always";
+      ExecStart = "${unstable.sing-box}/bin/sing-box run -c ${./tun-config.json}";
+    };
+    path = [ unstable.sing-box ];
+  };
   systemd.services.proxy = {
     enable = true;
     description = "main proxy for system";
