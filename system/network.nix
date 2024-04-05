@@ -2,7 +2,7 @@
 let proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
 in {
   imports = [ ];
-
+  networking.nameservers = [ "1.1.1.1" ];
   networking.networkmanager.enable = true;
   # Configure network proxy if necessary
   # networking.proxy.default = "http://localhost:1080";
@@ -65,5 +65,6 @@ in {
     v2ray
     unstable.sing-box
     unstable.v2raya
+    unstable.tun2socks
   ];
 }
