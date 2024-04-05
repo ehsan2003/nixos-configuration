@@ -47,6 +47,16 @@
   "route": {
     "final": "socks",
     "auto_detect_interface": true,
+
+    "rule_set": [
+      {
+        "tag": "geoip-ir",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/bootmortis/iran-hosted-domains/releases/download/202404010028/iran-geosite.db",
+        "download_detour": "direct"
+      }
+    ],
     "rules": [
       {
         "inbound": "dns-in",
@@ -66,10 +76,15 @@
         "outbound": "block"
       },
       {
-        "process_name": [
-          "xray",
-          ".xray-wrapper"
-        ],
+        "geoip": ["xray", ".xray-wrapper"],
+        "outbound": "direct"
+      },
+      {
+        "process_name": ["xray", ".xray-wrapper"],
+        "outbound": "direct"
+      },
+      {
+        "rule_set": "geoip-ir",
         "outbound": "direct"
       }
     ]
