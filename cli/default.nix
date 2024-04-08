@@ -55,6 +55,12 @@ in {
     chntpw
     zellij
   ];
+  home-manager.users.ehsan.home.file.zshrc = {
+    text = ''
+      task
+    '';
+    target = ".zshrc";
+  };
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
     enable = true;
