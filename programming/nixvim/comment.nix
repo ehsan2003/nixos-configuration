@@ -1,7 +1,7 @@
 { ... }: {
 
-  plugins.comment-nvim.enable = true;
-  plugins.comment-nvim.toggler.line = "<leader>/";
+  plugins.comment.enable = true;
+  plugins.comment.settings.toggler.line = "<leader>/";
   keymaps = [
     {
       key = "<leader>/";
