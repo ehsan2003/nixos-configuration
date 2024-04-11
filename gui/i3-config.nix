@@ -216,6 +216,7 @@ in {
 
 
     exec --no-startup-id "${pkgs.blueman}/bin/blueman-applet"
+    exec --no-startup-id "${pkgs.pasystray}/bin/pasystray"
 
   '';
 }

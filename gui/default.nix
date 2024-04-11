@@ -58,6 +58,7 @@
     rofi
     flameshot
     i3status
+    pasystray
 
     xarchiver
     unstable.tdesktop
