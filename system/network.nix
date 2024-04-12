@@ -1,5 +1,7 @@
 { pkgs, unstable, secrets, ... }:
-let proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
+let
+  proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
+  internet-gateway = pkgs.callPackage ./internet-gateway.nix { };
 in {
   imports = [ ];
   networking.nameservers = [ "1.1.1.1" ];
@@ -32,19 +34,25 @@ in {
     after = [ "network.target" ];
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${unstable.sing-box}/bin/sing-box run -c ${./tun-config.json}";
+      ExecStart =
+        "${unstable.sing-box}/bin/sing-box run -c ${./tun-config.json}";
     };
     path = [ unstable.sing-box ];
   };
   systemd.services.proxy = {
     enable = true;
     description = "main proxy for system";
-    after = [ "network.target" ];
+    after = [ "network.target" "network-online.target" ];
     serviceConfig = {
       Restart = "always";
       ExecStart = "${proxyFile}/bin/start-proxy";
     };
-    path = with pkgs; [ xray unstable.sing-box unstable.v2raya ];
+    path = with pkgs; [
+      xray
+      unstable.sing-box
+      unstable.v2raya
+      internet-gateway
+    ];
     wantedBy = [ "multi-user.target" ];
   };
 
@@ -76,5 +84,6 @@ in {
     unstable.sing-box
     unstable.v2raya
     unstable.tun2socks
+    internet-gateway
   ];
 }
