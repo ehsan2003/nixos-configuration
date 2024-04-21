@@ -29,6 +29,7 @@ in {
     # Absolute Utils
     killall
     btop
+    unrar-wrapper
     unzip
     ripgrep
     fd
