@@ -54,6 +54,7 @@ in {
     (urls "meet" "https://meet.google.com/")
     (urls "claude" "https://claude.ai/")
 
+    toybox
     zip
     tree
     ncdu
