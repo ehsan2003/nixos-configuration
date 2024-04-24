@@ -15,6 +15,11 @@ in {
   environment.variables.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
 
   home-manager.users.ehsan.programs.taskwarrior.enable = true;
+  home-manager.users.ehsan.home.file.timewarrior-hook = {
+    executable = true;
+    source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
+    target = ".local/share/task/hooks/on-modify.timewarrior";
+  };
 
   environment.systemPackages = with pkgs; [
     # editors
@@ -55,6 +60,7 @@ in {
     imagemagick
     chntpw
     zellij
+    timewarrior
   ];
   home-manager.users.ehsan.home.file.zshrc = {
     text = ''
