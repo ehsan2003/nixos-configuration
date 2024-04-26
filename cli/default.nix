@@ -48,6 +48,7 @@ in {
     github-cli
     chatgpt-cli
     nethogs
+    xclip
     nix-alien.packages.${"x86_64-linux"}.nix-alien
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
