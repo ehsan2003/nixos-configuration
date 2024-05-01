@@ -1,4 +1,4 @@
-{ pkgs, nix-alien, secrets, ... }:
+{ pkgs, nix-alien, unstable, secrets, ... }:
 let urls = (import ./uri-short.nix pkgs);
 in {
   imports = [ ];
@@ -15,13 +15,18 @@ in {
   environment.variables.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
 
   home-manager.users.ehsan.programs.taskwarrior.enable = true;
+  home-manager.users.ehsan.programs.taskwarrior.package = unstable.taskwarrior3;
+  home-manager.users.ehsan.programs.taskwarrior.config = {
+    sync.encryption_secret = secrets.taskwarrior-secret;
+  };
+
   home-manager.users.ehsan.home.file.timewarrior-hook = {
     executable = true;
     source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
     target = ".local/share/task/hooks/on-modify.timewarrior";
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     # editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     openssl
@@ -48,12 +53,7 @@ in {
     github-cli
     chatgpt-cli
     nethogs
-    nix-alien.packages.${"x86_64-linux"}.nix-alien
-    (urls "mathcha" "https://mathcha.io/editor")
-    (urls "poe" "https://poe.com")
-    (urls "meet" "https://meet.google.com/")
-    (urls "claude" "https://claude.ai/")
-
+    xclip
     toybox
     zip
     tree
@@ -62,6 +62,13 @@ in {
     chntpw
     zellij
     timewarrior
+  ]) ++ [
+    nix-alien.packages.${"x86_64-linux"}.nix-alien
+    (urls "mathcha" "https://mathcha.io/editor")
+    (urls "poe" "https://poe.com")
+    (urls "meet" "https://meet.google.com/")
+    (urls "claude" "https://claude.ai/")
+
   ];
   home-manager.users.ehsan.home.file.zshrc = {
     text = ''

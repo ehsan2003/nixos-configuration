@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 let dpi = 250;
 in {
   imports = [ ./base.nix ];
@@ -25,7 +25,22 @@ in {
     EOF
   '';
   services.serviio.enable = true;
+  systemd.services.task-sync = {
+    enable = true;
+    description = "taskwarrior sync server";
+    after = [ "network.target" ];
+    serviceConfig = {
+      Restart = "always";
+      ExecStart =
+        "${unstable.taskchampion-sync-server}/bin/taskchampion-sync-server --port 8443";
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
+
+  home-manager.users.ehsan.programs.taskwarrior.config = {
+    sync.server.origin = "http://localhost:8443";
+    sync.server.client_id = "aa529e36-0e93-4d5a-90e4-921f942aa0d7";
+  };
   nixpkgs.config.permittedInsecurePackages = [ "dcraw-9.28.0" ];
 
 }
-
