@@ -77,13 +77,14 @@ in {
     client.enable = true;
     torsocks.enable = true;
   };
-  environment.systemPackages = with pkgs; [
-    openvpn
-    xray
-    v2ray
+  environment.systemPackages = [
+    pkgs.openvpn
+    pkgs.xray
+    pkgs.v2ray
     unstable.sing-box
     unstable.v2raya
     unstable.tun2socks
     internet-gateway
+    unstable.nekoray
   ];
 }
