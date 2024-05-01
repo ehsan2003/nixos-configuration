@@ -5,5 +5,5 @@
   services.xserver.displayManager.sessionCommands =
     "sleep 5 && ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 94 = Shift_L' &";
   services.tlp.enable = true;
-
+  environment.systemPackages = [ pkgs.bottles ];
 }
