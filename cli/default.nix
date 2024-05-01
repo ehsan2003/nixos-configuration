@@ -18,6 +18,8 @@ in {
   home-manager.users.ehsan.programs.taskwarrior.package = unstable.taskwarrior3;
   home-manager.users.ehsan.programs.taskwarrior.config = {
     sync.encryption_secret = secrets.taskwarrior-secret;
+    sync.server.client_id = "aa529e36-0e93-4d5a-90e4-921f942aa0d7";
+    sync.server.origin = "http://localhost:8443";
   };
 
   home-manager.users.ehsan.home.file.timewarrior-hook = {

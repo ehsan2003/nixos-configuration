@@ -7,9 +7,6 @@
   services.tlp.enable = true;
   environment.systemPackages = [ pkgs.bottles ];
 
-  home-manager.users.ehsan.programs.taskwarrior.config = {
-    sync.server.origin = "http://192.168.1.105:8443";
-    sync.server.client_id = "7a6d0223-1ea0-46d0-a507-c36c2bcd2df7";
-  };
+  
 
 }

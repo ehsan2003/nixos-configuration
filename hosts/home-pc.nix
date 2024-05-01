@@ -37,10 +37,6 @@ in {
     wantedBy = [ "multi-user.target" ];
   };
 
-  home-manager.users.ehsan.programs.taskwarrior.config = {
-    sync.server.origin = "http://localhost:8443";
-    sync.server.client_id = "aa529e36-0e93-4d5a-90e4-921f942aa0d7";
-  };
   nixpkgs.config.permittedInsecurePackages = [ "dcraw-9.28.0" ];
 
 }
