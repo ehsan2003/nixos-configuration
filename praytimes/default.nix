@@ -1,4 +1,4 @@
-{ pkgs, config, fenix, ... }:
+{ pkgs, config, fenix, unstable, ... }:
 let
   adhanFile = ./adhan.mp3;
   playAdhan = "${pkgs.vlc}/bin/vlc ${adhanFile}";
@@ -88,7 +88,8 @@ in {
       PRAYTIMES_LOG = "info";
       DISPLAY = ":0";
     };
-    path = [ pkgs.bashInteractive pkgs.libnotify pkgs.dbus pkgs.taskwarrior ];
+    path =
+      [ pkgs.bashInteractive pkgs.libnotify pkgs.dbus unstable.taskwarrior3 ];
     wantedBy = [ "default.target" ];
     restartTriggers = [ configFile ];
     serviceConfig = {
