@@ -64,6 +64,7 @@ in {
     chntpw
     zellij
     timewarrior
+    llama-cpp
   ]) ++ [
     nix-alien.packages.${"x86_64-linux"}.nix-alien
     (urls "mathcha" "https://mathcha.io/editor")
