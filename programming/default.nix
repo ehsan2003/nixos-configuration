@@ -15,8 +15,8 @@
 
   nixpkgs.overlays = [ fenix.overlays.default ];
   environment.systemPackages = with pkgs; [
+    corepack_20
     nodejs_20
-    yarn
     python310
     git
     gcc
