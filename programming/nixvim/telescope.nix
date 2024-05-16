@@ -5,6 +5,7 @@
       "<leader>fr" = { action = "registers"; };
       "<leader>fw" = { action = "live_grep"; };
       "<leader>ff" = { action = "find_files"; };
+      "<leader>f<CR>" = { action = "resume"; };
     };
 
     settings.defaults.sorting_strategy = "ascending";
