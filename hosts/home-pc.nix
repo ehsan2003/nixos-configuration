@@ -38,5 +38,10 @@ in {
   };
 
   nixpkgs.config.permittedInsecurePackages = [ "dcraw-9.28.0" ];
+  boot.kernelParams = [
+    "cgroup_enable=memory"
+    "swapaccount=1"
+    "systemd.unified_cgroup_hierarchy=0" # Only if needed
+  ];
 
 }
