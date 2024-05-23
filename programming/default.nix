@@ -24,6 +24,7 @@
     docker-compose
     cloc
     postgresql_16
+    lazygit
 
     cargo-watch
     (pkgs.fenix.stable.withComponents [
