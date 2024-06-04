@@ -126,7 +126,7 @@
       servers.html.enable = true;
       servers.tailwindcss.enable = true;
       servers.svelte.enable = true;
-      servers.emmet_ls.enable = true;
+      servers.emmet-ls.enable = true;
       servers.pyright.enable = true;
       servers.ccls.enable = true;
       servers.nixd.enable = true;
@@ -135,65 +135,57 @@
   keymaps = [
     {
       key = "<leader>la";
-      action = "function() vim.lsp.buf.code_action() end";
+      action.__raw = "function() vim.lsp.buf.code_action() end";
       options.desc = "Code action";
-      lua = true;
       mode = "v";
     }
     {
       key = "<leader>la";
-      action = "function() vim.lsp.buf.code_action() end";
+      action.__raw = "function() vim.lsp.buf.code_action() end";
       options.desc = "Code action";
-      lua = true;
       mode = "n";
     }
     {
       key = "gd";
-      action =
+      action.__raw =
         ''function() require("telescope.builtin").lsp_definitions() end'';
       options.desc = "Go to definition";
-      lua = true;
       mode = "n";
     }
     {
       key = "gr";
-      action = ''function() require("telescope.builtin").lsp_references() end'';
+      action.__raw = ''function() require("telescope.builtin").lsp_references() end'';
       options.desc = "References of current symbol";
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>lR";
-      action = ''function() require("telescope.builtin").lsp_references() end'';
+      action.__raw = ''function() require("telescope.builtin").lsp_references() end'';
       options.desc = "Search references";
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>lr";
-      action = "function() vim.lsp.buf.rename() end";
+      action.__raw = "function() vim.lsp.buf.rename() end";
       options.desc = "Rename current symbol";
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>lh";
-      action = "function() vim.lsp.buf.signature_help() end";
+      action.__raw = "function() vim.lsp.buf.signature_help() end";
       options.desc = "Signature help";
-      lua = true;
       mode = "n";
     }
     {
       key = "gy";
-      action =
+      action.__raw =
         ''function() require("telescope.builtin").lsp_type_definitions() end'';
       options.desc = "Definition of current type";
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>lG";
-      action = ''
+      action.__raw = ''
         function()
           vim.ui.input({ prompt = "Symbol Query:" }, function(query)
             if query then
@@ -208,56 +200,48 @@
         end
       '';
       options.desc = "Search workspace symbols";
-      lua = true;
       mode = "n";
     }
     {
       key = "K";
-      action = "function () vim.lsp.buf.hover() end";
+      action.__raw = "function () vim.lsp.buf.hover() end";
       options.desc = "Hover symbol details";
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>lr";
-      action = "function () vim.lsp.buf.rename() end";
+      action.__raw = "function () vim.lsp.buf.rename() end";
       options.desc = "Rename using lsp";
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>ld";
-      action = "function() vim.diagnostic.open_float() end";
+      action.__raw = "function() vim.diagnostic.open_float() end";
       options.desc = "Hover diagnostics";
-      lua = true;
       mode = "n";
     }
     {
       key = "[d";
-      action = "function() vim.diagnostic.goto_prev() end";
+      action.__raw = "function() vim.diagnostic.goto_prev() end";
       options.desc = "Previous diagnostic";
-      lua = true;
       mode = "n";
     }
     {
       key = "]d";
-      action = "function() vim.diagnostic.goto_next() end";
+      action.__raw = "function() vim.diagnostic.goto_next() end";
       options.desc = "Next diagnostic";
-      lua = true;
       mode = "n";
     }
     {
       key = "gl";
-      action = "function() vim.diagnostic.open_float() end";
+      action.__raw = "function() vim.diagnostic.open_float() end";
       options.desc = "Hover diagnostics";
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>lf";
-      action = "function () vim.lsp.buf.format() end";
+      action.__raw = "function () vim.lsp.buf.format() end";
       options.desc = "Format using lsp";
-      lua = true;
       mode = "n";
     }
   ];

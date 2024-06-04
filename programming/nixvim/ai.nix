@@ -10,11 +10,11 @@ let
     };
   };
 in {
-  extraPlugins = with pkgs.vimPlugins; [ vim-ai ];
+  extraPlugins = [ vim-ai ];
   keymaps = [
     {
       key = "<leader>ai";
-      action = ''
+      action.__raw = ''
         function ()
           vim.ui.input({ prompt = "gpt Prompt" }, function(query)
             if query then
@@ -24,12 +24,11 @@ in {
         end
       '';
 
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>ai";
-      action = ''
+      action.__raw = ''
         function ()
           vim.ui.input({ prompt = "gpt Prompt" }, function(query)
             if query then
@@ -39,12 +38,11 @@ in {
         end
       '';
 
-      lua = true;
       mode = "v";
     }
     {
       key = "<leader>ae";
-      action = ''
+      action.__raw = ''
         function ()
           vim.ui.input({ prompt = "edit prompt" }, function(query)
             if query then
@@ -54,12 +52,11 @@ in {
         end
       '';
 
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>ae";
-      action = ''
+      action.__raw = ''
         function ()
           vim.ui.input({ prompt = "edit prompt" }, function(query)
             if query then
@@ -69,12 +66,11 @@ in {
         end
       '';
 
-      lua = true;
       mode = "v";
     }
     {
       key = "<leader>ac";
-      action = ''
+      action.__raw = ''
         function ()
           vim.ui.input({ prompt = "chat prompt" }, function(query)
             if query then
@@ -84,12 +80,11 @@ in {
         end
       '';
 
-      lua = true;
       mode = "n";
     }
     {
       key = "<leader>ac";
-      action = ''
+      action.__raw = ''
         function ()
           vim.ui.input({ prompt = "chat prompt" }, function(query)
             if query then
@@ -99,7 +94,6 @@ in {
         end
       '';
 
-      lua = true;
       mode = "v";
     }
     {
