@@ -16,6 +16,7 @@
     opts.wrap = false;
     opts.guifont = "FiraCode Nerd Font:h12";
     opts.hlsearch = false;
+    opts.termbidi = true;
 
   };
 }

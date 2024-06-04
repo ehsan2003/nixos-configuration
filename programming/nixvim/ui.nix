@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-  plugins.bufferline.enable = true;
   extraPlugins = with pkgs.vimPlugins; [ dressing-nvim ];
   plugins.which-key.enable = true;
   plugins.which-key.registrations = {
