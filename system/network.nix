@@ -47,12 +47,7 @@ in {
       Restart = "always";
       ExecStart = "${proxyFile}/bin/start-proxy";
     };
-    path = with pkgs; [
-      xray
-      unstable.sing-box
-      unstable.v2raya
-      internet-gateway
-    ];
+    path = [ unstable.xray unstable.sing-box unstable.v2raya internet-gateway ];
     wantedBy = [ "multi-user.target" ];
   };
 
