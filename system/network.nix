@@ -42,7 +42,7 @@ in {
   systemd.services.proxy = {
     enable = true;
     description = "main proxy for system";
-    after = [ "network.target" "network-online.target" ];
+    after = [ "network.target" ];
     serviceConfig = {
       Restart = "always";
       ExecStart = "${proxyFile}/bin/start-proxy";
