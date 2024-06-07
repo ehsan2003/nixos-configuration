@@ -13,6 +13,11 @@
       options.desc = "Quit";
     }
     {
+      key = "<leader>C";
+      action = "<Cmd>%bd<Cr>";
+      options.desc = "exit all buffer";
+    }
+    {
       key = "<leader>c";
       action = "<Cmd>bdelete<Cr>";
       options.desc = "exit buffer";
