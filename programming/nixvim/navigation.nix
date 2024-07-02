@@ -34,12 +34,14 @@
     }
     {
       key = "<C-h>";
-      action.__raw = "function () require('smart-splits').move_cursor_left() end";
+      action.__raw =
+        "function () require('smart-splits').move_cursor_left() end";
       mode = "n";
     }
     {
       key = "<C-j>";
-      action.__raw = "function () require('smart-splits').move_cursor_down() end";
+      action.__raw =
+        "function () require('smart-splits').move_cursor_down() end";
       mode = "n";
     }
     {
@@ -49,7 +51,8 @@
     }
     {
       key = "<C-l>";
-      action.__raw = "function () require('smart-splits').move_cursor_right() end";
+      action.__raw =
+        "function () require('smart-splits').move_cursor_right() end";
       mode = "n";
     }
     {

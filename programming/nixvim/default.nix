@@ -15,6 +15,7 @@
     plugins.yanky.enable = true;
     plugins.yanky.highlight.timer = 100;
     plugins.auto-save.enable = true;
+    plugins.oil.enable = true;
     plugins.auto-session.enable = true;
     plugins.auto-session.bypassSessionSaveFileTypes = [ "neo-tree" ];
     extraConfigVim = ''
