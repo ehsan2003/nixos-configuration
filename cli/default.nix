@@ -57,7 +57,6 @@ in {
     chatgpt-cli
     nethogs
     xclip
-    toybox
     zip
     tree
     ncdu
