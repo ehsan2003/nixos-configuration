@@ -2,9 +2,11 @@
   plugins.hmts.enable = true;
   plugins.treesitter = {
     enable = true;
-    incrementalSelection.enable = true;
-    incrementalSelection.keymaps.initSelection = "<A-h>";
-    incrementalSelection.keymaps.nodeDecremental = "<A-l>";
-    incrementalSelection.keymaps.nodeIncremental = "<A-h>";
+    settings.incremental_selection = {
+      enable = true;
+      keymaps.init_selection = "<A-h>";
+      keymaps.node_decremental = "<A-l>";
+      keymaps.node_incremental = "<A-h>";
+    };
   };
 }

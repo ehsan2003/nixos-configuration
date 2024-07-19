@@ -13,7 +13,7 @@
   ];
   config = {
     plugins.yanky.enable = true;
-    plugins.yanky.highlight.timer = 100;
+    plugins.yanky.settings.highlight.timer = 100;
     plugins.auto-save.enable = true;
     plugins.oil.enable = true;
     plugins.auto-session.enable = true;

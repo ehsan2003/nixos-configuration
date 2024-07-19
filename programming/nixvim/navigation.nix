@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
-  extraPlugins = with pkgs.vimPlugins; [ smart-splits-nvim ];
+{ ... }: {
+
+  plugins.smart-splits.enable = true;
   keymaps = [
     {
       # Default mode is "" which means normal-visual-op

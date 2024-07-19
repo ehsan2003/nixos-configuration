@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  extraPlugins = with pkgs.vimPlugins; [ dressing-nvim ];
+  plugins.dressing.enable = true;
   plugins.which-key.enable = true;
   plugins.which-key.registrations = {
     "<leader>f" = "Find";
