@@ -20,6 +20,7 @@
     python310
     git
     gcc
+    unstable.bun
     unstable.deno
     docker-compose
     cloc

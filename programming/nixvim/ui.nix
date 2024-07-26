@@ -2,6 +2,7 @@
   plugins.dressing.enable = true;
   plugins.which-key.enable = true;
   plugins.which-key.registrations = {
+    "<leader>a" = "AI";
     "<leader>f" = "Find";
     "<leader>t" = "Terminal";
     "<leader>l" = "Lsp";

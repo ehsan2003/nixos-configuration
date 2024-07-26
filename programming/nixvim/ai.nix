@@ -24,5 +24,19 @@ in {
       extra_curl_params = [ "-x" "socks5://localhost:1080" ];
     };
   };
+  keymaps = [
+    {
+      key = "<leader>ac";
+      action = "<Cmd>ChatGPT<CR>";
+      mode = "n";
+      options.desc = "Chat";
+    }
+    {
+      key = "<leader>ae";
+      action = "<Cmd>ChatGPTEditWithInstructions<CR>";
+      mode = [ "n" "v" ];
+      options.desc = "Ai edit";
+    }
+  ];
 
 }
