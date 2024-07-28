@@ -1,5 +1,7 @@
 { ... }: {
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings.registry-mirrors =
+    [ "https://registry.docker.ir" ];
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
   home-manager.users.ehsan = {
