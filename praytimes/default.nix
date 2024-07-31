@@ -89,7 +89,7 @@ in {
       DISPLAY = ":0";
     };
     path =
-      [ pkgs.bashInteractive pkgs.libnotify pkgs.dbus unstable.taskwarrior3 ];
+      [ pkgs.bashInteractive pkgs.libnotify pkgs.dbus pkgs.taskwarrior3 ];
     wantedBy = [ "default.target" ];
     restartTriggers = [ configFile ];
     serviceConfig = {

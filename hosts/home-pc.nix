@@ -32,7 +32,7 @@ in {
     serviceConfig = {
       Restart = "always";
       ExecStart =
-        "${unstable.taskchampion-sync-server}/bin/taskchampion-sync-server --port 8443";
+        "${pkgs.taskchampion-sync-server}/bin/taskchampion-sync-server --port 8443";
     };
     wantedBy = [ "multi-user.target" ];
   };
