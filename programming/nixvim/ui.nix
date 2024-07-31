@@ -1,7 +1,15 @@
 { pkgs, ... }: {
   plugins.dressing.enable = true;
   plugins.which-key.enable = true;
-  plugins.which-key.registrations = {
+
+  plugins.which-key.settings.spec = let
+    transformSet = set:
+      builtins.map (name: {
+        __unkeyed-1 = name;
+        desc = set.${name};
+      }) (builtins.attrNames set);
+
+  in transformSet {
     "<leader>a" = "AI";
     "<leader>f" = "Find";
     "<leader>t" = "Terminal";
