@@ -5,7 +5,7 @@ in {
     enable = true;
     settings = {
       openai_params = {
-        model = "llama3-70b-8192";
+        model = "llama3.1-70b-8192";
         frequency_penalty = 0;
         presence_penalty = 0;
         max_tokens = 4095;
@@ -14,7 +14,7 @@ in {
         n = 1;
       };
       openai_edit_params = {
-        model = "llama3-70b-8192";
+        model = "llama3.1-70b-8192";
         frequency_penalty = 0;
         presence_penalty = 0;
         temperature = 0;

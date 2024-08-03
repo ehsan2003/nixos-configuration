@@ -23,6 +23,8 @@
     };
   };
   security.polkit.enable = true;
+  services.ollama.enable = true;
+  services.ollama.acceleration = "rocm";
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
