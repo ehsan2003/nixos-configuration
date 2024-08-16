@@ -4,7 +4,7 @@ let
   internet-gateway = pkgs.callPackage ./internet-gateway.nix { };
 in {
   imports = [ ];
-  networking.nameservers = [ "1.1.1.1" ];
+  networking.nameservers = [ "178.22.122.101" "185.51.200.1" ];
   networking.networkmanager.enable = true;
   # Configure network proxy if necessary
   # networking.proxy.default = "http://localhost:1080";
