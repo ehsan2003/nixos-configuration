@@ -26,6 +26,7 @@
     cloc
     postgresql_16
     lazygit
+    typescript
 
     cargo-watch
     (pkgs.fenix.stable.withComponents [

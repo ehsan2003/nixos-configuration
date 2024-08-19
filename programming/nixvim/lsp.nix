@@ -1,5 +1,8 @@
 { pkgs, fenix, ... }: {
   plugins.markdown-preview.enable = true;
+  plugins.ts-autotag.enable = true;
+  plugins.typescript-tools.enable = true;
+
   plugins.nvim-autopairs.enable = true;
   plugins = {
     none-ls = {
@@ -109,11 +112,6 @@
         rootDir =
           ''require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
       };
-      servers.tsserver = {
-        enable = true;
-        extraOptions = { single_file_support = false; };
-        rootDir = ''require('lspconfig').util.root_pattern("package.json")'';
-      };
       servers.cssls.enable = true;
       servers.prismals.enable = true;
       servers.bashls.enable = true;
@@ -155,13 +153,15 @@
     }
     {
       key = "gr";
-      action.__raw = ''function() require("telescope.builtin").lsp_references() end'';
+      action.__raw =
+        ''function() require("telescope.builtin").lsp_references() end'';
       options.desc = "References of current symbol";
       mode = "n";
     }
     {
       key = "<leader>lR";
-      action.__raw = ''function() require("telescope.builtin").lsp_references() end'';
+      action.__raw =
+        ''function() require("telescope.builtin").lsp_references() end'';
       options.desc = "Search references";
       mode = "n";
     }
