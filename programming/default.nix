@@ -22,6 +22,7 @@
     gcc
     unstable.bun
     unstable.deno
+    unstable.ghc
     docker-compose
     cloc
     postgresql_16

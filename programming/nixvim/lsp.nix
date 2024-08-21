@@ -104,6 +104,7 @@
     lsp = {
       enable = true;
       servers.eslint.enable = true;
+      servers.hls.enable = true;
       servers.graphql.enable = true;
       servers.dockerls.enable = true;
       servers.docker-compose-language-service.enable = true;
