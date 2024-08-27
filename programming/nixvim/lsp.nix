@@ -3,6 +3,7 @@
   plugins.ts-autotag.enable = true;
   plugins.typescript-tools.enable = true;
   plugins.typst-vim.enable = true;
+  plugins.typst-vim.settings.pdf_viewer = "${pkgs.evince}/bin/evince";
   plugins.nvim-autopairs.enable = true;
   plugins = {
     none-ls = {
@@ -13,6 +14,7 @@
       sources.formatting.black.enable = true;
       sources.formatting.nixfmt.enable = true;
       # sources.formatting.beautysh.enable = true;
+      sources.formatting.typstfmt.enable = true;
     };
     luasnip.enable = true;
     luasnip.fromVscode = [ { } ];
