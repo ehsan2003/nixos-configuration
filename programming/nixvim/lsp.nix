@@ -2,7 +2,7 @@
   plugins.markdown-preview.enable = true;
   plugins.ts-autotag.enable = true;
   plugins.typescript-tools.enable = true;
-
+  plugins.typst-vim.enable = true;
   plugins.nvim-autopairs.enable = true;
   plugins = {
     none-ls = {
@@ -101,10 +101,12 @@
 
     };
     cmp-nvim-lsp.enable = true;
+
     lsp = {
       enable = true;
       servers.eslint.enable = true;
       servers.hls.enable = true;
+      servers.typst-lsp.enable = true;
       servers.graphql.enable = true;
       servers.dockerls.enable = true;
       servers.docker-compose-language-service.enable = true;
