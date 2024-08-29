@@ -3,6 +3,7 @@
   inputs = {
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.url = "github:danth/stylix";
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -23,7 +24,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixvim, ... }@inputs:
+  outputs = { self, nixpkgs, nixvim, stylix, ... }@inputs:
     let
 
       system = "x86_64-linux";

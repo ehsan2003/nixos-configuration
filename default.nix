@@ -1,5 +1,6 @@
-{ home-manager, ... }: {
+{ stylix, home-manager, ... }: {
   imports = [
+    stylix.nixosModules.stylix
     ./programming
     ./gui
     ./cli

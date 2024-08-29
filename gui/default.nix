@@ -4,6 +4,12 @@
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
     vazir-code-font
   ];
+  stylix = {
+    enable = true;
+    polarity = "dark";
+    base16Scheme = ./theme.yaml;
+    image = ./wallpaper.jpg;
+  };
   # Select internationalisation properties. i18n.inputMethod.enabled = "fcitx5";
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -28,16 +34,16 @@
   home-manager.users.ehsan = {
     gtk = {
       enable = true;
-      theme = {
-        name = "Materia-dark";
-        package = pkgs.materia-theme;
-      };
+      # theme = {
+      #   name = "Materia-dark";
+      #   package = pkgs.materia-theme;
+      # };
     };
     home.file.i3Config = import ./i3-config.nix { pkgs = pkgs; };
     programs = {
       rofi = {
         enable = true;
-        theme = "Adapta-Nokto";
+        # theme = "Adapta-Nokto";
       };
       alacritty = { enable = true; };
     };

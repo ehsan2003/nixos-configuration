@@ -6,9 +6,9 @@ in {
 
   home-manager.users.ehsan.home.pointerCursor = {
     x11.enable = true;
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-    size = 128;
+    # package = pkgs.vanilla-dmz;
+    # name = "Vanilla-DMZ";
+    size = pkgs.lib.mkForce 128;
   };
 
   services.xserver.dpi = dpi;
