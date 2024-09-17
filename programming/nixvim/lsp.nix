@@ -14,6 +14,12 @@
       sources.formatting.nixfmt.enable = true;
       # sources.formatting.beautysh.enable = true;
       sources.formatting.typstfmt.enable = true;
+
+      servers.tsserver = {
+        enable = true;
+        extraOptions = { single_file_support = false; };
+        rootDir = ''require('lspconfig').util.root_pattern("package.json")'';
+      };
     };
     luasnip.enable = true;
     luasnip.fromVscode = [ { } ];

@@ -1,5 +1,5 @@
 { ... }: {
-  plugins.hmts.enable = true;
+  # plugins.hmts.enable = true;
   plugins.treesitter = {
     enable = true;
     settings.highlight.enable = true;

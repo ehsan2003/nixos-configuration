@@ -54,7 +54,7 @@ in {
     tmux
     v4l-utils
     github-cli
-    chatgpt-cli
+    aichat
     nethogs
     xclip
     zip
