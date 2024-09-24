@@ -15,11 +15,6 @@
       # sources.formatting.beautysh.enable = true;
       sources.formatting.typstfmt.enable = true;
 
-      servers.tsserver = {
-        enable = true;
-        extraOptions = { single_file_support = false; };
-        rootDir = ''require('lspconfig').util.root_pattern("package.json")'';
-      };
     };
     luasnip.enable = true;
     luasnip.fromVscode = [ { } ];
@@ -139,6 +134,11 @@
       servers.pyright.enable = true;
       servers.ccls.enable = true;
       servers.nixd.enable = true;
+      servers.tsserver = {
+        enable = true;
+        extraOptions = { single_file_support = false; };
+        rootDir = ''require('lspconfig').util.root_pattern("package.json")'';
+      };
     };
   };
   keymaps = [
