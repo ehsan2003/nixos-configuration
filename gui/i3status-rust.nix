@@ -54,14 +54,6 @@
           ] else
             [ ]) ++ [
               {
-                block = "service_status";
-                service = "openvpn-vpn";
-                active_format = " ^icon_net_vpn ";
-                inactive_format = " ^icon_net_vpn ";
-                active_state = "Good";
-                inactive_state = "Warning";
-              }
-              {
                 block = "sound";
                 click = [{
                   button = "left";

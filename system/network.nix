@@ -1,44 +1,10 @@
 { pkgs, unstable, secrets, ... }:
-let
-  proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
-  internet-gateway = pkgs.callPackage ./internet-gateway.nix { };
+let proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
 in {
   imports = [ ];
-  networking.nameservers = [ "178.22.122.101" "185.51.200.1" ];
+  networking.nameservers = [ "1.1.1.1" ];
   networking.networkmanager.enable = true;
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://localhost:1080";
-  services.openvpn.servers = {
-    vpn = {
-      autoStart = false;
-      config = secrets.openvpn;
-      updateResolvConf = true;
-    };
-  };
 
-  systemd.services.v2raya = {
-    enable = true;
-    description = "v2rayA gui client";
-    after = [ "network.target" ];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "${unstable.v2raya}/bin/v2rayA";
-    };
-    path = with pkgs; [ iptables bash ];
-    wantedBy = [ "multi-user.target" ];
-
-  };
-  systemd.services.tun = {
-    enable = true;
-    description = "proxy tunneler";
-    after = [ "network.target" ];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart =
-        "${unstable.sing-box}/bin/sing-box run -c ${./tun-config.json}";
-    };
-    path = [ unstable.sing-box ];
-  };
   systemd.services.proxy = {
     enable = true;
     description = "main proxy for system";
@@ -47,7 +13,7 @@ in {
       Restart = "always";
       ExecStart = "${proxyFile}/bin/start-proxy";
     };
-    path = [ unstable.xray unstable.sing-box unstable.v2raya internet-gateway ];
+    path = [ unstable.xray unstable.sing-box unstable.v2raya ];
     wantedBy = [ "multi-user.target" ];
   };
 
@@ -94,13 +60,11 @@ in {
   };
 
   environment.systemPackages = [
-    pkgs.openvpn
     pkgs.xray
     pkgs.v2ray
     unstable.sing-box
     unstable.v2raya
     unstable.tun2socks
-    internet-gateway
     unstable.nekoray
   ];
 }

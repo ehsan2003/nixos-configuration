@@ -7,7 +7,6 @@ This repository contains my personal NixOS configuration files. Before using thi
 ## Secret management
 
 - A `/etc/secrets.nix` file containing sensitive information like API keys. There are 4 required keys:
-  - `openvpn` - OpenVPN configuration
   - `proxy` - A shell script that runs a proxy on port 1080
   - `OPENAI_API_KEY` - OpenAI's API key
   - `location` - an attributeset of Latitude and longitude of your current location (for praytimes and redshift)
