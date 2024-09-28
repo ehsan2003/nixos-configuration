@@ -1,4 +1,4 @@
-{ pkgs, fenix, unstable, nixvim, ... }: {
+{ pkgs, fenix, unstable, ... }: {
   imports = [ ./editors.nix ./virtualisation.nix ];
   # git 
   home-manager.users.ehsan = {
@@ -23,7 +23,6 @@
     unstable.bun
     unstable.deno
     unstable.ghc
-    docker-compose
     cloc
     postgresql_16
     lazygit
