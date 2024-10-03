@@ -107,7 +107,6 @@
     lsp = {
       enable = true;
       servers.eslint.enable = true;
-      servers.hls.enable = true;
       servers.typst-lsp.enable = true;
       servers.graphql.enable = true;
       servers.dockerls.enable = true;
@@ -132,7 +131,6 @@
       servers.svelte.enable = true;
       servers.emmet-ls.enable = true;
       servers.pyright.enable = true;
-      servers.ccls.enable = true;
       servers.nixd.enable = true;
       servers.tsserver = {
         enable = true;

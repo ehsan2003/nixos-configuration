@@ -22,7 +22,6 @@
     gcc
     unstable.bun
     unstable.deno
-    unstable.ghc
     cloc
     postgresql_16
     lazygit

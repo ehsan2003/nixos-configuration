@@ -8,7 +8,7 @@
   };
   environment.systemPackages = with pkgs; [
     mkvtoolnix
-    obs-studio
+    vokoscreen
     ffmpeg-full
     vlc
     smplayer
