@@ -13,6 +13,7 @@ in {
 
   services.atd.enable = true;
   environment.variables.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
+  environment.variables.GROQ_API_KEY = secrets.GROQ_API_KEY;
   environment.variables.OPENAI_API_HOST = secrets.OPENAI_API_HOST;
 
   home-manager.users.ehsan.programs.taskwarrior.enable = true;

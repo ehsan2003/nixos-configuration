@@ -1,42 +1,47 @@
 { ... }:
 let
 in {
-  plugins.chatgpt = {
+  plugins.avante = {
     enable = true;
     settings = {
-      openai_params = {
+      openai = {
+        endpoint = "https://api.groq.com/openai/v1";
+        max_tokens = 4096;
         model = "llama-3.1-70b-versatile";
-        frequency_penalty = 0;
-        presence_penalty = 0;
-        max_tokens = 4095;
-        temperature = 0.2;
-        top_p = 0.1;
-        n = 1;
-      };
-      openai_edit_params = {
-        model = "llama-3.1-70b-versatile";
-        frequency_penalty = 0;
-        presence_penalty = 0;
+        proxy="socks5://localhost:1080";
         temperature = 0;
-        top_p = 1;
-        n = 1;
       };
-      extra_curl_params = [ "-x" "socks5://localhost:1080" ];
+      provider = "openai";
+      diff = {
+        autojump = true;
+        debug = false;
+        list_opener = "copen";
+      };
+      highlights = {
+        diff = {
+          current = "DiffText";
+          incoming = "DiffAdd";
+        };
+      };
+      hints = { enabled = true; };
+      mappings = {
+        diff = {
+          both = "cb";
+          next = "]x";
+          none = "c0";
+          ours = "co";
+          prev = "[x";
+          theirs = "ct";
+        };
+      };
+      windows = {
+        sidebar_header = {
+          align = "center";
+          rounded = true;
+        };
+        width = 30;
+        wrap = true;
+      };
     };
   };
-  keymaps = [
-    {
-      key = "<leader>ac";
-      action = "<Cmd>ChatGPT<CR>";
-      mode = "n";
-      options.desc = "Chat";
-    }
-    {
-      key = "<leader>ae";
-      action = "<Cmd>ChatGPTEditWithInstructions<CR>";
-      mode = [ "n" "v" ];
-      options.desc = "Ai edit";
-    }
-  ];
-
 }
