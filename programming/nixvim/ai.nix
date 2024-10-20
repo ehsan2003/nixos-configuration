@@ -7,8 +7,9 @@ in {
       openai = {
         endpoint = "https://api.groq.com/openai/v1";
         max_tokens = 4096;
+        api_key_name = "GROQ_API_KEY";
         model = "llama-3.1-70b-versatile";
-        proxy="socks5://localhost:1080";
+        proxy = "socks5://localhost:1080";
         temperature = 0;
       };
       provider = "openai";
