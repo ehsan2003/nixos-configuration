@@ -17,7 +17,7 @@
     plugins.auto-save.enable = true;
     plugins.oil.enable = true;
     plugins.auto-session.enable = true;
-    plugins.auto-session.bypassSessionSaveFileTypes = [ "neo-tree" ];
+    plugins.auto-session.settings.bypass_save_filetypes = [ "neo-tree" ];
     extraConfigVim = ''
       let g:auto_session_pre_save_cmds = ["Neotree close"]
     '';

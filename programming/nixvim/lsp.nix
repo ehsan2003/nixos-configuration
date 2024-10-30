@@ -107,19 +107,18 @@
     lsp = {
       enable = true;
       servers.eslint.enable = true;
-      servers.typst-lsp.enable = true;
+      servers.typst_lsp.enable = true;
       servers.graphql.enable = true;
       servers.dockerls.enable = true;
-      servers.docker-compose-language-service.enable = true;
+      servers.docker_compose_language_service.enable = true;
       servers.denols = {
         enable = true;
         rootDir =
           ''require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
       };
       servers.cssls.enable = true;
-      servers.prismals.enable = true;
       servers.bashls.enable = true;
-      servers.rust-analyzer = {
+      servers.rust_analyzer = {
         enable = true;
         cargoPackage = fenix.stable.cargo;
         rustcPackage = fenix.stable.rustc;
@@ -129,10 +128,10 @@
       servers.html.enable = true;
       servers.tailwindcss.enable = true;
       servers.svelte.enable = true;
-      servers.emmet-ls.enable = true;
+      servers.emmet_ls.enable = true;
       servers.pyright.enable = true;
       servers.nixd.enable = true;
-      servers.tsserver = {
+      servers.ts_ls = {
         enable = true;
         extraOptions = { single_file_support = false; };
         rootDir = ''require('lspconfig').util.root_pattern("package.json")'';
