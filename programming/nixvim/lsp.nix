@@ -116,6 +116,7 @@
         rootDir =
           ''require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
       };
+      servers.csharp_ls.enable = true;
       servers.cssls.enable = true;
       servers.bashls.enable = true;
       servers.rust_analyzer = {
