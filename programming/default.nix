@@ -28,6 +28,7 @@
     postgresql_16
     lazygit
     typescript
+    unstable.aider-chat
 
     cargo-watch
     (pkgs.fenix.stable.withComponents [

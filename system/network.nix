@@ -4,6 +4,7 @@ in {
   imports = [ ];
   networking.nameservers = [ "1.1.1.1" ];
   networking.networkmanager.enable = true;
+  services.expressvpn.enable = true;
 
   systemd.services.proxy = {
     enable = true;
