@@ -67,5 +67,7 @@ in {
     unstable.v2raya
     unstable.tun2socks
     unstable.nekoray
+    pkgs.expressvpn
+
   ];
 }
