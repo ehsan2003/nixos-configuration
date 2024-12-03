@@ -49,6 +49,10 @@
           inherit specialArgs system;
           modules = [ ./hosts/base.nix ];
         };
+        nixos-old-laptop = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./hosts/old-laptop.nix ];
+        };
 
         nixos-laptop = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
