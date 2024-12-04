@@ -1,4 +1,8 @@
-{ config, pkgs, unstable, ... }: {
+{ config, pkgs, unstable, ... }:
+let
+  is-laptop = (config.networking.hostName == "nixos-laptop"
+    || config.networking.hostName == "nixos-old-laptop");
+in {
   fonts.packages = with pkgs; [ font-awesome ];
   home-manager.users.ehsan.programs.i3status-rust = {
     package = unstable.i3status-rust;
@@ -18,7 +22,7 @@
             format =
               "$icon $ip - {$ssid($signal_strength)|Wired connection} ^icon_net_down$speed_down.eng(prefix:K) ^icon_net_up$speed_up.eng(prefix:K)";
           }
-        ] ++ (if (config.system == "nixos-laptop") then [{
+        ] ++ (if is-laptop then [{
           block = "battery";
           format = "$icon $percentage {$time |}";
           format_missing = "";
@@ -43,7 +47,7 @@
               critical_mem = 90;
             }
 
-          ] ++ (if (config.networking.hostName == "nixos-laptop") then [
+          ] ++ (if is-laptop then [
             {
               block = "battery";
               device = "DisplayDevice";
