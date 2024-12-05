@@ -23,7 +23,6 @@
     unstable.bun
     unstable.deno
     unstable.dotnetCorePackages.dotnet_8.sdk
-    quartus-prime-lite
     cloc
     postgresql_16
     lazygit

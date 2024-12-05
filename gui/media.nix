@@ -1,10 +1,12 @@
 { pkgs, ... }: {
   imports = [ ];
-  sound.enable = true;
-  hardware.pulseaudio = {
+  services.pipewire = {
     enable = true;
-    extraConfig = "load-module module-combine-sink";
-    package = pkgs.pulseaudioFull;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
   };
   environment.systemPackages = with pkgs; [
     mkvtoolnix
@@ -16,7 +18,6 @@
     yewtube
     subdl
     popcorntime
-    nodePackages.webtorrent-cli
   ];
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
