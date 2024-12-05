@@ -18,7 +18,6 @@ in {
     wantedBy = [ "multi-user.target" ];
   };
 
-  programs.clash-verge.enable = true;
   programs.proxychains = {
     enable = true;
     proxies = {
