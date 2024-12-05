@@ -40,4 +40,8 @@
     ])
     pre-commit
   ];
+  services.pgadmin.enable = true;
+  services.pgadmin.initialEmail = "test";
+  services.pgadmin.initialPasswordFile = "/etc/pgadminpassword";
+
 }
