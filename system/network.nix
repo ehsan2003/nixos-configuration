@@ -1,5 +1,6 @@
 { pkgs, unstable, secrets, ... }:
 let proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
+
 in {
   imports = [ ];
   networking.nameservers = [ "1.1.1.1" ];
@@ -66,5 +67,7 @@ in {
     unstable.v2raya
     unstable.tun2socks
     unstable.nekoray
+    pkgs.expressvpn
+
   ];
 }
