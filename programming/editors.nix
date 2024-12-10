@@ -7,7 +7,7 @@ let
     module = import ./nixvim;
   };
 in {
-  environment.systemPackages = [ pkgs.neovide nvim ];
+  environment.systemPackages = [ pkgs.neovide pkgs.glrnvim nvim ];
   home-manager.users.ehsan = {
     programs = {
       git = {
