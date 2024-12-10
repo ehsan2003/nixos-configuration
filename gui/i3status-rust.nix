@@ -37,7 +37,6 @@ in {
             warning_mem = 70;
             critical_mem = 90;
           }
-
         ] ++ (if is-laptop then [
           {
             block = "battery";
@@ -45,7 +44,16 @@ in {
             driver = "upower";
             format = "$icon $percentage {$time |}";
           }
-          { block = "backlight"; }
+          {
+            block = "backlight";
+            invert_icons = true;
+          }
+          {
+            block = "temperature";
+            format = " $icon $max max ";
+            format_alt = " $icon $min min, $max max, $average avg ";
+            interval = 10;
+          }
         ] else
           [ ]) ++ [
             {
