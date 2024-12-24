@@ -22,65 +22,64 @@ in {
             format =
               "$icon $ip - {$ssid($signal_strength)|Wired connection} ^icon_net_down$speed_down.eng(prefix:K) ^icon_net_up$speed_up.eng(prefix:K)";
           }
-        ] ++ (if is-laptop then [{
-          block = "battery";
-          format = "$icon $percentage {$time |}";
-          format_missing = "";
-        }] else
-          [ ]) ++
-
-          [
+          {
+            block = "cpu";
+            interval = 1;
+            click = [{
+              button = "left";
+              cmd = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.btop}/bin/htop";
+            }];
+          }
+          {
+            block = "memory";
+            format = " $icon $mem_used_percents.eng(w:1) ";
+            interval = 10;
+            warning_mem = 70;
+            critical_mem = 90;
+          }
+        ] ++ (if is-laptop then [
+          {
+            block = "battery";
+            device = "DisplayDevice";
+            driver = "upower";
+            format = "$icon $percentage {$time |}";
+          }
+          {
+            block = "backlight";
+            invert_icons = true;
+          }
+          {
+            block = "temperature";
+            format = " $icon $max max ";
+            format_alt = " $icon $min min, $max max, $average avg ";
+            interval = 10;
+          }
+        ] else
+          [ ]) ++ [
             {
-              block = "cpu";
-              interval = 1;
+              block = "sound";
               click = [{
                 button = "left";
-                cmd =
-                  "${pkgs.alacritty}/bin/alacritty -e ${pkgs.btop}/bin/htop";
+                cmd = "pavucontrol";
               }];
             }
             {
-              block = "memory";
-              format = " $icon $mem_used_percents.eng(w:1) ";
-              interval = 10;
-              warning_mem = 70;
-              critical_mem = 90;
+              block = "custom";
+              command = "${pkgs.xkb-switch}/bin/xkb-switch";
+              interval = 1;
             }
-
-          ] ++ (if is-laptop then [
             {
-              block = "battery";
-              device = "DisplayDevice";
-              driver = "upower";
-              format = "$icon $percentage {$time |}";
+              block = "custom";
+              command =
+                "${pkgs.praytimes-kit}/bin/praytimes-kit next --config ${pkgs.praytimes-config}/etc/praytimes/praytimes.json";
+              interval = 10;
             }
-            { block = "backlight"; }
-          ] else
-            [ ]) ++ [
-              {
-                block = "sound";
-                click = [{
-                  button = "left";
-                  cmd = "pavucontrol";
-                }];
-              }
-              {
-                block = "custom";
-                command = "${pkgs.xkb-switch}/bin/xkb-switch";
-                interval = 1;
-              }
-              {
-                block = "custom";
-                command =
-                  "${pkgs.praytimes-kit}/bin/praytimes-kit next --config ${pkgs.praytimes-config}/etc/praytimes/praytimes.json";
-                interval = 10;
-              }
-              {
-                block = "time";
-                interval = 1;
-                format = "$timestamp.datetime(f:'%F %T')";
-              }
-            ];
+            {
+              block = "time";
+              interval = 1;
+              format = "$timestamp.datetime(f:'%F %T')";
+            }
+          ];
         settings = { theme = { theme = "space-villain"; }; };
         icons = "awesome5";
         theme = "gruvbox-dark";
