@@ -107,6 +107,9 @@
     lsp = {
       enable = true;
       servers.eslint.enable = true;
+      servers.prismals.enable = true;
+      servers.prismals.package = pkgs.prisma;
+
       servers.typst_lsp.enable = true;
       servers.graphql.enable = true;
       servers.dockerls.enable = true;
