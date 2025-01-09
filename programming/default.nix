@@ -29,6 +29,7 @@
     lazygit
     typescript
     unstable.aider-chat
+    unstable.prisma
 
     cargo-watch
     (pkgs.fenix.stable.withComponents [
