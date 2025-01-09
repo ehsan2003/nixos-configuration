@@ -108,7 +108,7 @@
       enable = true;
       servers.eslint.enable = true;
       servers.hls.enable = true;
-      servers.hls.install = true;
+      servers.hls.installGhc = true;
       servers.prismals.enable = true;
       servers.prismals.package = pkgs.prisma;
       servers.v_analyzer.package = pkgs.prisma;
