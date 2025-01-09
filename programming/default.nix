@@ -21,6 +21,7 @@
     git
     gcc
     unstable.bun
+    unstable.ghc
     unstable.deno
     unstable.dotnetCorePackages.dotnet_8.sdk
     cloc

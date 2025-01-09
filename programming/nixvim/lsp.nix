@@ -107,6 +107,8 @@
     lsp = {
       enable = true;
       servers.eslint.enable = true;
+      servers.hls.enable = true;
+      servers.hls.install = true;
       servers.typst_lsp.enable = true;
       servers.graphql.enable = true;
       servers.dockerls.enable = true;
