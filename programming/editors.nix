@@ -19,5 +19,5 @@ in {
     };
   };
 
-  environment.shellAliases.v = "neovide --fork";
+  environment.shellAliases.nv = "neovide --fork";
 }

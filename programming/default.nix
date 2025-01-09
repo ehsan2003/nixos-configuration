@@ -30,6 +30,7 @@
     typescript
     unstable.aider-chat
     unstable.prisma
+    unstable.vlang
 
     cargo-watch
     (pkgs.fenix.stable.withComponents [
