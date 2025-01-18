@@ -5,6 +5,7 @@ let
   notitrans-en = pkgs.callPackage ./notitrans-en.nix { };
   notitrans-dict = pkgs.callPackage ./notitrans-dict.nix { };
   search-select = pkgs.callPackage ./search-select.nix { };
+  aiask = pkgs.callPackage ./aiask.nix { };
 in {
   target = ".config/i3/config";
   text = ''
@@ -208,6 +209,7 @@ in {
     bindsym Print exec "${pkgs.flameshot}/bin/flameshot gui"
 
     bindsym $mod+t exec "${notitrans-fa}/bin/notitrans-fa"
+    bindsym $mod+i exec "${aiask}/bin/aiask"
     bindsym $mod+y exec "${notitrans-en}/bin/notitrans-en"
     bindsym $mod+g exec "${search-select}/bin/search-select"
     bindsym $mod+x exec "${notitrans-dict}/bin/notitrans-dict"
