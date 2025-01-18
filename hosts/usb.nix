@@ -5,7 +5,7 @@
     "${modulesPath}/profiles/base.nix"
     ../default.nix
     disko.nixosModules.disko
-  ];
+  ] ++ (if (builtins.getEnv "HIDPI") == "1" then [ ./hidpi.nix ] else [ ]);
 
   # nix.optimise.automatic = true;
   # nix.optimise.dates=["12:00"];
@@ -17,7 +17,7 @@
   networking.hostName = "nixos-usb"; # Define your hostname.
   environment.systemPackages = [ pkgs.xfce.thunar ];
   services.logrotate.enable = true;
-  boot.tmp.useTmpfs=true;
+  boot.tmp.useTmpfs = true;
 
   boot.kernel.sysctl = {
     # "vm.dirty_ratio" = 10;
