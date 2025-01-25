@@ -13,6 +13,5 @@ in {
 
   services.tlp.enable = true;
 
-  environment.systemPackages = [ pkgs.quartus-prime-lite ];
 
 }
