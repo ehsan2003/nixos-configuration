@@ -30,6 +30,19 @@
       };
     };
     home.file.i3Config = import ./i3-config.nix { pkgs = pkgs; };
+    home.file.aiderConfig = {
+      target = ".config/aichat/config.yaml";
+      text = ''
+        model: openrouter:deepseek/deepseek-chat
+        clients:
+          - type: openai-compatible
+            name: openrouter
+            api_base: https://openrouter.ai/api/v1
+            api_key: null
+            extra:
+              proxy: socks5://127.0.0.1:1080
+      '';
+    };
     programs = {
       rofi = {
         enable = true;

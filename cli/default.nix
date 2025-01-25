@@ -15,6 +15,7 @@ in {
   environment.variables.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
   environment.variables.GROQ_API_KEY = secrets.GROQ_API_KEY;
   environment.variables.OPENAI_API_HOST = secrets.OPENAI_API_HOST;
+  environment.variables.OPENROUTER_API_KEY = secrets.OPENROUTER_API_KEY;
 
   home-manager.users.ehsan.programs.taskwarrior.enable = true;
   home-manager.users.ehsan.programs.taskwarrior.package = pkgs.taskwarrior3;
