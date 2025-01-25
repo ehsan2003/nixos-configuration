@@ -1,6 +1,4 @@
-{ pkgs, unstable, ... }:
-let dpi = 250;
-in {
+{ pkgs, ... }: {
   imports = [ ./base.nix ./hidpi.nix ];
   networking.hostName = "nixos-home-desktop"; # Define your hostname.
 
