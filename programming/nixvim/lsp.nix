@@ -138,11 +138,6 @@
       servers.emmet_ls.enable = true;
       servers.pyright.enable = true;
       servers.nixd.enable = true;
-      servers.ts_ls = {
-        enable = true;
-        extraOptions = { single_file_support = false; };
-        rootDir = ''require('lspconfig').util.root_pattern("package.json")'';
-      };
     };
   };
   keymaps = [
@@ -260,6 +255,7 @@
       mode = "n";
     }
   ];
+  plugins.typescript-tools.enable = true;
   extraConfigLua = ''
     local cmp=require('cmp')
     cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done { tex = false })
