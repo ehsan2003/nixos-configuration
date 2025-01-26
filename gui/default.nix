@@ -43,6 +43,7 @@
               proxy: socks5://127.0.0.1:1080
       '';
     };
+    services.dunst.enable = true;
     programs = {
       rofi = {
         enable = true;
@@ -62,7 +63,6 @@
     dunst
     translate-shell
     xsel
-    dunst
     dmenu
     rofi
     flameshot
