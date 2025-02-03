@@ -113,7 +113,7 @@
       servers.prismals.package = pkgs.prisma;
       servers.v_analyzer.package = pkgs.prisma;
 
-      servers.typst_lsp.enable = true;
+      servers.tinymist.enable = true;
       servers.graphql.enable = true;
       servers.dockerls.enable = true;
       servers.docker_compose_language_service.enable = true;
