@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs,... }:
 let dpi = 250;
 in {
   home-manager.users.ehsan.home.pointerCursor = {
