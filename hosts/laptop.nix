@@ -12,6 +12,4 @@ in {
   '';
 
   services.tlp.enable = true;
-
-
 }

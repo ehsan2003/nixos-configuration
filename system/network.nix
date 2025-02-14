@@ -7,18 +7,6 @@ in {
   networking.networkmanager.enable = true;
   services.expressvpn.enable = true;
 
-  systemd.services.proxy = {
-    enable = true;
-    description = "main proxy for system";
-    after = [ "network.target" ];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "${proxyFile}/bin/start-proxy";
-    };
-    path = [ unstable.xray unstable.sing-box unstable.v2raya ];
-    wantedBy = [ "multi-user.target" ];
-  };
-
   programs.proxychains = {
     enable = true;
     proxies = {
@@ -67,7 +55,26 @@ in {
     unstable.v2raya
     unstable.tun2socks
     unstable.nekoray
+    unstable.amnezia-vpn
     pkgs.expressvpn
 
   ];
+  services.dbus.packages = [ unstable.amnezia-vpn ];
+  services.resolved.enable = true;
+
+  systemd = {
+    packages = [ unstable.amnezia-vpn ];
+    services."AmneziaVPN".wantedBy = [ "multi-user.target" ];
+    services.proxy = {
+      enable = true;
+      description = "main proxy for system";
+      after = [ "network.target" ];
+      serviceConfig = {
+        Restart = "always";
+        ExecStart = "${proxyFile}/bin/start-proxy";
+      };
+      path = [ unstable.xray unstable.sing-box unstable.v2raya ];
+      wantedBy = [ "multi-user.target" ];
+    };
+  };
 }
