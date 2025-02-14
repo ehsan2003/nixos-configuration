@@ -14,6 +14,7 @@
   programs.git.config = { init = { defaultBranch = "main"; }; };
 
   nixpkgs.overlays = [ fenix.overlays.default ];
+
   environment.systemPackages = with pkgs; [
     corepack_22
     nodejs_22
@@ -29,7 +30,6 @@
     lazygit
     typescript
     unstable.aider-chat
-    unstable.prisma
     unstable.vlang
 
     cargo-watch

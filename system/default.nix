@@ -3,6 +3,11 @@
 
   time.timeZone = "Asia/Tehran";
 
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 16 * 1024;
+  }];
+
   services.openssh.enable = true;
   environment.systemPackages = [ pkgs.linux-wifi-hotspot pkgs.ollama ];
   systemd = {

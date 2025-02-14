@@ -109,9 +109,6 @@
       servers.eslint.enable = true;
       servers.hls.enable = true;
       servers.hls.installGhc = true;
-      servers.prismals.enable = true;
-      servers.prismals.package = pkgs.prisma;
-      servers.v_analyzer.package = pkgs.prisma;
 
       servers.tinymist.enable = true;
       servers.graphql.enable = true;
