@@ -56,6 +56,8 @@ in {
     unstable.tun2socks
     unstable.nekoray
     unstable.amnezia-vpn
+    unstable.amneziawg-go
+    unstable.amneziawg-tools
     pkgs.expressvpn
 
   ];
