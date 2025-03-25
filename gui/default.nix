@@ -33,7 +33,7 @@
     home.file.aiderConfig = {
       target = ".config/aichat/config.yaml";
       text = ''
-        model: openrouter:deepseek/deepseek-chat
+        model: openrouter:deepseek/deepseek-r1:free
         clients:
           - type: openai-compatible
             name: openrouter

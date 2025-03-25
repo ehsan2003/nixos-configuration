@@ -112,6 +112,7 @@
 
       servers.tinymist.enable = true;
       servers.graphql.enable = true;
+      servers.graphql.package = pkgs.graphql-language-service-cli;
       servers.dockerls.enable = true;
       servers.docker_compose_language_service.enable = true;
       servers.denols = {
