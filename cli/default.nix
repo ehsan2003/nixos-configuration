@@ -40,6 +40,7 @@ in {
     wget
     curl
     aria2
+    caddy
 
     # Absolute Utils
     killall
