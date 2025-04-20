@@ -2,8 +2,8 @@
   imports = [ ./base.nix ./hidpi.nix ];
   networking.hostName = "nixos-home-desktop"; # Define your hostname.
 
-  environment.systemPackages = [ 
-    
+  environment.systemPackages = [
+
   ];
   services.serviio.enable = true;
   systemd.services.task-sync = {
@@ -55,5 +55,5 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
+  boot.loader.grub.gfxmodeEfi = "1024x768";
 }
