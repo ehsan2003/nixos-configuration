@@ -33,6 +33,7 @@
     home.file.aiderConfig = {
       target = ".config/aichat/config.yaml";
       text = ''
+        vim: true
         model: openrouter:deepseek/deepseek-r1:free
         clients:
           - type: openai-compatible
