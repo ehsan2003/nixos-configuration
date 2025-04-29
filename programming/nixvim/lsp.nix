@@ -117,8 +117,7 @@
       servers.docker_compose_language_service.enable = true;
       servers.denols = {
         enable = true;
-        rootDir =
-          ''require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
+        rootMarkers = [ "deno.json" "deno.jsonc" ];
       };
       servers.csharp_ls.enable = true;
       servers.cssls.enable = true;

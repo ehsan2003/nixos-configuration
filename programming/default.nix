@@ -29,7 +29,7 @@
     postgresql_16
     lazygit
     typescript
-    unstable.aider-chat-full
+    unstable.aider-chat
     unstable.vlang
 
     cargo-watch
