@@ -1,4 +1,4 @@
-{ config, nixpkgs, pkgs, unstable_input, secrets, ... }: {
+{ config, nixpkgs, pkgs, unstable, unstable_input, secrets, ... }: {
   imports = [ ./boot.nix ./users.nix ./nix.nix ./network.nix ];
 
   time.timeZone = "Asia/Tehran";
@@ -9,7 +9,7 @@
   }];
 
   services.openssh.enable = true;
-  environment.systemPackages = [ pkgs.linux-wifi-hotspot pkgs.ollama ];
+  environment.systemPackages = [ pkgs.linux-wifi-hotspot unstable.ollama ];
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       enable = true;
@@ -29,6 +29,7 @@
   };
   security.polkit.enable = true;
   services.ollama.enable = true;
+  services.ollama.package = unstable.ollama;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
