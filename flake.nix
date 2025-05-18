@@ -41,7 +41,10 @@
       nixosConfigurations = let
         system = "x86_64-linux";
         specialArgs = inputs // {
-          unstable = inputs.unstable.legacyPackages.${system};
+          unstable = import inputs.unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
           secrets = import /etc/secrets.nix;
         };
       in {
