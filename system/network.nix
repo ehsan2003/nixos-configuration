@@ -62,7 +62,6 @@ in {
 
   ];
   services.dbus.packages = [ unstable.amnezia-vpn ];
-  services.resolved.enable = true;
 
   systemd = {
     packages = [ unstable.amnezia-vpn ];
