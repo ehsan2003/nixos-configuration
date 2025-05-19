@@ -75,7 +75,6 @@ in {
       enable = true;
       description = "amnezia vpn service (awg-quick)";
       after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ]; # Ensure it starts on boot if desired
 
       serviceConfig =
         let awg-quick = "${unstable.amneziawg-tools}/bin/awg-quick";
