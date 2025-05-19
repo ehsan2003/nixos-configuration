@@ -1,6 +1,11 @@
 { pkgs, unstable, secrets, ... }:
-let proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
-
+let
+  proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
+  awg-config = pkgs.writeTextFile {
+    name = "awg-config";
+    text = secrets.awg-config;
+    destination = "/awg.conf";
+  };
 in {
   imports = [ ];
   networking.nameservers = [ "1.1.1.1" ];
@@ -66,6 +71,23 @@ in {
   systemd = {
     packages = [ unstable.amnezia-vpn ];
     services."AmneziaVPN".wantedBy = [ "multi-user.target" ];
+    services.amnezia = {
+      enable = true;
+      description = "amnezia vpn service (awg-quick)";
+      after = [ "network.target" ];
+
+      serviceConfig =
+        let awg-quick = "${unstable.amneziawg-tools}/bin/awg-quick";
+        in {
+          Type = "oneshot";
+          RemainAfterExit =
+            true; # So systemd considers the service 'active' even after the start script exits
+          ExecStart = [ "${awg-quick} up ${awg-config}/awg.conf" ];
+          ExecStop = [ "${awg-quick} down ${awg-config}/awg.conf" ];
+
+        };
+      path = [ unstable.amneziawg-tools ];
+    };
     services.proxy = {
       enable = true;
       description = "main proxy for system";
