@@ -75,18 +75,43 @@ in {
       enable = true;
       description = "amnezia vpn service (awg-quick)";
       after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ]; # Ensure it starts on boot if desired
 
       serviceConfig =
         let awg-quick = "${unstable.amneziawg-tools}/bin/awg-quick";
         in {
+          User = "root"; # Already correct - root has necessary permissions
           Type = "oneshot";
-          RemainAfterExit =
-            true; # So systemd considers the service 'active' even after the start script exits
+          RemainAfterExit = true;
+
+          # Add necessary capabilities
+          AmbientCapabilities =
+            [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+          CapabilityBoundingSet =
+            [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+
+          # Allow network configuration
+          PrivateNetwork = false;
+
+          # Ensure it can modify system network settings
+          RestrictAddressFamilies =
+            [ "AF_NETLINK" "AF_INET" "AF_INET6" "AF_UNIX" ];
+
+          # Allow the service to interact with systemd-resolved if needed
+          SystemCallFilter = [ "@network-io" "@system-service" ];
+
+          # Original commands
           ExecStart = [ "${awg-quick} up ${awg-config}/awg.conf" ];
           ExecStop = [ "${awg-quick} down ${awg-config}/awg.conf" ];
-
         };
-      path = [ unstable.amneziawg-tools ];
+
+      # Expand path to include all needed tools
+      path = [
+        unstable.amneziawg-tools
+        pkgs.iproute2 # For ip command
+        pkgs.openresolv # For resolvconf
+        pkgs.coreutils # For basic commands
+      ];
     };
     services.proxy = {
       enable = true;
