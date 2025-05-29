@@ -13,7 +13,7 @@
     serviceConfig = {
       Restart = "always";
       ExecStart =
-        "${pkgs.taskchampion-sync-server}/bin/taskchampion-sync-server --port 8443";
+        "${pkgs.taskchampion-sync-server}/bin/taskchampion-sync-server --listen 8443";
     };
     wantedBy = [ "multi-user.target" ];
   };
