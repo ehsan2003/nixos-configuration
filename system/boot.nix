@@ -1,4 +1,4 @@
-{ unstable, ... }: {
+{ unstable, pkgs, ... }: {
 
   boot.tmp.cleanOnBoot = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -7,8 +7,7 @@
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
-  boot.kernelPackages = unstable.linuxKernel.packages.linux_6_12;
-  boot.extraModulePackages =
-    [ unstable.linuxKernel.packages.linux_6_12.amneziawg ];
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_13;
+  boot.extraModulePackages = [ pkgs.linuxKernel.packages.linux_6_13.amneziawg ];
 
 }

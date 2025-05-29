@@ -30,12 +30,12 @@
       path = "default";
       id = 0;
 
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         tridactyl
         foxyproxy-standard
       ];
       isDefault = true;
-      search.default = "DuckDuckGo";
+      search.default = "ddg";
       search.force = true;
       settings = {
         "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";

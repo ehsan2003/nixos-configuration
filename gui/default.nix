@@ -1,7 +1,8 @@
 { pkgs, unstable, ... }: {
   imports = [ ./i3status-rust.nix ./firefox.nix ./media.nix ];
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.fira-code
     vazir-code-font
   ];
   i18n.defaultLocale = "en_US.UTF-8";

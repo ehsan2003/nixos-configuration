@@ -10,8 +10,10 @@ in {
   imports = [ ];
   networking.nameservers = [ "1.1.1.1" ];
   networking.networkmanager.enable = true;
+  # networking.firewall.checkReversePath = "loose"; 
   services.expressvpn.enable = true;
 
+  # programs.amnezia-vpn.enable = true;
   programs.proxychains = {
     enable = true;
     proxies = {
@@ -70,14 +72,14 @@ in {
 
   systemd = {
     packages = [ unstable.amnezia-vpn ];
-    services."AmneziaVPN".wantedBy = [ "multi-user.target" ];
+
     services.amnezia = {
       enable = true;
       description = "amnezia vpn service (awg-quick)";
       after = [ "network.target" ];
 
       serviceConfig =
-        let awg-quick = "${unstable.amneziawg-tools}/bin/awg-quick";
+        let awg-quick = "${pkgs.amneziawg-tools}/bin/awg-quick";
         in {
           User = "root"; # Already correct - root has necessary permissions
           Type = "oneshot";
