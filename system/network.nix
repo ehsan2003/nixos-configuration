@@ -12,6 +12,13 @@ in {
   networking.networkmanager.enable = true;
   # networking.firewall.checkReversePath = "loose"; 
   services.expressvpn.enable = true;
+  services.openvpn.servers = {
+    openvpn = {
+      autoStart = false;
+      config = secrets.openvpn;
+      updateResolvConf = true;
+    };
+  };
 
   # programs.amnezia-vpn.enable = true;
   programs.proxychains = {

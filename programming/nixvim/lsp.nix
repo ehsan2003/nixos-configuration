@@ -116,7 +116,7 @@
       servers.dockerls.enable = true;
       servers.docker_compose_language_service.enable = true;
       servers.denols = {
-        enable = true;
+        enable = false;
         rootMarkers = [ "deno.json" "deno.jsonc" ];
       };
       servers.csharp_ls.enable = true;
