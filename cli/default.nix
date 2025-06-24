@@ -18,6 +18,11 @@ in {
   environment.variables.OPENROUTER_API_KEY = secrets.OPENROUTER_API_KEY;
 
   home-manager.users.ehsan.programs.taskwarrior.enable = true;
+
+  home-manager.users.ehsan.programs.zoxide.enable = true;
+  home-manager.users.ehsan.programs.zoxide.enableZshIntegration = true;
+  environment.shellAliases.z = "zoxide";
+
   home-manager.users.ehsan.programs.taskwarrior.package = pkgs.taskwarrior3;
   home-manager.users.ehsan.programs.taskwarrior.config = {
     sync.encryption_secret = secrets.taskwarrior-secret;
@@ -69,6 +74,9 @@ in {
     timewarrior
     llama-cpp
     lynx
+    ariang
+    zoxide
+    yazi
   ]) ++ [
     nix-alien.packages.${"x86_64-linux"}.nix-alien
     (urls "mathcha" "https://mathcha.io/editor")
