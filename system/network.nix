@@ -41,6 +41,8 @@ in {
     client.enable = true;
     torsocks.enable = true;
   };
+  programs.nekoray.enable = true;
+  programs.nekoray.tunMode.enable = true;
   home-manager.users.ehsan.home.file.nekorayRouting = {
     target = ".config/nekoray/config/routes/Default";
     text = builtins.toJSON {
@@ -85,33 +87,32 @@ in {
       description = "amnezia vpn service (awg-quick)";
       after = [ "network.target" ];
 
-      serviceConfig =
-        let awg-quick = "${pkgs.amneziawg-tools}/bin/awg-quick";
-        in {
-          User = "root"; # Already correct - root has necessary permissions
-          Type = "oneshot";
-          RemainAfterExit = true;
+      serviceConfig = let awg-quick = "${pkgs.amneziawg-tools}/bin/awg-quick";
+      in {
+        User = "root"; # Already correct - root has necessary permissions
+        Type = "oneshot";
+        RemainAfterExit = true;
 
-          # Add necessary capabilities
-          AmbientCapabilities =
-            [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
-          CapabilityBoundingSet =
-            [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+        # Add necessary capabilities
+        AmbientCapabilities =
+          [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+        CapabilityBoundingSet =
+          [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
 
-          # Allow network configuration
-          PrivateNetwork = false;
+        # Allow network configuration
+        PrivateNetwork = false;
 
-          # Ensure it can modify system network settings
-          RestrictAddressFamilies =
-            [ "AF_NETLINK" "AF_INET" "AF_INET6" "AF_UNIX" ];
+        # Ensure it can modify system network settings
+        RestrictAddressFamilies =
+          [ "AF_NETLINK" "AF_INET" "AF_INET6" "AF_UNIX" ];
 
-          # Allow the service to interact with systemd-resolved if needed
-          SystemCallFilter = [ "@network-io" "@system-service" ];
+        # Allow the service to interact with systemd-resolved if needed
+        SystemCallFilter = [ "@network-io" "@system-service" ];
 
-          # Original commands
-          ExecStart = [ "${awg-quick} up ${awg-config}/awg.conf" ];
-          ExecStop = [ "${awg-quick} down ${awg-config}/awg.conf" ];
-        };
+        # Original commands
+        ExecStart = [ "${awg-quick} up ${awg-config}/awg.conf" ];
+        ExecStop = [ "${awg-quick} down ${awg-config}/awg.conf" ];
+      };
 
       # Expand path to include all needed tools
       path = [
