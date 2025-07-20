@@ -107,8 +107,6 @@
     lsp = {
       enable = true;
       servers.eslint.enable = true;
-      servers.hls.enable = true;
-      servers.hls.installGhc = true;
 
       servers.tinymist.enable = true;
       servers.graphql.enable = true;
@@ -119,7 +117,6 @@
         enable = false;
         rootMarkers = [ "deno.json" "deno.jsonc" ];
       };
-      servers.csharp_ls.enable = true;
       servers.cssls.enable = true;
       servers.bashls.enable = true;
       servers.rust_analyzer = {

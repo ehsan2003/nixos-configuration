@@ -1,5 +1,5 @@
 { config, nixpkgs, pkgs, unstable, unstable_input, secrets, ... }: {
-  imports = [ ./boot.nix ./users.nix ./nix.nix ./network.nix ];
+  imports = [ ./boot.nix ./users.nix ./nix.nix ./network.nix ./printing.nix ];
 
   time.timeZone = "Asia/Tehran";
 
