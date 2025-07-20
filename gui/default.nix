@@ -73,7 +73,5 @@
 
     xarchiver
     unstable.tdesktop
-    qutebrowser
-
   ];
 }

@@ -2,7 +2,6 @@
   plugins.markdown-preview.enable = true;
   plugins.ts-autotag.enable = true;
   plugins.typst-vim.enable = true;
-  plugins.typst-vim.settings.pdf_viewer = "${pkgs.evince}/bin/evince";
   plugins.nvim-autopairs.enable = true;
   plugins = {
     none-ls = {

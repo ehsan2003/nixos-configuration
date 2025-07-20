@@ -48,6 +48,7 @@ in {
     caddy
 
     # Absolute Utils
+    nix-tree
     killall
     btop
     unrar-wrapper
@@ -72,7 +73,6 @@ in {
     chntpw
     zellij
     timewarrior
-    llama-cpp
     lynx
     ariang
     zoxide

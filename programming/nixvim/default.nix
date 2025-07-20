@@ -9,7 +9,6 @@
     ./ui.nix
     ./comment.nix
     ./treesitter.nix
-    ./ai.nix
   ];
   config = {
     plugins.yanky.enable = true;
