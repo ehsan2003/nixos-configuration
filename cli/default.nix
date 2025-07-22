@@ -77,6 +77,10 @@ in {
     ariang
     zoxide
     yazi
+    (pkgs.writeShellApplication {
+      name = "aider";
+      text = ''${alacritty}/bin/alacritty --title "aider" '';
+    })
   ]) ++ [
     nix-alien.packages.${"x86_64-linux"}.nix-alien
     (urls "mathcha" "https://mathcha.io/editor")
