@@ -78,7 +78,7 @@ in {
     zoxide
     yazi
     (pkgs.writeShellApplication {
-      name = "aider";
+      name = "ai";
       text = ''${alacritty}/bin/alacritty --title "aider" '';
     })
   ]) ++ [
