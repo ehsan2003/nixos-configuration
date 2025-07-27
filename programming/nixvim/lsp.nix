@@ -112,9 +112,16 @@
       servers.graphql.package = pkgs.graphql-language-service-cli;
       servers.dockerls.enable = true;
       servers.docker_compose_language_service.enable = true;
+      servers.vtsls.enable = true;
+
+      servers.vtsls.extraOptions.single_file_support = false;
+      servers.vtsls.extraOptions.root_dir.__raw = ''
+        require('lspconfig').util.root_pattern("tsconfig.json", "package.json")'';
       servers.denols = {
-        enable = false;
-        rootMarkers = [ "deno.json" "deno.jsonc" ];
+        enable = true;
+        extraOptions.root_dir.__raw =
+          ''require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
+
       };
       servers.cssls.enable = true;
       servers.bashls.enable = true;
@@ -248,7 +255,7 @@
       mode = "n";
     }
   ];
-  plugins.typescript-tools.enable = true;
+  # plugins.typescript-tools.enable = true;
   extraConfigLua = ''
     local cmp=require('cmp')
     cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done { tex = false })
