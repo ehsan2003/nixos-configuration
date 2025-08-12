@@ -30,6 +30,7 @@
     unstable.aider-chat
     unstable.vlang
 
+    uv
     cargo-watch
     (pkgs.fenix.stable.withComponents [
       "cargo"

@@ -3,8 +3,8 @@
     enable = true;
     keymaps = {
       "<leader>fr" = { action = "registers"; };
-      "<leader>fw" = { action = "live_grep"; };
-      "<leader>ff" = { action = "find_files"; };
+      "<leader>fw" = { action = "live_grep hidden=true"; };
+      "<leader>ff" = { action = "find_files hidden=true"; };
       "<leader>f<CR>" = { action = "resume"; };
     };
 
