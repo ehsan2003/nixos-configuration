@@ -219,11 +219,10 @@ in {
 
     exec --no-startup-id "${pkgs.blueman}/bin/blueman-applet"
     exec --no-startup-id "${pkgs.pasystray}/bin/pasystray"
-    for_window [class="nvim"] move to workspace 1, workspace number 1
+    for_window [class="glrnvim"] move to workspace 1, workspace number 1
     for_window [class="firefox"] move to workspace 2, workspace number 2
     for_window [class="Alacritty"] move to workspace 3, workspace number 3
-    for_window [title="aider"] move to workspace 4, workspace number 4
-    for_window [title="nvim"] move to workspace 1, workspace number 1
+    for_window [title="^aider$"] move to workspace 4, workspace number 4
     for_window [class="Telegram"] move to workspace 5, workspace number 5
 
 
