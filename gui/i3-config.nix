@@ -6,6 +6,7 @@ let
   notitrans-dict = pkgs.callPackage ./notitrans-dict.nix { };
   search-select = pkgs.callPackage ./search-select.nix { };
   aiask = pkgs.callPackage ./aiask.nix { };
+  ensure-class = pkgs.callPackage ./ensure-class.nix { };
 in {
   target = ".config/i3/config";
   text = ''
@@ -136,11 +137,11 @@ in {
     set $ws10 "10"
 
     # switch to workspace
-    bindsym $mod+1 workspace number $ws1
-    bindsym $mod+2 workspace number $ws2
-    bindsym $mod+3 workspace number $ws3
-    bindsym $mod+4 workspace number $ws4
-    bindsym $mod+5 workspace number $ws5
+    bindsym $mod+1 workspace number $ws1; exec "${ensure-class}/bin/ensure-class glrnvim glrnvim"
+    bindsym $mod+2 workspace number $ws2; exec ${ensure-class}/bin/ensure-class Navigator "firefox"
+    bindsym $mod+3 workspace number $ws3; exec "${ensure-class}/bin/ensure-class Alacritty alacritty"
+    bindsym $mod+4 workspace number $ws4; exec "${ensure-class}/bin/ensure-class aider \\"alacritty --class aider,aider\\""
+    bindsym $mod+5 workspace number $ws5; exec "${ensure-class}/bin/ensure-class Telegram Telegram"
     bindsym $mod+6 workspace number $ws6
     bindsym $mod+7 workspace number $ws7
     bindsym $mod+8 workspace number $ws8
@@ -222,7 +223,7 @@ in {
     for_window [class="glrnvim"] move to workspace 1, workspace number 1
     for_window [class="firefox"] move to workspace 2, workspace number 2
     for_window [class="Alacritty"] move to workspace 3, workspace number 3
-    for_window [title="^aider$"] move to workspace 4, workspace number 4
+    for_window [class="aider"] move to workspace 4, workspace number 4
     for_window [class="Telegram"] move to workspace 5, workspace number 5
 
 
