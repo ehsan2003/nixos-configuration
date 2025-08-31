@@ -107,7 +107,8 @@ in {
     bindsym $mod+f fullscreen toggle
 
     # change container layout (stacked, tabbed, toggle split)
-    bindsym $mod+s layout stacking
+    bindsym $mod+b exec --no-startup-id "${ensure-class}/bin/ensure-class btop \\"alacritty --class btop,btop -o font.size=8 -e btop\\""";  
+    bindsym $mod+s exec --no-startup-id "${ensure-class}/bin/ensure-class ai \\"firefox https://duck.ai --class ai \\"" ;exec "sleep 0.1; i3-msg scratchpad show";  
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
@@ -203,9 +204,15 @@ in {
         mode hide
         status_command ${pkgs.i3status-rust}/bin/i3status-rs  ~/.config/i3status-rust/config-bottom.toml
     }
-    default_border none
 
-    workspace_layout tabbed
+
+
+    hide_edge_borders smart
+
+    workspace_layout default
+    gaps inner 5
+    gaps outer 5 
+    smart_gaps on
 
     bindsym Print exec "${pkgs.flameshot}/bin/flameshot gui"
 
@@ -220,11 +227,17 @@ in {
 
     exec --no-startup-id "${pkgs.blueman}/bin/blueman-applet"
     exec --no-startup-id "${pkgs.pasystray}/bin/pasystray"
+    exec --no-startup-id alacritty --class btop,btop -o font.size=8 -e btop
+    exec --no-startup-id firefox https://duck.ai --class ai
     for_window [class="glrnvim"] move to workspace 1, workspace number 1
     for_window [class="firefox"] move to workspace 2, workspace number 2
     for_window [class="Alacritty"] move to workspace 3, workspace number 3
     for_window [class="aider"] move to workspace 4, workspace number 4
     for_window [class="Telegram"] move to workspace 5, workspace number 5
+    for_window [class="btop"] move scratchpad;
+    for_window [class="ai"] move scratchpad;
+
+    for_window [class="^.*"] border pixel 1
 
 
   '';

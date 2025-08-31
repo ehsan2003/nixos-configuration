@@ -22,7 +22,7 @@
     cmp_luasnip.enable = true;
 
     lspkind.enable = true;
-    lspkind.mode = "symbol";
+    lspkind.settings.mode = "symbol";
     cmp = {
       enable = true;
       settings = {
