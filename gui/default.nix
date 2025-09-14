@@ -70,6 +70,7 @@
     flameshot
     i3status
     pasystray
+    scrcpy
 
     xarchiver
     unstable.tdesktop
