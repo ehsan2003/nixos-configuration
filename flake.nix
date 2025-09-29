@@ -70,6 +70,12 @@
           inherit specialArgs system;
           modules = [ ./hosts/home-pc.nix ];
         };
+
+        tablet = nixpkgs.lib.nixosSystem {
+          inherit specialArgs system;
+          modules = [ ./hosts/tablet.nix ];
+        };
+
         usb = nixpkgs.lib.nixosSystem {
           inherit specialArgs system;
           modules = [ ./hosts/usb.nix ];
