@@ -30,6 +30,8 @@
     unstable.aider-chat
     unstable.vlang
 
+    claude-code
+
     uv
     cargo-watch
     (pkgs.fenix.stable.withComponents [
