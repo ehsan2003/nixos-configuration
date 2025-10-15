@@ -1,4 +1,6 @@
-{ pkgs, fenix, unstable, ... }: {
+{ pkgs, fenix, unstable, ... }:
+let aider-ce = unstable.callPackage ./aider-ce/package.nix { };
+in {
   imports = [ ./editors.nix ./virtualisation.nix ];
   # git 
   home-manager.users.ehsan = {
@@ -27,7 +29,8 @@
     postgresql_16
     lazygit
     typescript
-    unstable.aider-chat
+
+    aider-ce
     unstable.vlang
 
     claude-code
