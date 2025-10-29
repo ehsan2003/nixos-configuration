@@ -30,7 +30,7 @@ in {
     lazygit
     typescript
 
-    aider-ce
+    unstable.aider-chat #aider-ce
     unstable.vlang
 
     claude-code

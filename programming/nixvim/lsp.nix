@@ -115,8 +115,9 @@
       servers.vtsls.enable = true;
 
       servers.vtsls.extraOptions.single_file_support = false;
-      servers.vtsls.extraOptions.root_dir.__raw = ''
-        require('lspconfig').util.root_pattern("tsconfig.json", "package.json")'';
+      # servers.vtsls.extraOptions.root_dir.__raw = ''
+      #   function() require('lspconfig').util.root_pattern("tsconfig.json", "package.json") end
+      # '';
       servers.denols = {
         enable = true;
         extraOptions.root_dir.__raw =
