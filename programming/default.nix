@@ -18,8 +18,8 @@ in {
   nixpkgs.overlays = [ fenix.overlays.default ];
 
   environment.systemPackages = with pkgs; [
-    corepack_22
-    nodejs_22
+    unstable.pnpm
+    unstable.nodejs_24
     python310
     git
     gcc
@@ -30,7 +30,7 @@ in {
     lazygit
     typescript
 
-    unstable.aider-chat #aider-ce
+    unstable.aider-chat # aider-ce
     unstable.vlang
 
     claude-code
