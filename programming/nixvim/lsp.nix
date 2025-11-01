@@ -7,6 +7,7 @@
     none-ls = {
       enable = true;
       sources.formatting.prettier.enable = true;
+      sources.formatting.biome.enable = true;
       sources.formatting.prettier.disableTsServerFormatter = true;
       # sources.formatting.rustfmt.enable = true;
       sources.formatting.black.enable = true;
@@ -106,6 +107,7 @@
     lsp = {
       enable = true;
       servers.eslint.enable = true;
+      servers.biome.enable = true;
 
       servers.tinymist.enable = true;
       servers.graphql.enable = true;
