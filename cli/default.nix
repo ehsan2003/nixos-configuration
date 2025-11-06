@@ -17,6 +17,12 @@ in {
   environment.variables.OPENAI_API_HOST = secrets.OPENAI_API_HOST;
   environment.variables.OPENROUTER_API_KEY = secrets.OPENROUTER_API_KEY;
 
+  environment.variables.ANTHROPIC_AUTH_TOKEN = secrets.ANTHROPIC_AUTH_TOKEN;
+  environment.variables.ANTHROPIC_BASE_URL = secrets.ANTHROPIC_BASE_URL;
+  environment.variables.ANTHROPIC_DEFAULT_HAIKU_MODEL = "glm-4.5-air";
+  environment.variables.ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-4.6";
+  environment.variables.ANTHROPIC_DEFAULT_OPUS_MODEL = "glm-4.6";
+
   home-manager.users.ehsan.programs.taskwarrior.enable = true;
 
   home-manager.users.ehsan.programs.zoxide.enable = true;
@@ -86,7 +92,7 @@ in {
     (urls "mathcha" "https://mathcha.io/editor")
     (urls "poe" "https://poe.com")
     (urls "meet" "https://meet.google.com/")
-    (urls "claude" "https://claude.ai/")
+    # (urls "claude" "https://claude.ai/")
 
   ];
   home-manager.users.ehsan.home.file.zshrc = {
