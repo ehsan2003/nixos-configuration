@@ -117,13 +117,22 @@
       servers.vtsls.enable = true;
 
       servers.vtsls.extraOptions.single_file_support = false;
-      # servers.vtsls.extraOptions.root_dir.__raw = ''
-      #   function() require('lspconfig').util.root_pattern("tsconfig.json", "package.json") end
-      # '';
+      servers.vtsls.rootMarkers = [ "package.json" "tsconfig.json" ];
+      servers.vtsls.extraOptions.root_dir.__raw = ''
+        function(bufnr, ondir) if vim.fs.root(bufnr, { "package.json" }) ~= nil then
+                ondir(vim.fs.root(bufnr, { "package.json" }))
+              end
+            end
+      '';
+
       servers.denols = {
         enable = true;
-        extraOptions.root_dir.__raw =
-          ''require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
+        rootMarkers = [ "deno.json" "deno.jsonc" ];
+        extraOptions.workspace_required = true;
+
+        # extraOptions.root_dir.__raw =
+        #   ''
+        # require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
 
       };
       servers.cssls.enable = true;
