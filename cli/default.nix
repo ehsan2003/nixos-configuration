@@ -1,5 +1,7 @@
 { pkgs, nix-alien, unstable, secrets, ... }:
-let urls = (import ./uri-short.nix pkgs);
+let
+  urls = (import ./uri-short.nix pkgs);
+  alert = (import ./alert.nix pkgs) secrets;
 in {
   imports = [ ];
 
@@ -52,7 +54,7 @@ in {
     curl
     aria2
     caddy
-
+    alert
     # Absolute Utils
     nix-tree
     killall
