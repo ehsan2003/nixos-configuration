@@ -13,7 +13,7 @@
       sources.formatting.black.enable = true;
       sources.formatting.nixfmt.enable = true;
       # sources.formatting.beautysh.enable = true;
-      sources.formatting.typstfmt.enable = true;
+      # sources.formatting.typstfmt.enable = true;
 
     };
     luasnip.enable = true;

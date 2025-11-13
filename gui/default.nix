@@ -74,6 +74,6 @@
     libreoffice
 
     xarchiver
-    unstable.tdesktop
+    unstable.telegram-desktop
   ];
 }
