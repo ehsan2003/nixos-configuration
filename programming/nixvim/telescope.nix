@@ -47,6 +47,7 @@
       "<leader>ff" = { action = "find_files hidden=true"; };
       "<leader>f<CR>" = { action = "resume"; };
       "<leader>fp" = { action = "project"; };
+      "<leader>fs" = { action = "lsp_dynamic_workspace_symbols"; };
     };
 
     extensions.project.enable = true;

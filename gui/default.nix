@@ -71,8 +71,9 @@
     i3status
     pasystray
     scrcpy
+    libreoffice
 
     xarchiver
-    unstable.tdesktop
+    unstable.telegram-desktop
   ];
 }

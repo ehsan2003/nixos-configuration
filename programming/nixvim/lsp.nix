@@ -7,12 +7,13 @@
     none-ls = {
       enable = true;
       sources.formatting.prettier.enable = true;
+      sources.formatting.biome.enable = true;
       sources.formatting.prettier.disableTsServerFormatter = true;
       # sources.formatting.rustfmt.enable = true;
       sources.formatting.black.enable = true;
       sources.formatting.nixfmt.enable = true;
       # sources.formatting.beautysh.enable = true;
-      sources.formatting.typstfmt.enable = true;
+      # sources.formatting.typstfmt.enable = true;
 
     };
     luasnip.enable = true;
@@ -106,6 +107,7 @@
     lsp = {
       enable = true;
       servers.eslint.enable = true;
+      servers.biome.enable = true;
 
       servers.tinymist.enable = true;
       servers.graphql.enable = true;
@@ -115,12 +117,22 @@
       servers.vtsls.enable = true;
 
       servers.vtsls.extraOptions.single_file_support = false;
+      servers.vtsls.rootMarkers = [ "package.json" "tsconfig.json" ];
       servers.vtsls.extraOptions.root_dir.__raw = ''
-        require('lspconfig').util.root_pattern("tsconfig.json", "package.json")'';
+        function(bufnr, ondir) if vim.fs.root(bufnr, { "package.json" }) ~= nil then
+                ondir(vim.fs.root(bufnr, { "package.json" }))
+              end
+            end
+      '';
+
       servers.denols = {
         enable = true;
-        extraOptions.root_dir.__raw =
-          ''require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
+        rootMarkers = [ "deno.json" "deno.jsonc" ];
+        extraOptions.workspace_required = true;
+
+        # extraOptions.root_dir.__raw =
+        #   ''
+        # require('lspconfig').util.root_pattern("deno.json", "deno.jsonc")'';
 
       };
       servers.cssls.enable = true;

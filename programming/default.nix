@@ -1,4 +1,6 @@
-{ pkgs, fenix, unstable, ... }: {
+{ pkgs, fenix, unstable, secrets, ... }:
+let aider-ce = unstable.callPackage ./aider-ce/package.nix { };
+in {
   imports = [ ./editors.nix ./virtualisation.nix ];
   # git 
   home-manager.users.ehsan = {
@@ -16,8 +18,8 @@
   nixpkgs.overlays = [ fenix.overlays.default ];
 
   environment.systemPackages = with pkgs; [
-    corepack_22
-    nodejs_22
+    unstable.pnpm
+    unstable.nodejs_24
     python310
     git
     gcc
@@ -27,7 +29,9 @@
     postgresql_16
     lazygit
     typescript
-    unstable.aider-chat
+
+    unstable.claude-code
+    unstable.aider-chat # aider-ce
     unstable.vlang
 
     uv
@@ -41,6 +45,39 @@
     ])
     pre-commit
   ];
+  home-manager.users.ehsan.home.file.claude-settinngs = {
+    text = builtins.toJSON {
+      env = {
+        ANTHROPIC_DEFAULT_HAIKU_MODEL = "glm-4.5-air";
+        ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-4.6";
+        ANTHROPIC_DEFAULT_OPUS_MODEL = "glm-4.6";
+        https_proxy = "http://localhost:1080";
+        ANTHROPIC_AUTH_TOKEN = secrets.ANTHROPIC_AUTH_TOKEN;
+        ANTHROPIC_BASE_URL = "https://api.z.ai/api/anthropic";
+      };
+      hooks = {
+        Notification = [
+          {
+            matcher = "*";
+            hooks = [{
+              type = "command";
+              command = "notify-send 'Claude Code' 'Awaiting your input'";
+            }];
+          }
+          {
+            matcher = "*";
+            hooks = [{
+              type = "command";
+              command = ''
+                curl -s -X POST "https://api.telegram.org/bot${secrets.NOTIFIER_BOT_TOKEN}/sendMessage"  -d chat_id=${secrets.CHAT_ID}  -d text="claude is awaiting your input"'';
+            }];
+          }
+        ];
+      };
+      alwaysThinkingEnabled = true;
+    };
+    target = ".claude/settings.json";
+  };
   services.postgresql.package = pkgs.postgresql_17;
   services.pgadmin.enable = true;
   services.pgadmin.initialEmail = "test@mail.com";
