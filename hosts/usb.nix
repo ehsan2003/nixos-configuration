@@ -5,7 +5,9 @@
     "${modulesPath}/profiles/base.nix"
     ../default.nix
     disko.nixosModules.disko
-  ] ++ (if (builtins.getEnv "HIDPI") == "1" then [ ./hidpi.nix ] else [ ]);
+  ];
+
+  specialisation.hidpi.configuration = import ./hidpi.nix { inherit pkgs; };
 
   # nix.optimise.automatic = true;
   # nix.optimise.dates=["12:00"];
