@@ -30,69 +30,71 @@
   };
   outputs = { self, nixpkgs, nixvim, ... }@inputs:
     let
-
-      system = "x86_64-linux";
       nixvim' = nixvim.legacyPackages.${system};
       nvim = nixvim'.makeNixvimWithModule {
         pkgs = inputs.unstable.legacyPackages.${system};
         module = import ./programming/nixvim;
       };
+      system = "x86_64-linux";
+      installing = builtins.getEnv "INSTALLING" == "1";
+      secrets-file =
+        if installing then /mnt/etc/secrets.nix else /etc/secrets.nix;
+      secrets = import secrets-file;
+      hardware-configuration = (if installing then
+        /mnt/etc/nixos/hardware-configuration.nix
+      else
+        /etc/nixos/hardware-configuration.nix);
+      system-definer = (secrets: hw:
+        let
+          specialArgs = inputs // {
+            unstable = import inputs.unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+            inherit hardware-configuration;
+            inherit secrets;
+
+          };
+        in {
+          base = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/base.nix ];
+          };
+          nixos-old-laptop = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/old-laptop.nix ];
+          };
+
+          nixos-laptop = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/laptop.nix ];
+          };
+          nixos-home-desktop = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/home-pc.nix ];
+          };
+
+          tablet = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/tablet.nix ];
+          };
+
+          usb = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/usb.nix ];
+          };
+          iso = nixpkgs.lib.nixosSystem {
+            inherit specialArgs system;
+            modules = [ ./hosts/iso.nix ];
+          };
+        });
     in {
       packages."x86_64-linux".nvim = nvim;
       packages."x86_64-linux".iso =
         inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
       packages."x86_64-linux".usb =
         inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
-      nixosConfigurations = let
-        system = "x86_64-linux";
-        secrets-file = if builtins.getEnv "INSTALLING" == "1" then
-          /mnt/etc/secrets.nix
-        else
-          /etc/secrets.nix;
-        specialArgs = inputs // {
-          inherit secrets-file;
-          unstable = import inputs.unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          hardware-configuration = (if builtins.getEnv "INSTALLING" == "1" then
-            /mnt/etc/nixos/hardware-configuration.nix
-          else
-            /etc/nixos/hardware-configuration.nix);
-          secrets = import secrets-file;
-        };
-      in {
-        base = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/base.nix ];
-        };
-        nixos-old-laptop = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/old-laptop.nix ];
-        };
-
-        nixos-laptop = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/laptop.nix ];
-        };
-        nixos-home-desktop = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/home-pc.nix ];
-        };
-
-        tablet = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/tablet.nix ];
-        };
-
-        usb = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/usb.nix ];
-        };
-        iso = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [ ./hosts/iso.nix ];
-        };
-      };
+      nixosConfigurations = system-definer secrets hardware-configuration;
+      inherit system-definer;
     };
 }

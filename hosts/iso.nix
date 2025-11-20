@@ -1,11 +1,11 @@
-{ pkgs, modulesPath, lib, secrets-file, ... }: {
+{ pkgs, modulesPath, lib, ... }: {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix"
     ../default.nix
   ];
   environment.etc.secrets = {
     enable = true;
-    source = secrets-file;
+    source = /etc/secrets.nix;
     target = "secrets.nix";
   };
 
@@ -16,6 +16,7 @@
 
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
   isoImage.compressImage = false;
+
 
   # Needed for https://github.com/NixOS/nixpkgs/issues/58959
   boot.supportedFilesystems =
