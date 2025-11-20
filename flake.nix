@@ -56,34 +56,34 @@
 
           };
         in {
-          base = nixpkgs.lib.nixosSystem {
+          base = {
             inherit specialArgs system;
             modules = [ ./hosts/base.nix ];
           };
-          nixos-old-laptop = nixpkgs.lib.nixosSystem {
+          nixos-old-laptop = {
             inherit specialArgs system;
             modules = [ ./hosts/old-laptop.nix ];
           };
 
-          nixos-laptop = nixpkgs.lib.nixosSystem {
+          nixos-laptop = {
             inherit specialArgs system;
             modules = [ ./hosts/laptop.nix ];
           };
-          nixos-home-desktop = nixpkgs.lib.nixosSystem {
+          nixos-home-desktop = {
             inherit specialArgs system;
             modules = [ ./hosts/home-pc.nix ];
           };
 
-          tablet = nixpkgs.lib.nixosSystem {
+          tablet = {
             inherit specialArgs system;
             modules = [ ./hosts/tablet.nix ];
           };
 
-          usb = nixpkgs.lib.nixosSystem {
+          usb = {
             inherit specialArgs system;
             modules = [ ./hosts/usb.nix ];
           };
-          iso = nixpkgs.lib.nixosSystem {
+          iso = {
             inherit specialArgs system;
             modules = [ ./hosts/iso.nix ];
           };
@@ -94,7 +94,9 @@
         inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
       packages."x86_64-linux".usb =
         inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
-      nixosConfigurations = system-definer secrets hardware-configuration;
+      nixosConfigurations =
+        builtins.mapAttrs (name: value: (nixpkgs.lib.nixosSystem value))
+        (system-definer secrets hardware-configuration);
       inherit system-definer;
     };
 }
