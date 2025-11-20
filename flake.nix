@@ -45,15 +45,21 @@
         inputs.self.nixosConfigurations.usb.config.system.build.sdImage;
       nixosConfigurations = let
         system = "x86_64-linux";
+        secrets-file = if builtins.getEnv "INSTALLING" == "1" then
+          /mnt/etc/secrets.nix
+        else
+          /etc/secrets.nix;
         specialArgs = inputs // {
+          inherit secrets-file;
           unstable = import inputs.unstable {
             inherit system;
             config.allowUnfree = true;
           };
-          secrets = if builtins.getEnv "INSTALLING" == "1" then
-            import /mnt/etc/secrets.nix
+          hardware-configuration = (if builtins.getEnv "INSTALLING" == "1" then
+            /mnt/etc/nixos/hardware-configuration.nix
           else
-           import /etc/secrets.nix;
+            /etc/nixos/hardware-configuration.nix);
+          secrets = import secrets-file;
         };
       in {
         base = nixpkgs.lib.nixosSystem {
