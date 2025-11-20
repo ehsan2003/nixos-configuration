@@ -39,9 +39,9 @@ sudo nixos-rebuild switch --flake .#iso --impure # For the ISO file
 - create needed partitions
 - mount needed partitions to /mnt and /mnt/boot ( and any other partition )
 - generate nixos configuration
-- ** copy /mnt/nixos/hardware-configuration.nix to /etc/nixos/hardware-configuration.nix **
+- ** copy /etc/secrets.nix to /mnt/etc/secrets.nix **
 - ** add secrets.nix file **
-- run `sudo nixos-install --flake github:ehsan2003/nixos-configuration#<system-name> --impure`
+- run `sudo INSTALLING=1 nixos-install --flake github:ehsan2003/nixos-configuration#<system-name> --impure`
 - wait for installation
 
 ## Usb installation
@@ -62,7 +62,7 @@ echo -n "some-super-secure-password" > /tmp/secret.key
 and installing the os :
 
 ```sh
-sudo nixos-install --flake .#usb --impure --root /mnt
+sudo INSTALLING=1 nixos-install --flake .#usb --impure --root /mnt
 ```
 
 and have fun :)
