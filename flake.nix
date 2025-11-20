@@ -50,7 +50,10 @@
             inherit system;
             config.allowUnfree = true;
           };
-          secrets = import /etc/secrets.nix;
+          secrets = if builtins.getEnv "INSTALLING" == "1" then
+            import /mnt/etc/secrets.nix
+          else
+           import /etc/secrets.nix;
         };
       in {
         base = nixpkgs.lib.nixosSystem {
