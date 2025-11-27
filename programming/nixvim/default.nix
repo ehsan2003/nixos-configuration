@@ -15,6 +15,7 @@
     plugins.yanky.enable = true;
     plugins.yanky.settings.highlight.timer = 100;
     plugins.auto-save.enable = true;
+    plugins.git-conflict.enable = true;
     plugins.oil.enable = true;
     plugins.visual-multi.enable = true;
     plugins.auto-session.enable = true;
