@@ -24,6 +24,8 @@ in {
     git
     gcc
     unstable.bun
+    unstable.playwright-mcp
+    unstable.playwright-driver.browsers
     unstable.deno
     cloc
     postgresql_16
