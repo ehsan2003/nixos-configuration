@@ -12,9 +12,9 @@ in {
     programs = {
       git = {
         enable = true;
-        userName = "ehsan";
-        userEmail = "ehsan2003.2003.382@gmail.com";
-        extraConfig = { init = { defaultBranch = "main"; }; };
+        settings.user.name = "ehsan";
+        settings.user.email = "ehsan2003.2003.382@gmail.com";
+        settings.init = { defaultBranch = "main"; };
       };
     };
   };

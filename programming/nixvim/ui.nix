@@ -18,7 +18,7 @@
   };
   plugins.lualine.enable = true;
   plugins.neo-tree.enable = true;
-  plugins.neo-tree.filesystem.filteredItems.visible = true;
+  plugins.neo-tree.settings.filesystem.filtered_items.visible = true;
 
   plugins.noice.enable = true;
   plugins.noice.settings.presets = {

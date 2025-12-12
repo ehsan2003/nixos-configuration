@@ -41,28 +41,8 @@ in {
     client.enable = true;
     torsocks.enable = true;
   };
-  programs.nekoray.enable = true;
-  programs.nekoray.tunMode.enable = true;
-  home-manager.users.ehsan.home.file.nekorayRouting = {
-    target = ".config/nekoray/config/routes/Default";
-    text = builtins.toJSON {
-      block_domain = "geosite:category-ads-all";
-      custom = ''{"rules": []}'';
-      def_outbound = "proxy";
-      direct_dns = "localhost";
-      direct_domain = ''
-        regexp:^.+\.ir$
-        geosite:category-ir'';
-      direct_ip = "geoip:ir";
-      dns_final_out = "proxy";
-      dns_routing = true;
-      domain_strategy = "IPIfNonMatch";
-      outbound_domain_strategy = "PreferIPv4";
-      remote_dns = "https://1.1.1.1/dns-query";
-      sniffing_mode = 1;
-      use_dns_object = false;
-    };
-  };
+  programs.throne.enable = true;
+  programs.throne.tunMode.enable = true;
 
   environment.systemPackages = [
     pkgs.xray
@@ -70,7 +50,7 @@ in {
     unstable.sing-box
     unstable.v2raya
     unstable.tun2socks
-    unstable.nekoray
+    unstable.throne
     unstable.amnezia-vpn
     unstable.amneziawg-go
     unstable.amneziawg-tools
