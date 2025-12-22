@@ -21,9 +21,9 @@ in {
 
   environment.variables.ANTHROPIC_AUTH_TOKEN = secrets.ANTHROPIC_AUTH_TOKEN;
   environment.variables.ANTHROPIC_BASE_URL = secrets.ANTHROPIC_BASE_URL;
-  environment.variables.ANTHROPIC_DEFAULT_HAIKU_MODEL = "glm-4.5-air";
-  environment.variables.ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-4.6";
-  environment.variables.ANTHROPIC_DEFAULT_OPUS_MODEL = "glm-4.6";
+  environment.variables.ANTHROPIC_DEFAULT_HAIKU_MODEL = "glm-4.7";
+  environment.variables.ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-4.7";
+  environment.variables.ANTHROPIC_DEFAULT_OPUS_MODEL = "glm-4.7";
 
   home-manager.users.ehsan.programs.taskwarrior.enable = true;
 

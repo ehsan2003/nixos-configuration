@@ -50,9 +50,9 @@ in {
   home-manager.users.ehsan.home.file.claude-settinngs = {
     text = builtins.toJSON {
       env = {
-        ANTHROPIC_DEFAULT_HAIKU_MODEL = "glm-4.5-air";
-        ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-4.6";
-        ANTHROPIC_DEFAULT_OPUS_MODEL = "glm-4.6";
+        ANTHROPIC_DEFAULT_HAIKU_MODEL = "glm-4.7";
+        ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-4.7";
+        ANTHROPIC_DEFAULT_OPUS_MODEL = "glm-4.7";
         https_proxy = "http://localhost:1080";
         ANTHROPIC_AUTH_TOKEN = secrets.ANTHROPIC_AUTH_TOKEN;
         ANTHROPIC_BASE_URL = "https://api.z.ai/api/anthropic";
