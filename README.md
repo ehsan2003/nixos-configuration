@@ -6,11 +6,11 @@ This repository contains my personal NixOS configuration files. Before using thi
 
 ## Secret management
 
-- A `/etc/secrets.nix` file containing sensitive information like API keys. There are 4 required keys:
+- A `./vars/secrets.<username>.nix` file containing sensitive information like API keys. There are 4 required keys:
   - `proxy` - A shell script that runs a proxy on port 1080
   - `OPENAI_API_KEY` - OpenAI's API key
   - `location` - an attributeset of Latitude and longitude of your current location (for praytimes and redshift)
-- A hardware configuration file at `/etc/nixos/hardware-configuration.nix` for your system (not needed for building the ISO file)
+- A hardware configuration file at `./vars/hardware-configuration.nix` for your system (not needed for building the ISO file)
 
 You can build the configuration for different systems:
 
@@ -38,10 +38,10 @@ sudo nixos-rebuild switch --flake .#iso --impure # For the ISO file
 - boot iso in system
 - create needed partitions
 - mount needed partitions to /mnt and /mnt/boot ( and any other partition )
-- generate nixos configuration
-- ** copy /etc/secrets.nix to /mnt/etc/secrets.nix **
-- ** add secrets.nix file **
-- run `sudo INSTALLING=1 nixos-install --flake github:ehsan2003/nixos-configuration#<system-name> --impure`
+- generate nixos configuration with `nixos-generate-config --root /mnt`
+- copy `/mnt/etc/nixos/hardware-configuration.nix` to `./vars/hardware-configuration.nix` in the repository
+- add your secrets file to `./vars/secrets.<username>.nix`
+- run `sudo nixos-install --flake path:./#<system-name> --impure`
 - wait for installation
 
 ## Usb installation
@@ -59,10 +59,10 @@ adding a password for the disk encryption
 echo -n "some-super-secure-password" > /tmp/secret.key
 ```
 
-and installing the os :
+and installing the os:
 
 ```sh
-sudo INSTALLING=1 nixos-install --flake .#usb --impure --root /mnt
+sudo nixos-install --flake path:./#usb --impure --root /mnt
 ```
 
 and have fun :)

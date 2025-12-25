@@ -36,14 +36,9 @@
         module = import ./programming/nixvim;
       };
       system = "x86_64-linux";
-      installing = builtins.getEnv "INSTALLING" == "1";
-      secrets-file =
-        if installing then /mnt/etc/secrets.nix else /etc/secrets.nix;
+      secrets-file = ./vars/secrets.ehsan.nix;
       secrets = import secrets-file;
-      hardware-configuration = (if installing then
-        /mnt/etc/nixos/hardware-configuration.nix
-      else
-        /etc/nixos/hardware-configuration.nix);
+      hardware-configuration = ./vars/hardware-configuration.nix;
       system-definer = (secrets: hw:
         let
           specialArgs = inputs // {

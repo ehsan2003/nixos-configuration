@@ -1,3 +1,4 @@
 result
 .aider*
 .env
+vars/*.nix
