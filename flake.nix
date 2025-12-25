@@ -60,9 +60,10 @@
             inherit specialArgs system;
             modules = [ ./hosts/base.nix ];
           };
-          nixos-old-laptop = {
+
+          nixos-new-laptop = {
             inherit specialArgs system;
-            modules = [ ./hosts/old-laptop.nix ];
+            modules = [ ./hosts/new-laptop.nix ];
           };
 
           nixos-laptop = {

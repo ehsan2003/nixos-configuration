@@ -1,7 +1,7 @@
 { config, pkgs, unstable, ... }:
 let
   is-laptop = (config.networking.hostName == "nixos-laptop"
-    || config.networking.hostName == "nixos-old-laptop");
+    || config.networking.hostName == "nixos-new-laptop");
 in {
   fonts.packages = with pkgs; [ font-awesome ];
   home-manager.users.ehsan.programs.i3status-rust = {
