@@ -35,7 +35,7 @@ in {
     unstable.claude-code
     unstable.aider-chat # aider-ce
     unstable.vlang
-    unstable.sqlit-tui
+    unstable.lazysql
 
     uv
     cargo-watch

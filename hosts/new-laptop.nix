@@ -6,10 +6,10 @@ in {
   services.xserver.dpi = dpi;
   home-manager.users.ehsan.programs.rofi.extraConfig."dpi" = dpi;
   services.xserver.displayManager.sessionCommands = ''
+        sleep 5 && ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 94 = Shift_L' &
         ${pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
           Xft.dpi: ${toString dpi}  
         EOF
-    sleep 5 && ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 94 = Shift_L' &
   '';
 
   services.tlp.enable = true;
