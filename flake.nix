@@ -46,7 +46,7 @@
               inherit system;
               config.allowUnfree = true;
             };
-            inherit hardware-configuration;
+            inherit hw;
             inherit secrets;
 
           };
