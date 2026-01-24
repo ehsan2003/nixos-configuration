@@ -45,6 +45,7 @@ in {
   programs.throne.tunMode.enable = true;
 
   environment.systemPackages = [
+    (pkgs.callPackage ./slipstream.nix { })
     pkgs.xray
     pkgs.v2ray
     unstable.tor-browser
