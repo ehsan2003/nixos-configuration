@@ -47,6 +47,7 @@ in {
   environment.systemPackages = [
     pkgs.xray
     pkgs.v2ray
+    unstable.tor-browser
     unstable.sing-box
     unstable.v2raya
     unstable.tun2socks
@@ -54,9 +55,10 @@ in {
     unstable.amnezia-vpn
     unstable.amneziawg-go
     unstable.amneziawg-tools
+    unstable.tor
     pkgs.expressvpn
-
   ];
+  services.snowflake-proxy.enable = true;
   services.dbus.packages = [ unstable.amnezia-vpn ];
 
   systemd = {
