@@ -1,16 +1,44 @@
-{ pkgs, unstable, secrets, ... }:
+{
+  pkgs,
+  unstable,
+  secrets,
+  ...
+}:
 let
-  proxyFile = pkgs.writeShellScriptBin "start-proxy" secrets.proxy;
+
+  proxies = secrets.proxies;
+  defaultProxy = secrets.defaultProxy;
   awg-config = pkgs.writeTextFile {
     name = "awg-config";
     text = secrets.awg-config;
     destination = "/awg.conf";
   };
-in {
+  proxiesDir = pkgs.symlinkJoin {
+    name = "proxies";
+    paths = pkgs.lib.mapAttrsToList (
+      name: value: pkgs.writeShellScriptBin "proxy-${name}" value
+    ) proxies;
+  };
+  chproxy = pkgs.writeShellScriptBin "chproxy" ''
+    if [ -z "$1" ]; then
+      echo "Usage: chproxy <proxy-name>"
+      echo "Available proxies: ${pkgs.lib.concatStringsSep " " (pkgs.lib.attrNames proxies)}"
+      exit 1
+    fi
+    if [ ! -e "${proxiesDir}/bin/proxy-$1" ]; then
+      echo "Error: Proxy '$1' not found"
+      echo "Available proxies: ${pkgs.lib.concatStringsSep " " (pkgs.lib.attrNames proxies)}"
+      exit 1
+    fi
+    echo "$1" > /etc/current-proxy;
+    sudo systemctl restart proxy.service;
+  '';
+in
+{
   imports = [ ];
   networking.nameservers = [ "1.1.1.1" ];
   networking.networkmanager.enable = true;
-  # networking.firewall.checkReversePath = "loose"; 
+  # networking.firewall.checkReversePath = "loose";
   services.expressvpn.enable = true;
   services.openvpn.servers = {
     openvpn = {
@@ -58,6 +86,7 @@ in {
     unstable.amneziawg-tools
     unstable.tor
     pkgs.expressvpn
+    chproxy
   ];
   services.snowflake-proxy.enable = true;
   services.dbus.packages = [ unstable.amnezia-vpn ];
@@ -70,32 +99,48 @@ in {
       description = "amnezia vpn service (awg-quick)";
       after = [ "network.target" ];
 
-      serviceConfig = let awg-quick = "${pkgs.amneziawg-tools}/bin/awg-quick";
-      in {
-        User = "root"; # Already correct - root has necessary permissions
-        Type = "oneshot";
-        RemainAfterExit = true;
+      serviceConfig =
+        let
+          awg-quick = "${pkgs.amneziawg-tools}/bin/awg-quick";
+        in
+        {
+          User = "root"; # Already correct - root has necessary permissions
+          Type = "oneshot";
+          RemainAfterExit = true;
 
-        # Add necessary capabilities
-        AmbientCapabilities =
-          [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
-        CapabilityBoundingSet =
-          [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+          # Add necessary capabilities
+          AmbientCapabilities = [
+            "CAP_NET_ADMIN"
+            "CAP_NET_BIND_SERVICE"
+            "CAP_NET_RAW"
+          ];
+          CapabilityBoundingSet = [
+            "CAP_NET_ADMIN"
+            "CAP_NET_BIND_SERVICE"
+            "CAP_NET_RAW"
+          ];
 
-        # Allow network configuration
-        PrivateNetwork = false;
+          # Allow network configuration
+          PrivateNetwork = false;
 
-        # Ensure it can modify system network settings
-        RestrictAddressFamilies =
-          [ "AF_NETLINK" "AF_INET" "AF_INET6" "AF_UNIX" ];
+          # Ensure it can modify system network settings
+          RestrictAddressFamilies = [
+            "AF_NETLINK"
+            "AF_INET"
+            "AF_INET6"
+            "AF_UNIX"
+          ];
 
-        # Allow the service to interact with systemd-resolved if needed
-        SystemCallFilter = [ "@network-io" "@system-service" ];
+          # Allow the service to interact with systemd-resolved if needed
+          SystemCallFilter = [
+            "@network-io"
+            "@system-service"
+          ];
 
-        # Original commands
-        ExecStart = [ "${awg-quick} up ${awg-config}/awg.conf" ];
-        ExecStop = [ "${awg-quick} down ${awg-config}/awg.conf" ];
-      };
+          # Original commands
+          ExecStart = [ "${awg-quick} up ${awg-config}/awg.conf" ];
+          ExecStop = [ "${awg-quick} down ${awg-config}/awg.conf" ];
+        };
 
       # Expand path to include all needed tools
       path = [
@@ -111,9 +156,20 @@ in {
       after = [ "network.target" ];
       serviceConfig = {
         Restart = "always";
-        ExecStart = "${proxyFile}/bin/start-proxy";
+        ExecStart = pkgs.writeShellScript "proxy-start" ''
+          if [ -f /etc/current-proxy ]; then
+            name=$(cat /etc/current-proxy)
+          else
+            name="${defaultProxy}"
+          fi
+          exec "${proxiesDir}/bin/proxy-$name"
+        '';
       };
-      path = [ unstable.xray unstable.sing-box unstable.v2raya ];
+      path = [
+        unstable.xray
+        unstable.sing-box
+        unstable.v2raya
+      ];
       wantedBy = [ "multi-user.target" ];
     };
   };
