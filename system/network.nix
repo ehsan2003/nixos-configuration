@@ -19,6 +19,7 @@ let
       name: value: pkgs.writeShellScriptBin "proxy-${name}" value
     ) proxies;
   };
+  slipstream = (pkgs.callPackage ./slipstream.nix { });
   chproxy = pkgs.writeShellScriptBin "chproxy" ''
     if [ -z "$1" ]; then
       echo "Usage: chproxy <proxy-name>"
@@ -73,7 +74,7 @@ in
   programs.throne.tunMode.enable = true;
 
   environment.systemPackages = [
-    (pkgs.callPackage ./slipstream.nix { })
+    slipstream
     pkgs.xray
     pkgs.v2ray
     unstable.tor-browser
@@ -166,6 +167,7 @@ in
         '';
       };
       path = [
+        slipstream
         unstable.xray
         unstable.sing-box
         unstable.v2raya
