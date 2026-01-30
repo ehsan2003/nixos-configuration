@@ -1,9 +1,9 @@
-{ writeShellApplication, translate-shell, xsel, libnotify }:
+{ writeShellApplication, translate-shell, wl-clipboard, libnotify }:
 writeShellApplication {
   name = "notitrans-dict";
-  runtimeInputs = [ translate-shell xsel libnotify ];
+  runtimeInputs = [ translate-shell wl-clipboard libnotify ];
   text = ''
-    text=$(xsel -o)
+    text=$(wl-paste)
     complete=$(trans -d  -no-ansi "$text")
     brief=$(trans :fa -no-bidi -no-ansi -b "$text")
 

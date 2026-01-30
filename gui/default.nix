@@ -11,13 +11,25 @@
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.windowManager.i3.enable = true; # Configure keymap in X11
-  services.xserver.xkb.layout = "us,ir";
-  services.xserver.xkb.options = "eurosign:e,caps:escape, grp:shifts_toggle";
+  # Enable Sway (Wayland)
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraOptions = ["--my-next-gpu-wont-be-nvidia"];
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export MOZ_ENABLE_WAYLAND=1
+    '';
+  };
+
+  # Display manager
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -31,7 +43,7 @@
         package = pkgs.materia-theme;
       };
     };
-    home.file.i3Config = import ./i3-config.nix { pkgs = pkgs; };
+    home.file.".config/sway/config".text = (import ./sway-config.nix { pkgs = pkgs; }).text;
     home.file.aiderConfig = {
       target = ".config/aichat/config.yaml";
       text = ''
@@ -48,33 +60,33 @@
     };
     services.dunst.enable = true;
     programs = {
-      rofi = {
+      wofi = {
         enable = true;
-        theme = "Adapta-Nokto";
       };
       alacritty = { enable = true; };
     };
 
   };
-  services.redshift.enable = true;
+  # services.gammastep.enable = true;
   environment.systemPackages = with pkgs; [
     alacritty
     # Window manager and utils
-    rofi
-    xorg.xmodmap
+    wofi
     libnotify
     dunst
     translate-shell
-    xsel
-    dmenu
-    rofi
-    flameshot
+    wl-clipboard
+    grim
+    swappy
     i3status
-    pasystray
     scrcpy
     libreoffice
 
     xarchiver
     unstable.telegram-desktop
+    sway
+    swayidle
+    swaylock
+    waybar
   ];
 }

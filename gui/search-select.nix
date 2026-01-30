@@ -1,9 +1,9 @@
-{ writeShellApplication, firefox, xsel }:
+{ writeShellApplication, firefox, wl-clipboard }:
 writeShellApplication {
   name = "search-select";
-  runtimeInputs = [ firefox xsel ];
+  runtimeInputs = [ firefox wl-clipboard ];
   text = ''
-    text=$(xsel -o)
+    text=$(wl-paste)
     firefox --search "$text"  
   '';
 }

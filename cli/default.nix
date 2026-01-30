@@ -73,7 +73,7 @@ in {
     github-cli
     aichat
     nethogs
-    xclip
+    wl-clipboard
     zip
     tree
     ncdu
