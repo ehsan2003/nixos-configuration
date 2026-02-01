@@ -1,4 +1,4 @@
-{ pkgs, unstable, ... }:
+{ pkgs, config,unstable, ... }:
 let
   tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix { };
 in
@@ -62,7 +62,11 @@ in
         package = pkgs.materia-theme;
       };
     };
-    home.file.".config/sway/config".text = (import ./sway-config.nix { pkgs = pkgs; }).text;
+    home.file.".config/sway/config".text =
+      (import ./sway-config.nix {
+        pkgs = pkgs;
+        config = config;
+      }).text;
     home.file.aiderConfig = {
       target = ".config/aichat/config.yaml";
       text = ''
