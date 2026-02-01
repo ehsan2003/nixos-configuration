@@ -1,0 +1,266 @@
+* {
+    font-family: "JetBrains Mono Nerd Font", monospace;
+    font-size: 15px;
+    font-weight: 500;
+    min-height: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: linear-gradient(135deg, rgba(30, 30, 46, 0.95) 0%, rgba(24, 24, 37, 0.98) 100%);
+    color: #CDD6F4;
+    border-radius: 16px 16px 0 0;
+    margin: 0 4px 0 4px;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* Module styling - pill design */
+#mpris,
+#network,
+#cpu,
+#memory,
+#battery,
+#backlight,
+#temperature,
+#idle_inhibitor,
+#power-profiles-daemon,
+#pulseaudio,
+#custom-keyboard,
+#custom-prayer-times,
+#clock,
+#workspaces,
+#mode,
+#window {
+    padding: 4px 8px;
+    margin: 2px 2px;
+    background: rgba(69, 71, 90, 0.3);
+    border-radius: 12px;
+    color: #CDD6F4;
+    border: 1px solid rgba(137, 180, 250, 0.1);
+}
+
+#mpris:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#backlight:hover,
+#temperature:hover,
+#idle_inhibitor:hover,
+#power-profiles-daemon:hover,
+#pulseaudio:hover,
+#custom-keyboard:hover,
+#custom-prayer-times:hover,
+#clock:hover {
+    background: rgba(137, 180, 250, 0.3);
+    border-color: rgba(137, 180, 250, 0.5);
+}
+
+/* Workspaces */
+#workspaces {
+    margin: 2px 2px;
+    padding: 4px;
+    background: rgba(69, 71, 90, 0.2);
+    border-radius: 14px;
+    border: 1px solid rgba(137, 180, 250, 0.1);
+}
+
+#workspaces button {
+    padding: 4px 8px;
+    margin: 2px 1px;
+    background: transparent;
+    color: #6C7086;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    min-width: 28px;
+}
+
+#workspaces button:hover {
+    background: rgba(137, 180, 250, 0.15);
+    color: #CDD6F4;
+}
+
+#workspaces button.focused {
+    background: linear-gradient(135deg, #89B4FA 0%, #74C7EC 100%);
+    color: #1E1E2E;
+}
+
+#workspaces button.urgent {
+    background: linear-gradient(135deg, #F38BA8 0%, #EBA0AC 100%);
+    color: #1E1E2E;
+}
+
+/* Window title */
+#window {
+    font-weight: 600;
+    background: linear-gradient(135deg, rgba(137, 180, 250, 0.15) 0%, rgba(166, 227, 161, 0.1) 100%);
+}
+
+/* MPRIS (Music) */
+#mpris {
+    background: linear-gradient(135deg, rgba(243, 139, 168, 0.2) 0%, rgba(245, 194, 231, 0.15) 100%);
+    border-color: rgba(243, 139, 168, 0.3);
+}
+
+#mpris:hover {
+    background: linear-gradient(135deg, rgba(243, 139, 168, 0.35) 0%, rgba(245, 194, 231, 0.25) 100%);
+}
+
+/* Network */
+#network {
+    background: linear-gradient(135deg, rgba(137, 180, 250, 0.15) 0%, rgba(116, 199, 236, 0.1) 100%);
+}
+
+#network.connected {
+    border-color: rgba(137, 180, 250, 0.3);
+}
+
+/* CPU */
+#cpu {
+    background: linear-gradient(135deg, rgba(166, 227, 161, 0.15) 0%, rgba(148, 226, 213, 0.1) 100%);
+}
+
+/* Memory */
+#memory {
+    background: linear-gradient(135deg, rgba(250, 179, 135, 0.15) 0%, rgba(249, 226, 175, 0.1) 100%);
+}
+
+#memory.warning {
+    background: linear-gradient(135deg, #F9E2AF 0%, #FAE3B0 100%);
+    color: #1E1E2E;
+    font-weight: 700;
+}
+
+#memory.critical {
+    background: linear-gradient(135deg, #F38BA8 0%, #EBA0AC 100%);
+    color: #1E1E2E;
+    font-weight: 700;
+}
+
+/* Battery */
+#battery {
+    background: linear-gradient(135deg, rgba(148, 226, 213, 0.15) 0%, rgba(116, 199, 236, 0.1) 100%);
+}
+
+#battery.charging {
+    background: linear-gradient(135deg, rgba(166, 227, 161, 0.25) 0%, rgba(148, 226, 213, 0.2) 100%);
+    border-color: rgba(166, 227, 161, 0.4);
+}
+
+#battery.warning {
+    background: linear-gradient(135deg, #F9E2AF 0%, #FAE3B0 100%);
+    color: #1E1E2E;
+}
+
+#battery.critical {
+    background: linear-gradient(135deg, #F38BA8 0%, #EBA0AC 100%);
+    color: #1E1E2E;
+}
+
+/* Backlight */
+#backlight {
+    background: linear-gradient(135deg, rgba(249, 226, 175, 0.15) 0%, rgba(250, 179, 135, 0.1) 100%);
+}
+
+/* Temperature */
+#temperature {
+    background: linear-gradient(135deg, rgba(243, 139, 168, 0.15) 0%, rgba(250, 179, 135, 0.1) 100%);
+}
+
+#temperature.critical {
+    background: linear-gradient(135deg, #F38BA8 0%, #EBA0AC 100%);
+    color: #1E1E2E;
+    font-weight: 700;
+}
+
+/* Pulseaudio */
+#pulseaudio {
+    background: linear-gradient(135deg, rgba(245, 194, 231, 0.15) 0%, rgba(243, 139, 168, 0.1) 100%);
+}
+
+#pulseaudio.muted {
+    opacity: 0.5;
+}
+
+/* Idle Inhibitor */
+#idle_inhibitor {
+    background: linear-gradient(135deg, rgba(250, 179, 135, 0.15) 0%, rgba(249, 226, 175, 0.1) 100%);
+}
+
+#idle_inhibitor.activated {
+    background: linear-gradient(135deg, rgba(166, 227, 161, 0.25) 0%, rgba(148, 226, 213, 0.2) 100%);
+    border-color: rgba(166, 227, 161, 0.4);
+}
+
+/* Power Profiles Daemon */
+#power-profiles-daemon {
+    background: linear-gradient(135deg, rgba(203, 166, 247, 0.15) 0%, rgba(181, 191, 254, 0.1) 100%);
+}
+
+/* Custom keyboard */
+#custom-keyboard {
+    background: linear-gradient(135deg, rgba(203, 166, 247, 0.15) 0%, rgba(181, 191, 254, 0.1) 100%);
+}
+
+/* Custom prayer times */
+#custom-prayer-times {
+    background: linear-gradient(135deg, rgba(203, 166, 247, 0.15) 0%, rgba(245, 194, 231, 0.1) 100%);
+}
+
+/* Clock */
+#clock {
+    background: linear-gradient(135deg, rgba(137, 180, 250, 0.2) 0%, rgba(203, 166, 247, 0.15) 100%);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* Mode */
+#mode {
+    background: linear-gradient(135deg, #F38BA8 0%, #EBA0AC 100%);
+    color: #1E1E2E;
+    font-weight: 700;
+    padding: 4px 8px;
+}
+
+/* Tray */
+#tray {
+    margin: 2px 2px;
+    padding: 4px 8px;
+    background: rgba(69, 71, 90, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(137, 180, 250, 0.1);
+}
+
+#tray > * {
+    font-size: 14px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+    opacity: 0.6;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: rgba(243, 139, 168, 0.3);
+    border-radius: 8px;
+}
+
+/* Tooltip styling */
+tooltip {
+    background: rgba(30, 30, 46, 0.95);
+    border: 1px solid rgba(137, 180, 250, 0.3);
+    border-radius: 12px;
+    padding: 4px 8px;
+}
+
+tooltip label {
+    color: #CDD6F4;
+    font-size: 14px;
+}

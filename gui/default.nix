@@ -1,10 +1,16 @@
-{ pkgs, config,unstable, ... }:
+{
+  pkgs,
+  config,
+  unstable,
+  ...
+}:
 let
   tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix { };
 in
 {
   imports = [
     ./i3status-rust.nix
+    ./waybar.nix
     ./firefox.nix
     ./media.nix
   ];
@@ -55,6 +61,13 @@ in
   services.libinput.touchpad.disableWhileTyping = true;
 
   home-manager.users.ehsan = {
+
+    services.flameshot.enable = true;
+    services.flameshot.settings = {
+      General = {
+        useGrimAdapter = true;
+      };
+    };
     gtk = {
       enable = true;
       theme = {

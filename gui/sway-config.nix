@@ -29,7 +29,7 @@ in
     # Note: sway doesn't use dex, use exec directly for autostart
 
     # Lock screen before suspend
-    exec swaylock -f
+    bindsym --to-code $mod+Shift+m exec swaylock -f --image ~/.background-image 
 
     # NetworkManager applet
     exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator
@@ -248,5 +248,6 @@ in
 
     # Use the Wayland native backend for Firefox
     # Set environment variables in sway config or systemd user session
+    exec --no-startup-id swaybg --image ~/.background-image
   '';
 }
