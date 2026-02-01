@@ -1,13 +1,17 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
-
+  is-tab = (
+    config.networking.hostName == "nixos-new-laptop"
+  );
   notitrans-fa = pkgs.callPackage ./notitrans-fa.nix { };
   notitrans-en = pkgs.callPackage ./notitrans-en.nix { };
   notitrans-dict = pkgs.callPackage ./notitrans-dict.nix { };
   search-select = pkgs.callPackage ./search-select.nix { };
   aiask = pkgs.callPackage ./aiask.nix { };
   ensure-class = pkgs.callPackage ./ensure-class.nix { };
-in {
+  tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix { };
+in
+{
   target = ".config/sway/config";
   text = ''
     # Sway config file (derived from i3)
@@ -51,8 +55,9 @@ in {
     bindsym $mod+Shift+q kill
 
     # start application launcher (wofi for Wayland)
-    bindsym $mod+d exec --no-startup-id wofi -S run -I
-    bindsym $mod+n exec --no-startup-id wofi -S drun -I
+
+    bindsym $mod+d exec --no-startup-id rofi -show combi
+    bindsym $mod+n exec --no-startup-id rofi -show 
 
     # change focus
     bindsym $mod+h focus left
@@ -120,10 +125,10 @@ in {
 
     # switch to workspace
     bindsym $mod+1 workspace number $ws1; exec "${ensure-class}/bin/ensure-class glrnvim glrnvim"
-    bindsym $mod+2 workspace number $ws2; exec ${ensure-class}/bin/ensure-class Navigator "firefox"
+    bindsym $mod+2 workspace number $ws2; exec ${ensure-class}/bin/ensure-class firefox "firefox"
     bindsym $mod+3 workspace number $ws3; exec "${ensure-class}/bin/ensure-class Alacritty alacritty"
-    bindsym $mod+4 workspace number $ws4; exec "${ensure-class}/bin/ensure-class aider \"alacritty --class aider,aider\""
-    bindsym $mod+5 workspace number $ws5; exec "${ensure-class}/bin/ensure-class Telegram Telegram"
+    bindsym $mod+4 workspace number $ws4; exec ${ensure-class}/bin/ensure-class aider "alacritty --class=aider"
+    bindsym $mod+5 workspace number $ws5; exec "${ensure-class}/bin/ensure-class org.telegram.desktop Telegram"
     bindsym $mod+6 workspace number $ws6
     bindsym $mod+7 workspace number $ws7
     bindsym $mod+8 workspace number $ws8
@@ -178,8 +183,11 @@ in {
 
     # Start swaybar to display a workspace bar
     bar {
-        mode hide
-        status_command ${pkgs.i3status-rust}/bin/i3status-rs  ~/.config/i3status-rust/config-bottom.toml
+      swaybar_command waybar
+      position top
+      hidden_state hide
+      mode hide
+      modifier Mod4
     }
 
     hide_edge_borders smart
@@ -201,6 +209,18 @@ in {
     bindsym $mod+c exec "${pkgs.dunst}/bin/dunstctl history-pop"
 
     exec --no-startup-id "${pkgs.blueman}/bin/blueman-applet"
+    exec --no-startup-id "${pkgs.dunst}/bin/dunst"
+
+    ${
+      if is-tab then
+        ''
+
+          # Tablet mode monitor
+          exec --no-startup-id "${tablet-mode-monitor}/bin/tablet-mode-monitor
+          "''
+      else
+        ""
+    }
 
     # exec --no-startup-id alacritty --class btop,btop -o font.size=8 -e btop
     # exec --no-startup-id firefox https://duck.ai --class ai

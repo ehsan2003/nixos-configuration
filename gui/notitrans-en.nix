@@ -3,7 +3,7 @@ writeShellApplication {
   name = "notitrans-en";
   runtimeInputs = [ translate-shell wl-clipboard libnotify ];
   text = ''
-    text=$(wl-paste)
+    text=$(wl-paste --primary)
     brief=$(trans :en -no-ansi "$text")
     notify-send "$text" "$brief"
   '';

@@ -3,7 +3,7 @@ writeShellApplication {
   name = "notitrans-dict";
   runtimeInputs = [ translate-shell wl-clipboard libnotify ];
   text = ''
-    text=$(wl-paste)
+    text=$(wl-paste --primary)
     complete=$(trans -d  -no-ansi "$text")
     brief=$(trans :fa -no-bidi -no-ansi -b "$text")
 

@@ -1,5 +1,32 @@
-{ pkgs, unstable, ... }: {
-  imports = [ ./i3status-rust.nix ./firefox.nix ./media.nix ];
+{ pkgs, unstable, ... }:
+let
+  tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix { };
+in
+{
+  imports = [
+    ./i3status-rust.nix
+    ./firefox.nix
+    ./media.nix
+  ];
+
+  xdg.portal = {
+    enable = true;
+
+    config = {
+      preferred = {
+        default = "wlroots";
+      };
+    };
+    wlr.enable = true;
+    # Add the WLR backend for Sway/Wayland
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk # Recommended for GTK file dialogs
+    ];
+
+    # Tells GTK apps to use the portal instead of native dialogs
+  };
+
   fonts.packages = with pkgs; [
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.nerd-fonts.fira-code
@@ -15,14 +42,6 @@
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
-    extraOptions = ["--my-next-gpu-wont-be-nvidia"];
-    extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      export _JAVA_AWT_WM_NONREPARENTING=1
-      export MOZ_ENABLE_WAYLAND=1
-    '';
   };
 
   # Display manager
@@ -63,7 +82,9 @@
       wofi = {
         enable = true;
       };
-      alacritty = { enable = true; };
+      alacritty = {
+        enable = true;
+      };
     };
 
   };
@@ -88,5 +109,25 @@
     swayidle
     swaylock
     waybar
+    libinput
+    lisgd
+    rofi
+    fcitx5
+    arc-icon-theme
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    wvkbd
+    tablet-mode-monitor
+
   ];
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
+  i18n.inputMethod = {
+    type = "fcitx5";
+    enable = true;
+    fcitx5.waylandFrontend = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-gtk
+    ];
+  };
 }

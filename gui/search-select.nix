@@ -3,7 +3,7 @@ writeShellApplication {
   name = "search-select";
   runtimeInputs = [ firefox wl-clipboard ];
   text = ''
-    text=$(wl-paste)
+    text=$(wl-paste --primary)
     firefox --search "$text"  
   '';
 }
