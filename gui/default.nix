@@ -135,6 +135,7 @@ in
     xdg-desktop-portal-wlr
     wvkbd
     tablet-mode-monitor
+    swaybg
 
   ];
   services.xserver.desktopManager.runXdgAutostartIfNone = true;
