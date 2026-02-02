@@ -1,0 +1,100 @@
+* {
+    bg: #0a0a0f;
+    bg-alt: #111116;
+    fg: #e0e0e8;
+    fg-alt: #a0a0b0;
+
+    background-color: transparent;
+    text-color: @fg;
+
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    background-color: @bg;
+    border-radius: 12px;
+    padding: 12px;
+    width: 80ch;
+    location: north;
+    anchor: north;
+    y-offset: 10px;
+}
+
+mainbox {
+    spacing: 8px;
+    children: [inputbar, listview];
+}
+
+inputbar {
+    spacing: 8px;
+    padding: 0;
+    children: [textbox-prompt-colon, entry];
+}
+
+textbox-prompt-colon {
+    expand: false;
+    text-color: @fg-alt;
+    font: "JetBrainsMono Nerd Font 12";
+    margin: 0 4px 0 0;
+}
+
+entry {
+    font: "Inter 14";
+    text-color: @fg;
+    placeholder: "Search...";
+    placeholder-color: @fg-alt;
+}
+
+listview {
+    columns: 1;
+    lines: 5;
+    spacing: 6px;
+    fixed-height: false;
+}
+
+element {
+    padding: 8px 12px;
+    background-color: @bg-alt;
+    border-radius: 8px;
+    text-color: @fg-alt;
+    spacing: 12px;
+}
+
+element selected {
+    background-color: #1a1a24;
+    text-color: @fg;
+}
+
+element-icon {
+    size: 28px;
+    vertical-align: 0.5;
+}
+
+element-text {
+    font: "Inter 13";
+    vertical-align: 0.5;
+}
+
+message {
+    padding: 8px;
+    background-color: @bg-alt;
+    border-radius: 8px;
+    text-color: @fg-alt;
+    font: "Inter 12";
+}
+
+textbox {
+    text-color: @fg;
+}
+
+prompt {
+    enabled: true;
+}
+
+scrollbar {
+    handle-color: #2a2a36;
+    handle-width: 6px;
+    padding: 0;
+}

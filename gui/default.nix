@@ -11,6 +11,7 @@ in
   imports = [
     ./i3status-rust.nix
     ./waybar.nix
+    ./rofi.nix
     ./firefox.nix
     ./media.nix
   ];
