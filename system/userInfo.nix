@@ -122,15 +122,15 @@ in
                 type = lib.types.anything;
                 description = "Attrset of proxy shell scripts. Each value is a shell script that launches the proxy (typically xray or sing-box).";
                 example = {
-                  erfanvless = "#!/bin/sh\nxray run -c ...";
-                  newfragment = "#!/bin/sh\nxray run -c ...";
+                  some-vless = "#!/bin/sh\nxray run -c ...";
+                  name1 = "#!/bin/sh\nxray run -c ...";
                 };
               };
 
               defaultProxy = lib.mkOption {
                 type = lib.types.str;
                 description = "Name of the default proxy to use (must be a key in secrets.proxies).";
-                example = "erfanvless";
+                example = "some-vless";
               };
 
               # AI API keys
