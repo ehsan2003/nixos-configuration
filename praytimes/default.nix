@@ -1,5 +1,6 @@
-{ pkgs, config, fenix, unstable, ... }:
+{ pkgs, config, fenix, unstable, lib, ... }:
 let
+  enablePraytimes = config.userConfiguration.enablePraytimes;
   adhanFile = ./adhan.mp3;
   playAdhan = "${pkgs.vlc}/bin/vlc ${adhanFile}";
   configFile = pkgs.writeTextFile {
@@ -54,7 +55,7 @@ let
 
     };
   };
-in {
+in lib.mkIf enablePraytimes {
 
   nixpkgs.config.packageOverrides = pkgs: {
     praytimes-config = configFile;

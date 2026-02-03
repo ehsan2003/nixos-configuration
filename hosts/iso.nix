@@ -9,7 +9,21 @@
     target = "secrets.nix";
   };
 
-  home-manager.users.ehsan.home.file.nixos-configuration = {
+{ config, pkgs, modulesPath, lib, ... }:
+let
+  userName = config.userConfiguration.name;
+in {
+  imports = [
+    "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix"
+    ../default.nix
+  ];
+  environment.etc.secrets = {
+    enable = true;
+    source = /etc/secrets.nix;
+    target = "secrets.nix";
+  };
+
+  home-manager.users.${userName}.home.file.nixos-configuration = {
     source = ../.;
     target = "nixos-configuration";
   };

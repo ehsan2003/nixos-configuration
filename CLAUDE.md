@@ -82,7 +82,8 @@ flake.nix                      # Central orchestrator, defines all systems
 The flake passes these to all modules via `specialArgs`:
 - `unstable` - Unstable nixpkgs import with unfree enabled
 - `hardware-configuration` - From `./vars/hardware-configuration.nix`
-- `secrets` - Imported from `./vars/secrets.ehsan.nix`
+
+Secrets are injected via `config.userConfiguration.secrets` (defined in `system/userInfo.nix`).
 
 ### Import Hierarchy
 
@@ -100,7 +101,11 @@ flake.nix → nixosConfigurations
 
 ## Secrets Management
 
-Secrets are stored in `vars/secrets.ehsan.nix` (gitignored). Required keys:
+Secrets are stored in `vars/secrets.ehsan.nix` (gitignored) and injected into `config.userConfiguration.secrets` via a module in `flake.nix`. The full secrets schema is defined in `system/userInfo.nix` via the `userConfiguration.secrets` option.
+
+Access secrets in modules via `config.userConfiguration.secrets.<key>`.
+
+Required keys:
 
 | Key | Purpose |
 |-----|---------|

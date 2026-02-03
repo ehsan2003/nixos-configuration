@@ -1,7 +1,9 @@
-{ pkgs,... }:
-let dpi = 250;
+{ config, pkgs, ... }:
+let
+  dpi = 250;
+  userName = config.userConfiguration.name;
 in {
-  home-manager.users.ehsan.home.pointerCursor = {
+  home-manager.users.${userName}.home.pointerCursor = {
     package = pkgs.vanilla-dmz;
     name = "Vanilla-DMZ";
     size = 128;

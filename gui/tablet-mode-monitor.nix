@@ -1,7 +1,22 @@
-{ writeShellApplication, libnotify, sway, wvkbd, lisgd, rofi, libinput, coreutils }:
+{
+  writeShellApplication,
+  libnotify,
+  sway,
+  wvkbd,
+  lisgd,
+  rofi,
+  libinput,
+  coreutils,
+  enable-persian ? false,
+}:
 writeShellApplication {
   name = "tablet-mode-monitor";
-  runtimeInputs = [ libnotify sway libinput coreutils ];
+  runtimeInputs = [
+    libnotify
+    sway
+    libinput
+    coreutils
+  ];
   text = ''
     DEVICE="/dev/input/by-path/platform-INTC1078:00-event"
     STATE_FILE="/tmp/tablet_mode_state"
@@ -27,7 +42,9 @@ writeShellApplication {
       pkill lisgd 2>/dev/null || true
 
       # Launch virtual keyboard
-      ${wvkbd}/bin/wvkbd-mobintl -L 250 --landscape-layers full,persian &
+      ${wvkbd}/bin/wvkbd-mobintl -L 250 --landscape-layers full${
+        if enable-persian then ",persian" else ""
+      } &
       echo $! > /tmp/wvkbd.pid
 
       # Launch gesture daemon

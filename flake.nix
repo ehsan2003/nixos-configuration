@@ -47,41 +47,43 @@
               config.allowUnfree = true;
             };
             hardware-configuration = hw;
-            inherit secrets;
-
+          };
+          # Module to inject secrets into config.userConfiguration.secrets
+          secretsModule = { config, ... }: {
+            config.userConfiguration.secrets = secrets;
           };
         in {
           base = {
             inherit specialArgs system;
-            modules = [ ./hosts/base.nix ];
+            modules = [ secretsModule ./hosts/base.nix ];
           };
 
           nixos-new-laptop = {
             inherit specialArgs system;
-            modules = [ ./hosts/new-laptop.nix ];
+            modules = [ secretsModule ./hosts/new-laptop.nix ];
           };
 
           nixos-laptop = {
             inherit specialArgs system;
-            modules = [ ./hosts/laptop.nix ];
+            modules = [ secretsModule ./hosts/laptop.nix ];
           };
           nixos-home-desktop = {
             inherit specialArgs system;
-            modules = [ ./hosts/home-pc.nix ];
+            modules = [ secretsModule ./hosts/home-pc.nix ];
           };
 
           tablet = {
             inherit specialArgs system;
-            modules = [ ./hosts/tablet.nix ];
+            modules = [ secretsModule ./hosts/tablet.nix ];
           };
 
           usb = {
             inherit specialArgs system;
-            modules = [ ./hosts/usb.nix ];
+            modules = [ secretsModule ./hosts/usb.nix ];
           };
           iso = {
             inherit specialArgs system;
-            modules = [ ./hosts/iso.nix ];
+            modules = [ secretsModule ./hosts/iso.nix ];
           };
         });
     in {

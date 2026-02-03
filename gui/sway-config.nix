@@ -7,7 +7,9 @@ let
   search-select = pkgs.callPackage ./search-select.nix { };
   aiask = pkgs.callPackage ./aiask.nix { };
   ensure-class = pkgs.callPackage ./ensure-class.nix { };
-  tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix { };
+  tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix {
+    enable-persian = config.userConfiguration.persianLayout;
+  };
 in
 {
   target = ".config/sway/config";
@@ -196,6 +198,8 @@ in
     smart_gaps on
 
     # Screenshot with grim
+
+    bindsym Print exec "${pkgs.flameshot}/bin/flameshot gui"
     bindsym --to-code Print exec "${pkgs.swappy}/bin/swappy-grim &"
 
     bindsym --to-code $mod+t exec "${notitrans-fa}/bin/notitrans-fa"
@@ -233,7 +237,7 @@ in
 
     # Input configuration (replaces xmodmap)
     input type:keyboard {
-        xkb_layout us,ir
+        xkb_layout us${if config.userConfiguration.persianLayout then ",ir" else ""}
         xkb_options eurosign:e,caps:escape,grp:shifts_toggle
     }
 

@@ -1,7 +1,13 @@
-{ secrets, ... }: {
-  users.users.ehsan = {
-    hashedPassword = secrets.HASHED_PASSWORD; # ehsan
+{ config, lib, ... }:
+let
+  userName = config.userConfiguration.name;
+  userGroups = config.userConfiguration.extraGroups;
+  secrets = config.userConfiguration.secrets;
+in
+{
+  users.users.${userName} = {
+    hashedPassword = secrets.HASHED_PASSWORD;
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "input"]; # Enable ‘sudo’ for the user.
+    extraGroups = userGroups;
   };
 }

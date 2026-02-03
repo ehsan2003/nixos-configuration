@@ -1,7 +1,9 @@
-{ pkgs, nix-alien, unstable, secrets, ... }:
+{ config, pkgs, nix-alien, unstable, ... }:
 let
   urls = (import ./uri-short.nix pkgs);
+  secrets = config.userConfiguration.secrets;
   alert = (import ./alert.nix pkgs) secrets;
+  userName = config.userConfiguration.name;
 in {
   imports = [ ];
 
@@ -25,24 +27,37 @@ in {
   environment.variables.ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-4.7";
   environment.variables.ANTHROPIC_DEFAULT_OPUS_MODEL = "glm-4.7";
 
-  home-manager.users.ehsan.programs.taskwarrior.enable = true;
+  home-manager.users.${userName} = {
+    programs.taskwarrior = {
+      enable = true;
+      package = pkgs.taskwarrior3;
+      config = {
+        sync.encryption_secret = secrets.taskwarrior-secret;
+        sync.server.client_id = "aa529e36-0e93-4d5a-90e4-921f942aa0d7";
+        sync.server.origin = "http://localhost:8443";
+      };
+    };
 
-  home-manager.users.ehsan.programs.zoxide.enable = true;
-  home-manager.users.ehsan.programs.zoxide.enableZshIntegration = true;
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    home.file.timewarrior-hook = {
+      executable = true;
+      source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
+      target = ".local/share/task/hooks/on-modify.timewarrior";
+    };
+
+    home.file.zshrc = {
+      text = ''
+        task
+      '';
+      target = ".zshrc";
+    };
+  };
+
   environment.shellAliases.z = "zoxide";
-
-  home-manager.users.ehsan.programs.taskwarrior.package = pkgs.taskwarrior3;
-  home-manager.users.ehsan.programs.taskwarrior.config = {
-    sync.encryption_secret = secrets.taskwarrior-secret;
-    sync.server.client_id = "aa529e36-0e93-4d5a-90e4-921f942aa0d7";
-    sync.server.origin = "http://localhost:8443";
-  };
-
-  home-manager.users.ehsan.home.file.timewarrior-hook = {
-    executable = true;
-    source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
-    target = ".local/share/task/hooks/on-modify.timewarrior";
-  };
 
   environment.systemPackages = (with pkgs; [
     # editors
@@ -97,12 +112,6 @@ in {
     # (urls "claude" "https://claude.ai/")
 
   ];
-  home-manager.users.ehsan.home.file.zshrc = {
-    text = ''
-      task
-    '';
-    target = ".zshrc";
-  };
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
     enable = true;

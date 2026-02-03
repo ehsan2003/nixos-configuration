@@ -1,5 +1,9 @@
-{ nur, pkgs, ... }: {
-  home-manager.users.ehsan = {
+{ config, nur, pkgs, ... }:
+let
+  userName = config.userConfiguration.name;
+in
+{
+  home-manager.users.${userName} = {
     nixpkgs.overlays = [ (self: super: { fcitx-engines = pkgs.fcitx5; }) ];
     home.stateVersion = "22.11";
   };

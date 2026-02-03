@@ -1,11 +1,11 @@
 {
+  config,
   pkgs,
   unstable,
-  secrets,
   ...
 }:
 let
-
+  secrets = config.userConfiguration.secrets;
   proxies = secrets.proxies;
   defaultProxy = secrets.defaultProxy;
   awg-config = pkgs.writeTextFile {
@@ -44,7 +44,7 @@ in
   services.openvpn.servers = {
     openvpn = {
       autoStart = false;
-      config = secrets.openvpn;
+      config = config.userConfiguration.secrets.openvpn;
       updateResolvConf = true;
     };
   };

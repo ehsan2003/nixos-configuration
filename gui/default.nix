@@ -6,10 +6,10 @@
 }:
 let
   tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix { };
+  userName = config.userConfiguration.name;
 in
 {
   imports = [
-    ./i3status-rust.nix
     ./waybar.nix
     ./rofi.nix
     ./firefox.nix
@@ -33,6 +33,9 @@ in
 
     # Tells GTK apps to use the portal instead of native dialogs
   };
+
+  # Mask xdg-desktop-portal-gtk.service to prevent it from interfering with wlr portal
+  systemd.user.services.xdg-desktop-portal-gtk.enable = false;
 
   fonts.packages = with pkgs; [
     pkgs.nerd-fonts.jetbrains-mono
@@ -61,7 +64,7 @@ in
   services.libinput.enable = true;
   services.libinput.touchpad.disableWhileTyping = true;
 
-  home-manager.users.ehsan = {
+  home-manager.users.${userName} = {
 
     services.flameshot.enable = true;
     services.flameshot.settings = {
