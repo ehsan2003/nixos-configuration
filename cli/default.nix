@@ -64,6 +64,8 @@ in {
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     openssl
     llm-agents.claude-code-acp
+    llm-agents.claude-plugins
+    llm-agents.skills-installer
 
     # Netowrk
     wget

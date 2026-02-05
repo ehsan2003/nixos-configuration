@@ -29,7 +29,6 @@
         mode = [
           "n"
           "v"
-          "i"
         ];
         action.__raw = "function() require('agentic').toggle() end";
         options = {
@@ -52,7 +51,6 @@
         mode = [
           "n"
           "v"
-          "i"
         ];
         action.__raw = "function() require('agentic').new_session() end";
         options = {
@@ -64,7 +62,6 @@
         mode = [
           "n"
           "v"
-          "i"
         ];
         action.__raw = "function() require('agentic').close() end";
         options = {
@@ -76,7 +73,6 @@
         mode = [
           "n"
           "v"
-          "i"
         ];
         action.__raw = "function() require('agentic').open() end";
         options = {
@@ -108,7 +104,6 @@
         mode = [
           "n"
           "v"
-          "i"
         ];
         action.__raw = "function() require('agentic').stop_generation() end";
         options = {
