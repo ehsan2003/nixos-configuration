@@ -17,6 +17,10 @@
     "<leader>g" = "Git";
   };
   plugins.lualine.enable = true;
+  plugins.lualine.settings.options.disabled_filetypes = {
+    statusline = [ "AgenticChat" "AgenticInput" "AgenticCode" "AgenticFiles" ];
+    winbar = [ "AgenticChat" "AgenticInput" "AgenticCode" "AgenticFiles" ];
+  };
   plugins.neo-tree.enable = true;
   plugins.neo-tree.settings.filesystem.filtered_items.visible = true;
 

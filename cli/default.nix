@@ -1,4 +1,4 @@
-{ config, pkgs, nix-alien, unstable, ... }:
+{ config, pkgs, nix-alien, unstable, llm-agents, ... }:
 let
   urls = (import ./uri-short.nix pkgs);
   secrets = config.userConfiguration.secrets;
@@ -63,6 +63,7 @@ in {
     # editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     openssl
+    llm-agents.claude-code-acp
 
     # Netowrk
     wget
