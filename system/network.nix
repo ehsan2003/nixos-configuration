@@ -20,6 +20,7 @@ let
     ) proxies;
   };
   slipstream = (pkgs.callPackage ./slipstream.nix { });
+  paqet = (pkgs.callPackage ./paqet.nix { });
   chproxy = pkgs.writeShellScriptBin "chproxy" ''
     if [ -z "$1" ]; then
       echo "Usage: chproxy <proxy-name>"
@@ -75,6 +76,7 @@ in
 
   environment.systemPackages = [
     slipstream
+    paqet
     pkgs.xray
     pkgs.v2ray
     unstable.tor-browser
@@ -171,6 +173,7 @@ in
         unstable.xray
         unstable.sing-box
         unstable.v2raya
+        paqet
       ];
       wantedBy = [ "multi-user.target" ];
     };
