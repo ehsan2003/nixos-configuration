@@ -1,10 +1,18 @@
-{ fetchFromGitHub, lib, rustPlatform, pkg-config, openssl, cmake, stdenv, }:
+
+{
+  fetchFromGitHub,
+  lib,
+  rustPlatform,
+  pkg-config,
+  openssl,
+  cmake,
+  stdenv,
+}:
 let
   cmakeFix = [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
   picotls = stdenv.mkDerivation {
     pname = "picotls";
-    version =
-      "2024-04-12"; # Use the commit suggested by slipstream-picoquic CMCMakeLists.txt for https://github.com/h2o/picotls.git
+    version = "2024-04-12"; # Use the commit suggested by slipstream-picoquic CMCMakeLists.txt for https://github.com/h2o/picotls.git
     src = fetchFromGitHub {
       owner = "h2o";
       repo = "picotls";
@@ -18,7 +26,10 @@ let
       cp libpicotls*.a $out/lib/
     '';
     cmakeFlags = cmakeFix;
-    nativeBuildInputs = [ cmake pkg-config ];
+    nativeBuildInputs = [
+      cmake
+      pkg-config
+    ];
     buildInputs = [ openssl ];
   };
   slipstream-picoquic = stdenv.mkDerivation {
@@ -30,8 +41,14 @@ let
       rev = "4bd356c004a50ec46ee8a933ebd024da5d659f75";
       hash = "sha256-MMCA//7NxbdSC/wqMwCEQetUs+HxWdAGSNcZ9ysrvto=";
     };
-    nativeBuildInputs = [ cmake pkg-config ];
-    buildInputs = [ openssl picotls ];
+    nativeBuildInputs = [
+      cmake
+      pkg-config
+    ];
+    buildInputs = [
+      openssl
+      picotls
+    ];
     cmakeFlags = cmakeFix ++ [
       "-DPICOTLS_INCLUDE_DIR=${picotls}/include"
       "-DPICOTLS_LIBRARIES=${picotls}/lib/libpicotls-core.a" # Adjust filename if necessary
@@ -47,23 +64,34 @@ let
       cp -r ${picotls}/include/* $out/include/
     '';
   };
-in rustPlatform.buildRustPackage {
+in
+rustPlatform.buildRustPackage {
   pname = "slipstream-rust";
   version = "2026-01-22";
 
   src = fetchFromGitHub {
     owner = "Mygod";
     repo = "slipstream-rust";
-    rev = "95749bc0013bf826f58b48d8d6dfe2bb955ae97b";
-    hash = "sha256-6SK455EbYkdkN6vdic09PVj3xHXVLVICLG09T0AX5r8=";
+    rev = "bc772dd07d9a136dbd7553b0da575526de207847";
+    hash = "sha256-1d8eK+XyyorH9nqFj+r8uADqg73dEW6QOkQS/a9X4Tc=";
     fetchSubmodules = true;
   };
 
   cargoHash = "sha256-ySJDeGXTsuPJc740yDcSXvaHTEnFsojgNPf/P0YYKFI=";
-  cargoBuildFlags = [ "-p slipstream-client" "-p slipstream-server" ];
+  cargoBuildFlags = [
+    "-p slipstream-client"
+    "-p slipstream-server"
+  ];
 
-  nativeBuildInputs = [ pkg-config cmake ];
-  buildInputs = [ slipstream-picoquic picotls openssl ];
+  nativeBuildInputs = [
+    pkg-config
+    cmake
+  ];
+  buildInputs = [
+    slipstream-picoquic
+    picotls
+    openssl
+  ];
 
   PICOQUIC_AUTO_BUILD = "0";
   PICOQUIC_INCLUDE_DIR = "${slipstream-picoquic}/include";
@@ -71,10 +99,5 @@ in rustPlatform.buildRustPackage {
   PICOQUIC_LIB_DIR = "${slipstream-picoquic}/lib";
 
   doCheck = false;
-  meta = with lib; {
-    description =
-      "High-performance multi-path covert channel over DNS in Rust with vibe coding";
-    homepage = "https://github.com/Mygod/slipstream-rust";
-    license = licenses.asl20;
-  };
 }
+

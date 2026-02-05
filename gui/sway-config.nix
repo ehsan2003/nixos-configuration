@@ -199,8 +199,7 @@ in
 
     # Screenshot with grim
 
-    bindsym Print exec "${pkgs.flameshot}/bin/flameshot gui"
-    bindsym --to-code Print exec "${pkgs.swappy}/bin/swappy-grim &"
+    bindsym --to-code Print exec "${pkgs.flameshot}/bin/flameshot gui"
 
     bindsym --to-code $mod+t exec "${notitrans-fa}/bin/notitrans-fa"
     bindsym --to-code $mod+i exec "${aiask}/bin/aiask"
