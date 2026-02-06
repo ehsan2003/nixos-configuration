@@ -68,4 +68,6 @@
   ];
   # nixpkgs.config.cudaSupport = true;
 
+  programs.sway.extraOptions = [ "--unsupported-gpu" ];
+
 }
