@@ -152,6 +152,10 @@ in
     swaybg
     # Hyprland packages
     hyprland
+    hyprlandPlugins.hyprgrass
+    hyprlandPlugins.hyprbars
+    hyprlandPlugins.hyprexpo
+
     hyprpaper
     # Common Wayland packages
     waybar

@@ -1,6 +1,9 @@
 { pkgs, config, ... }:
 let
   is-tab = (config.networking.hostName == "nixos-new-laptop");
+  hyprgrass = pkgs.hyprlandPlugins.hyprgrass;
+  hyprexpo = pkgs.hyprlandPlugins.hyprexpo;
+  hyprbars = pkgs.hyprlandPlugins.hyprbars;
   notitrans-fa = pkgs.callPackage ./notitrans-fa.nix { };
   notitrans-en = pkgs.callPackage ./notitrans-en.nix { };
   notitrans-dict = pkgs.callPackage ./notitrans-dict.nix { };
@@ -310,6 +313,104 @@ in
 
     xwayland {
         use_nearest_neighbor = false
+    }
+
+
+    exec-once = hyprctl plugin load ${hyprgrass}/lib/libhyprgrass.so 
+    exec-once = hyprctl plugin load ${hyprexpo}/lib/libhyprexpo.so 
+    exec-once = hyprctl plugin load ${hyprbars}/lib/libhyprbars.so 
+
+    plugin {
+        hyprexpo {
+            columns = 3
+            gap_size = 5
+            bg_col = rgb(111111)
+            workspace_method = center current # [center/first] [workspace] e.g. first 1 or center m+1
+
+            gesture_distance = 300 # how far is the "max" for the gesture
+
+            # Three-finger swipe up to open overview
+            hyprexpo-gesture = 3, up, expo
+
+            # Four-finger swipe down with Alt modifier
+            hyprexpo-gesture = 4, down, mod:ALT, expo
+
+            # Unset a gesture
+            hyprexpo-gesture = 3, up, unset
+        }
+        hyprbars {
+            # example config
+            bar_height = 20
+
+            # example buttons (R -> L)
+            # hyprbars-button = color, size, on-click
+            hyprbars-button = rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive
+            hyprbars-button = rgb(eeee11), 10, , hyprctl dispatch fullscreen 1
+
+            # cmd to run on double click of the bar
+            on_double_click = hyprctl dispatch fullscreen 1
+        }
+
+     touch_gestures {
+      # The default sensitivity is probably too low on tablet screens,
+      # I recommend turning it up to 4.0
+      sensitivity = 4.0
+
+      # must be >= 3
+      workspace_swipe_fingers = 3
+
+      # switching workspaces by swiping from an edge, this is separate from workspace_swipe_fingers
+      # and can be used at the same time
+      # possible values: l, r, u, or d
+      # to disable it set it to anything else
+      workspace_swipe_edge = d
+
+      # in milliseconds
+      long_press_delay = 400
+
+      # resize windows by long-pressing on window borders and gaps.
+      # If general:resize_on_border is enabled, general:extend_border_grab_area is
+      # used for floating windows
+      resize_on_border_long_press = true
+
+      # in pixels, the distance from the edge that is considered an edge
+      edge_margin = 10
+
+      # emulates touchpad swipes when swiping in a direction that does not trigger
+      # workspace swipe. ONLY triggers when finger count is equal to 
+      # workspace_swipe_fingers.
+      #
+      # might be removed in the future in favor of event hooks
+      emulate_touchpad_swipe = false
+
+
+      # swipe left from right edge
+      hyprgrass-bind = , edge:r:l, workspace, +1
+
+      # swipe up from bottom edge
+      hyprgrass-bind = , edge:d:u, exec, firefox
+
+      # swipe down from left edge
+      hyprgrass-bind = , edge:l:d, exec, pactl set-sink-volume @DEFAULT_SINK@ -4%
+
+      # swipe down with 4 fingers
+      hyprgrass-bind = , swipe:4:d, killactive
+
+      # swipe diagonally left and down with 3 fingers
+      # l (or r) must come before d and u
+      hyprgrass-bind = , swipe:3:ld, exec, foot
+
+      # tap with 3 fingers
+      hyprgrass-bind = , tap:3, exec, alacritty
+
+      # pinch in with 3 fingers
+      hyprgrass-bind = , pinch:3:i, exec, alacritty
+
+      # longpress can trigger mouse binds:
+      hyprgrass-bindm = , longpress:2, movewindow
+      hyprgrass-bindm = , longpress:3, resizewindow
+    }
+
     }
 
 
