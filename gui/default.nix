@@ -6,11 +6,15 @@
 }:
 let
   tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix { };
+  tablet-mode-monitor-hyprland = pkgs.callPackage ./tablet-mode-monitor-hyprland.nix {
+    enable-persian = config.userConfiguration.persianLayout;
+  };
   userName = config.userConfiguration.name;
 in
 {
   imports = [
     ./waybar.nix
+    ./waybar-hyprland.nix
     ./rofi.nix
     ./firefox.nix
     ./media.nix
@@ -54,6 +58,12 @@ in
     wrapperFeatures.gtk = true;
   };
 
+  # Enable Hyprland (Wayland)
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
   # Display manager
   services.displayManager.sddm = {
     enable = true;
@@ -84,6 +94,15 @@ in
         pkgs = pkgs;
         config = config;
       }).text;
+    home.file.".config/hypr/hyprland.conf".text =
+      (import ./hyprland-config.nix {
+        pkgs = pkgs;
+        config = config;
+      }).text;
+    home.file.".config/hypr/hyprpaper.conf".text = ''
+      preload = ~/.background-image
+      wallpaper = eDP-1,~/.background-image
+    '';
     home.file.aiderConfig = {
       target = ".config/aichat/config.yaml";
       text = ''
@@ -126,9 +145,15 @@ in
 
     xarchiver
     unstable.telegram-desktop
+    # Sway packages
     sway
     swayidle
     swaylock
+    swaybg
+    # Hyprland packages
+    hyprland
+    hyprpaper
+    # Common Wayland packages
     waybar
     libinput
     lisgd
@@ -139,7 +164,7 @@ in
     xdg-desktop-portal-wlr
     wvkbd
     tablet-mode-monitor
-    swaybg
+    tablet-mode-monitor-hyprland
 
   ];
   services.xserver.desktopManager.runXdgAutostartIfNone = true;

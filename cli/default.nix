@@ -57,12 +57,6 @@ in
       target = ".local/share/task/hooks/on-modify.timewarrior";
     };
 
-    home.file.zshrc = {
-      text = ''
-        task
-      '';
-      target = ".zshrc";
-    };
   };
 
   environment.shellAliases.z = "zoxide";
