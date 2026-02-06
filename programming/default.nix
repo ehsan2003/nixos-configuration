@@ -1,12 +1,22 @@
-{ config, pkgs, fenix, unstable, ... }:
+{
+  config,
+  pkgs,
+  fenix,
+  unstable,
+  ...
+}:
 let
   aider-ce = unstable.callPackage ./aider-ce/package.nix { };
   userName = config.userConfiguration.name;
   userFullName = config.userConfiguration.fullName;
   userEmail = config.userConfiguration.email;
   secrets = config.userConfiguration.secrets;
-in {
-  imports = [ ./editors.nix ./virtualisation.nix ];
+in
+{
+  imports = [
+    ./editors.nix
+    ./virtualisation.nix
+  ];
   # git
   home-manager.users.${userName} = {
     programs = {
@@ -14,7 +24,9 @@ in {
         enable = true;
         settings.user.name = userFullName;
         settings.user.email = userEmail;
-        settings.init = { defaultBranch = "main"; };
+        settings.init = {
+          defaultBranch = "main";
+        };
       };
 
       claude-code = {
@@ -33,18 +45,21 @@ in {
             Notification = [
               {
                 matcher = "*";
-                hooks = [{
-                  type = "command";
-                  command = "notify-send 'Claude Code' 'Awaiting your input'";
-                }];
+                hooks = [
+                  {
+                    type = "command";
+                    command = "notify-send 'Claude Code' 'Awaiting your input'";
+                  }
+                ];
               }
               {
                 matcher = "*";
-                hooks = [{
-                  type = "command";
-                  command = ''
-                    curl -s -X POST "https://api.telegram.org/bot${secrets.NOTIFIER_BOT_TOKEN}/sendMessage"  -d chat_id=${secrets.CHAT_ID}  -d text="claude is awaiting your input"'';
-                }];
+                hooks = [
+                  {
+                    type = "command";
+                    command = ''curl -s -X POST "https://api.telegram.org/bot${secrets.NOTIFIER_BOT_TOKEN}/sendMessage"  -d chat_id=${secrets.CHAT_ID}  -d text="claude is awaiting your input"'';
+                  }
+                ];
               }
             ];
           };
@@ -62,7 +77,10 @@ in {
           "zai-mcp-server" = {
             "type" = "stdio";
             "command" = "npx";
-            "args" = [ "-y" "@z_ai/mcp-server" ];
+            "args" = [
+              "-y"
+              "@z_ai/mcp-server"
+            ];
             "env" = {
               "Z_AI_API_KEY" = "${secrets.ANTHROPIC_AUTH_TOKEN}";
               "Z_AI_MODE" = "ZAI";
@@ -86,7 +104,11 @@ in {
       };
     };
   };
-  programs.git.config = { init = { defaultBranch = "main"; }; };
+  programs.git.config = {
+    init = {
+      defaultBranch = "main";
+    };
+  };
 
   nixpkgs.overlays = [ fenix.overlays.default ];
 
@@ -112,6 +134,11 @@ in {
 
     uv
     cargo-watch
+    mdbook
+    mdbook-d2
+    mdbook-pdf
+    mdbook-pandoc
+    d2
     (pkgs.fenix.stable.withComponents [
       "cargo"
       "clippy"
