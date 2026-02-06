@@ -31,7 +31,10 @@
                   type = "filesystem";
                   format = "ext4";
                   mountpoint = "/";
-                  mountOptions = [ "noatime" "data=writeback"];
+                  mountOptions = [
+                    "noatime"
+                    "data=writeback"
+                  ];
                 };
               };
             };
@@ -41,4 +44,3 @@
     };
   };
 }
-

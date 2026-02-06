@@ -1,10 +1,18 @@
-{ config, pkgs, nix-alien, unstable, llm-agents, ... }:
+{
+  config,
+  pkgs,
+  nix-alien,
+  unstable,
+  llm-agents,
+  ...
+}:
 let
   urls = (import ./uri-short.nix pkgs);
   secrets = config.userConfiguration.secrets;
   alert = (import ./alert.nix pkgs) secrets;
   userName = config.userConfiguration.name;
-in {
+in
+{
   imports = [ ];
 
   environment.shells = with pkgs; [ zsh ];
@@ -59,66 +67,75 @@ in {
 
   environment.shellAliases.z = "zoxide";
 
-  environment.systemPackages = (with pkgs; [
-    # editors
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    openssl
-    llm-agents.claude-code-acp
-    llm-agents.claude-plugins
-    llm-agents.skills-installer
+  environment.systemPackages =
+    (with pkgs; [
+      # editors
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      openssl
+      llm-agents.claude-code-acp
+      llm-agents.claude-plugins
+      llm-agents.skills-installer
 
-    # Netowrk
-    wget
-    curl
-    aria2
-    caddy
-    alert
-    # Absolute Utils
-    nix-tree
-    killall
-    btop
-    unrar-wrapper
-    unzip
-    ripgrep
-    fd
-    bat
-    jcal
-    jq
-    ddgr
-    pup
-    tmux
-    v4l-utils
-    github-cli
-    aichat
-    nethogs
-    wl-clipboard
-    zip
-    tree
-    ncdu
-    imagemagick
-    chntpw
-    zellij
-    timewarrior
-    lynx
-    ariang
-    zoxide
-    yazi
-    (pkgs.writeShellApplication {
-      name = "ai";
-      text = ''${alacritty}/bin/alacritty --title "aider" '';
-    })
-  ]) ++ [
-    nix-alien.packages.${"x86_64-linux"}.nix-alien
-    (urls "mathcha" "https://mathcha.io/editor")
-    (urls "poe" "https://poe.com")
-    (urls "meet" "https://meet.google.com/")
-    # (urls "claude" "https://claude.ai/")
+      # Netowrk
+      wget
+      curl
+      aria2
+      caddy
+      alert
+      # Absolute Utils
+      nix-tree
+      killall
+      btop
+      unrar-wrapper
+      unzip
+      ripgrep
+      fd
+      bat
+      jcal
+      jq
+      ddgr
+      pup
+      tmux
+      v4l-utils
+      github-cli
+      aichat
+      nethogs
+      wl-clipboard
+      zip
+      tree
+      ncdu
+      imagemagick
+      chntpw
+      zellij
+      timewarrior
+      lynx
+      ariang
+      zoxide
+      yazi
+      (pkgs.writeShellApplication {
+        name = "ai";
+        text = ''${alacritty}/bin/alacritty --title "aider" '';
+      })
+    ])
+    ++ [
+      nix-alien.packages.${"x86_64-linux"}.nix-alien
+      (urls "mathcha" "https://mathcha.io/editor")
+      (urls "poe" "https://poe.com")
+      (urls "meet" "https://meet.google.com/")
+      # (urls "claude" "https://claude.ai/")
 
-  ];
+    ];
   programs.zsh.enable = true;
   programs.zsh.ohMyZsh = {
     enable = true;
-    plugins = [ "git" "python" "man" "vi-mode" "docker" "docker-compose" ];
+    plugins = [
+      "git"
+      "python"
+      "man"
+      "vi-mode"
+      "docker"
+      "docker-compose"
+    ];
     theme = "robbyrussell";
   };
 }

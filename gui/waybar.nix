@@ -49,8 +49,8 @@ in
   home-manager.users.${userName} = {
     xdg.configFile."waybar/style.css".source = ./waybar-style.css;
     xdg.configFile."waybar/config" = {
-      text =
-        builtins.toJSON ({
+      text = builtins.toJSON (
+        {
           layer = "top";
           ipc = true;
           position = "bottom";
@@ -209,7 +209,8 @@ in
           tray = {
             spacing = 10;
           };
-        });
+        }
+      );
     };
   };
 

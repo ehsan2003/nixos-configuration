@@ -1,10 +1,28 @@
-{ config, nixpkgs, pkgs, unstable, unstable_input, ... }: {
-  imports = [ ./userInfo.nix ./boot.nix ./users.nix ./nix.nix ./network.nix ./printing.nix ];
+{
+  config,
+  nixpkgs,
+  pkgs,
+  unstable,
+  unstable_input,
+  ...
+}:
+{
+  imports = [
+    ./userInfo.nix
+    ./boot.nix
+    ./users.nix
+    ./nix.nix
+    ./network.nix
+    ./printing.nix
+  ];
 
   time.timeZone = "Asia/Tehran";
 
   services.openssh.enable = true;
-  environment.systemPackages = [ pkgs.linux-wifi-hotspot unstable.ollama ];
+  environment.systemPackages = [
+    pkgs.linux-wifi-hotspot
+    unstable.ollama
+  ];
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       enable = true;
@@ -14,8 +32,7 @@
       after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart =
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;

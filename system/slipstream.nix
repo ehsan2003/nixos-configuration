@@ -1,4 +1,3 @@
-
 {
   fetchFromGitHub,
   lib,
@@ -100,4 +99,3 @@ rustPlatform.buildRustPackage {
 
   doCheck = false;
 }
-

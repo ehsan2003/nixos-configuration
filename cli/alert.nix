@@ -1,7 +1,10 @@
 pkgs: secrets:
 pkgs.writeShellApplication {
   name = "al";
-  runtimeInputs = [ pkgs.curl pkgs.jq ];
+  runtimeInputs = [
+    pkgs.curl
+    pkgs.jq
+  ];
   text = ''
     # Configuration
     API_URL="https://api.telegram.org/bot${secrets.NOTIFIER_BOT_TOKEN}"

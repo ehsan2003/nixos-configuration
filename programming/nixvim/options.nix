@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   config = {
     colorschemes.tokyonight.enable = true;
     globals.mapleader = " ";

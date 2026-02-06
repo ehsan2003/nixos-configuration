@@ -1,4 +1,5 @@
-{ home-manager, ... }: {
+{ home-manager, ... }:
+{
   imports = [
     ./programming
     ./gui

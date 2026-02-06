@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 let
   userName = config.userConfiguration.name;
-in {
+in
+{
   home-manager.users.${userName}.programs.firefox = {
     enable = true;
     package = pkgs.wrapFirefox pkgs.firefox-bin-unwrapped {

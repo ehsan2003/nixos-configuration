@@ -1,25 +1,39 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   plugins.dressing.enable = true;
   plugins.which-key.enable = true;
   plugins.web-devicons.enable = true;
-  plugins.which-key.settings.spec = let
-    transformSet = set:
-      builtins.map (name: {
-        __unkeyed-1 = name;
-        desc = set.${name};
-      }) (builtins.attrNames set);
+  plugins.which-key.settings.spec =
+    let
+      transformSet =
+        set:
+        builtins.map (name: {
+          __unkeyed-1 = name;
+          desc = set.${name};
+        }) (builtins.attrNames set);
 
-  in transformSet {
-    "<leader>a" = "AI";
-    "<leader>f" = "Find";
-    "<leader>t" = "Terminal";
-    "<leader>l" = "Lsp";
-    "<leader>g" = "Git";
-  };
+    in
+    transformSet {
+      "<leader>a" = "AI";
+      "<leader>f" = "Find";
+      "<leader>t" = "Terminal";
+      "<leader>l" = "Lsp";
+      "<leader>g" = "Git";
+    };
   plugins.lualine.enable = true;
   plugins.lualine.settings.options.disabled_filetypes = {
-    statusline = [ "AgenticChat" "AgenticInput" "AgenticCode" "AgenticFiles" ];
-    winbar = [ "AgenticChat" "AgenticInput" "AgenticCode" "AgenticFiles" ];
+    statusline = [
+      "AgenticChat"
+      "AgenticInput"
+      "AgenticCode"
+      "AgenticFiles"
+    ];
+    winbar = [
+      "AgenticChat"
+      "AgenticInput"
+      "AgenticCode"
+      "AgenticFiles"
+    ];
   };
   plugins.neo-tree.enable = true;
   plugins.neo-tree.settings.filesystem.filtered_items.visible = true;

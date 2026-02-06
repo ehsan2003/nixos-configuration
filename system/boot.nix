@@ -1,4 +1,5 @@
-{ unstable, pkgs, ... }: {
+{ unstable, pkgs, ... }:
+{
 
   boot.tmp.cleanOnBoot = true;
   boot.loader.efi.canTouchEfiVariables = true;

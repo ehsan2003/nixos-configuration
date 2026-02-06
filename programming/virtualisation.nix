@@ -4,8 +4,7 @@ let
 in
 {
   virtualisation.docker.enable = true;
-  virtualisation.docker.daemon.settings.registry-mirrors =
-    [ "https://registry.docker.ir" ];
+  virtualisation.docker.daemon.settings.registry-mirrors = [ "https://registry.docker.ir" ];
 
   virtualisation.docker.daemon.settings.data-root = "/var/lib/d22";
   virtualisation.libvirtd.enable = true;

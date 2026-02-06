@@ -1,4 +1,10 @@
-{ pkgs, lib, modulesPath, disko, ... }:
+{
+  pkgs,
+  lib,
+  modulesPath,
+  disko,
+  ...
+}:
 {
   imports = [
     "${modulesPath}/profiles/all-hardware.nix"
@@ -43,4 +49,5 @@
   networking.hostName = "nixos-tablet"; # Define your hostname.
   # boot.initrd.kernelModules = [ "uat" ];
   # checkout the example folder for how to configure different disko layouts
-} // import ./tablet-disko.nix
+}
+// import ./tablet-disko.nix

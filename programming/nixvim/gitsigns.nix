@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   plugins.gitsigns.enable = true;
   keymaps = [
     {

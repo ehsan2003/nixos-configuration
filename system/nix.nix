@@ -1,4 +1,9 @@
-{ config, nur, pkgs, ... }:
+{
+  config,
+  nur,
+  pkgs,
+  ...
+}:
 let
   userName = config.userConfiguration.name;
 in

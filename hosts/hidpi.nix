@@ -2,7 +2,8 @@
 let
   dpi = 250;
   userName = config.userConfiguration.name;
-in {
+in
+{
   home-manager.users.${userName}.home.pointerCursor = {
     package = pkgs.vanilla-dmz;
     name = "Vanilla-DMZ";

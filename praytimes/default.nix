@@ -1,4 +1,11 @@
-{ pkgs, config, fenix, unstable, lib, ... }:
+{
+  pkgs,
+  config,
+  fenix,
+  unstable,
+  lib,
+  ...
+}:
 let
   enablePraytimes = config.userConfiguration.enablePraytimes;
   adhanFile = ./adhan.mp3;
@@ -11,7 +18,9 @@ let
         inherit latitude;
         inherit longitude;
       };
-      parameters = { method = "Tehran"; };
+      parameters = {
+        method = "Tehran";
+      };
       commands = [
         {
           praytime = "dhuhr";
@@ -42,45 +51,47 @@ let
         {
           praytime = "sunset";
           time_diff = -480;
-          cmd =
-            ''notify-send sunset "Its nearly sunset expect it on ($TIME) "'';
+          cmd = ''notify-send sunset "Its nearly sunset expect it on ($TIME) "'';
         }
         {
           praytime = "midnight";
           time_diff = -480;
-          cmd = ''
-            notify-send midnight "Its nearly midnight expect it on ($TIME) "'';
+          cmd = ''notify-send midnight "Its nearly midnight expect it on ($TIME) "'';
         }
       ];
 
     };
   };
-in lib.mkIf enablePraytimes {
+in
+lib.mkIf enablePraytimes {
 
   nixpkgs.config.packageOverrides = pkgs: {
     praytimes-config = configFile;
 
-    praytimes-kit = ((pkgs.makeRustPlatform {
-      inherit (fenix.packages.x86_64-linux.stable) cargo rustc;
-    }).buildRustPackage {
-      pname = "praytimes-kit";
-      version = "1.1.0";
+    praytimes-kit = (
+      (pkgs.makeRustPlatform {
+        inherit (fenix.packages.x86_64-linux.stable) cargo rustc;
+      }).buildRustPackage
+        {
+          pname = "praytimes-kit";
+          version = "1.1.0";
 
-      src = pkgs.fetchFromGitHub {
-        owner = "basemax";
-        repo = "praytimesrust";
-        rev = "1fc8e65679736b422b614f3470b0a97f6df5053a";
-        sha256 = "sha256-mi3RS+7cv5mTLxMkJtOFd6OtVAxFLt1LkhsKgTYlLmM=";
-      };
+          src = pkgs.fetchFromGitHub {
+            owner = "basemax";
+            repo = "praytimesrust";
+            rev = "1fc8e65679736b422b614f3470b0a97f6df5053a";
+            sha256 = "sha256-mi3RS+7cv5mTLxMkJtOFd6OtVAxFLt1LkhsKgTYlLmM=";
+          };
 
-      cargoHash = "sha256-VURaHe07+9RMCUXK1PkP60jIpnJDS0ZLyViyrIZ0/1o=";
+          cargoHash = "sha256-VURaHe07+9RMCUXK1PkP60jIpnJDS0ZLyViyrIZ0/1o=";
 
-      meta = with pkgs.lib; {
-        description = "A rust based praytimes calculator";
-        homepage = "https://github.com/basemax/praytimesrust";
-        license = licenses.gpl3;
-      };
-    });
+          meta = with pkgs.lib; {
+            description = "A rust based praytimes calculator";
+            homepage = "https://github.com/basemax/praytimesrust";
+            license = licenses.gpl3;
+          };
+        }
+    );
   };
   systemd.user.services.praytimes = {
     enable = true;
@@ -89,21 +100,22 @@ in lib.mkIf enablePraytimes {
       PRAYTIMES_LOG = "info";
       DISPLAY = ":0";
     };
-    path =
-      [ pkgs.bashInteractive pkgs.libnotify pkgs.dbus pkgs.taskwarrior3 ];
+    path = [
+      pkgs.bashInteractive
+      pkgs.libnotify
+      pkgs.dbus
+      pkgs.taskwarrior3
+    ];
     wantedBy = [ "default.target" ];
     restartTriggers = [ configFile ];
     serviceConfig = {
       Restart = "always";
-      ExecStart =
-        "${pkgs.praytimes-kit}/bin/praytimes-kit daemon ${configFile}/etc/praytimes/praytimes.json";
+      ExecStart = "${pkgs.praytimes-kit}/bin/praytimes-kit daemon ${configFile}/etc/praytimes/praytimes.json";
     };
   };
   environment.systemPackages = with pkgs; [ praytimes-kit ];
 
-  environment.shellAliases.pt =
-    "${pkgs.praytimes-kit}/bin/praytimes-kit calculate --config  ${configFile}/etc/praytimes/praytimes.json";
+  environment.shellAliases.pt = "${pkgs.praytimes-kit}/bin/praytimes-kit calculate --config  ${configFile}/etc/praytimes/praytimes.json";
 
-  environment.shellAliases.pn =
-    "${pkgs.praytimes-kit}/bin/praytimes-kit next --config  ${configFile}/etc/praytimes/praytimes.json";
+  environment.shellAliases.pn = "${pkgs.praytimes-kit}/bin/praytimes-kit next --config  ${configFile}/etc/praytimes/praytimes.json";
 }

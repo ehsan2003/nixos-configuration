@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # plugins.hmts.enable = true;
   plugins.treesitter = {
     enable = true;

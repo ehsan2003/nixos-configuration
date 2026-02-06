@@ -1,4 +1,10 @@
-{ config, pkgs, nixvim, unstable, ... }@inputs:
+{
+  config,
+  pkgs,
+  nixvim,
+  unstable,
+  ...
+}@inputs:
 let
   system = "x86_64-linux";
   nixvim' = nixvim.legacyPackages.${system};
@@ -9,15 +15,22 @@ let
   userName = config.userConfiguration.name;
   userFullName = config.userConfiguration.fullName;
   userEmail = config.userConfiguration.email;
-in {
-  environment.systemPackages = [ pkgs.neovide pkgs.glrnvim nvim ];
+in
+{
+  environment.systemPackages = [
+    pkgs.neovide
+    pkgs.glrnvim
+    nvim
+  ];
   home-manager.users.${userName} = {
     programs = {
       git = {
         enable = true;
         settings.user.name = userFullName;
         settings.user.email = userEmail;
-        settings.init = { defaultBranch = "main"; };
+        settings.init = {
+          defaultBranch = "main";
+        };
       };
     };
   };

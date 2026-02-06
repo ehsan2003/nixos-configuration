@@ -1,4 +1,5 @@
-{ pkgs, fenix, ... }: {
+{ pkgs, fenix, ... }:
+{
   plugins.markdown-preview.enable = true;
   plugins.ts-autotag.enable = true;
   plugins.typst-vim.enable = true;
@@ -59,8 +60,7 @@
               end
           '';
         };
-        snippet.expand =
-          "function(args) require('luasnip').lsp_expand(args.body) end";
+        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         sources = [
           {
             name = "nvim_lsp";
@@ -83,8 +83,7 @@
         window = {
           completion = {
             border = "rounded";
-            winhighlight =
-              "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
             scrolloff = 0;
             colOffset = 0;
             sidePadding = 1;
@@ -92,11 +91,9 @@
           };
           documentation = {
             maxHeight = "math.floor(40 * (40 / vim.o.lines))";
-            maxWidth =
-              "math.floor((40 * 2) * (vim.o.columns / (40 * 2 * 16 / 9)))";
+            maxWidth = "math.floor((40 * 2) * (vim.o.columns / (40 * 2 * 16 / 9)))";
             border = "rounded";
-            winhighlight =
-              "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None";
           };
         };
       };
@@ -117,7 +114,10 @@
       servers.vtsls.enable = true;
 
       servers.vtsls.extraOptions.single_file_support = false;
-      servers.vtsls.rootMarkers = [ "package.json" "tsconfig.json" ];
+      servers.vtsls.rootMarkers = [
+        "package.json"
+        "tsconfig.json"
+      ];
       servers.vtsls.extraOptions.root_dir.__raw = ''
         function(bufnr, ondir) if vim.fs.root(bufnr, { "package.json" }) ~= nil then
                 ondir(vim.fs.root(bufnr, { "package.json" }))
@@ -127,7 +127,10 @@
 
       servers.denols = {
         enable = true;
-        rootMarkers = [ "deno.json" "deno.jsonc" ];
+        rootMarkers = [
+          "deno.json"
+          "deno.jsonc"
+        ];
         extraOptions.workspace_required = true;
 
         # extraOptions.root_dir.__raw =
@@ -167,22 +170,19 @@
     }
     {
       key = "gd";
-      action.__raw =
-        ''function() require("telescope.builtin").lsp_definitions() end'';
+      action.__raw = ''function() require("telescope.builtin").lsp_definitions() end'';
       options.desc = "Go to definition";
       mode = "n";
     }
     {
       key = "gr";
-      action.__raw =
-        ''function() require("telescope.builtin").lsp_references() end'';
+      action.__raw = ''function() require("telescope.builtin").lsp_references() end'';
       options.desc = "References of current symbol";
       mode = "n";
     }
     {
       key = "<leader>lR";
-      action.__raw =
-        ''function() require("telescope.builtin").lsp_references() end'';
+      action.__raw = ''function() require("telescope.builtin").lsp_references() end'';
       options.desc = "Search references";
       mode = "n";
     }
@@ -200,8 +200,7 @@
     }
     {
       key = "gy";
-      action.__raw =
-        ''function() require("telescope.builtin").lsp_type_definitions() end'';
+      action.__raw = ''function() require("telescope.builtin").lsp_type_definitions() end'';
       options.desc = "Definition of current type";
       mode = "n";
     }

@@ -1,4 +1,5 @@
-{ pkgs, fenix, ... }: {
+{ pkgs, fenix, ... }:
+{
   imports = [
     ./lsp.nix
     ./telescope.nix

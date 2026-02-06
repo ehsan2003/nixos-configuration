@@ -1,7 +1,20 @@
-{ writeShellApplication, wofi, aichat, sway, alacritty, jq }:
+{
+  writeShellApplication,
+  wofi,
+  aichat,
+  sway,
+  alacritty,
+  jq,
+}:
 writeShellApplication {
   name = "aiask";
-  runtimeInputs = [ wofi aichat sway alacritty jq ];
+  runtimeInputs = [
+    wofi
+    aichat
+    sway
+    alacritty
+    jq
+  ];
   text = ''
     prompt=$(wofi -dmenu -p "🤖")
     read -r screen_width screen_height < <(swaymsg -t get_outputs | jq -r '.[0].current_mode.width, .[0].current_mode.height')

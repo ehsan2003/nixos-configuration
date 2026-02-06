@@ -1,7 +1,16 @@
-{ writeShellApplication, translate-shell, wl-clipboard, libnotify }:
+{
+  writeShellApplication,
+  translate-shell,
+  wl-clipboard,
+  libnotify,
+}:
 writeShellApplication {
   name = "notitrans-dict";
-  runtimeInputs = [ translate-shell wl-clipboard libnotify ];
+  runtimeInputs = [
+    translate-shell
+    wl-clipboard
+    libnotify
+  ];
   text = ''
     text=$(wl-paste --primary)
     complete=$(trans -d  -no-ansi "$text")

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   plugins.toggleterm.enable = true;
   keymaps = [
     {

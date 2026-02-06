@@ -139,6 +139,7 @@ in
     mdbook-pdf
     mdbook-pandoc
     d2
+    nixfmt-tree
     (pkgs.fenix.stable.withComponents [
       "cargo"
       "clippy"

@@ -1,4 +1,10 @@
-{ pkgs, lib, modulesPath, disko, ... }:
+{
+  pkgs,
+  lib,
+  modulesPath,
+  disko,
+  ...
+}:
 {
   imports = [
     "${modulesPath}/profiles/all-hardware.nix"
@@ -29,4 +35,5 @@
   # boot.initrd.kernelModules = [ "uat" ];
   # checkout the example folder for how to configure different disko layouts
 
-} // import ./usb-disko.nix
+}
+// import ./usb-disko.nix
