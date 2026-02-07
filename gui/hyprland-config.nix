@@ -81,7 +81,7 @@ in
     }
 
     decoration {
-        rounding = 0
+        rounding = 5
         blur {
             enabled = false
         }
@@ -226,7 +226,7 @@ in
     bind = SUPER, 1, exec, hyprctl dispatch workspace 1 && ${ensure-class}/bin/ensure-class-hyprland glrnvim glrnvim
     bind = SUPER, 2, exec, hyprctl dispatch workspace 2 && ${ensure-class}/bin/ensure-class-hyprland firefox firefox
     bind = SUPER, 3, exec, hyprctl dispatch workspace 3 && ${ensure-class}/bin/ensure-class-hyprland Alacritty alacritty
-    bind = SUPER, 4, exec, hyprctl dispatch workspace 4 && ${ensure-class}/bin/ensure-class-hyprland aider "alacritty --class=aider"
+    bind = SUPER, 4, exec, hyprctl dispatch workspace 4 && ${ensure-class}/bin/ensure-class-hyprland aider "alacritty --class=aider --config-file=${./alacritty-ai-theme.toml}"
     bind = SUPER, 5, exec, hyprctl dispatch workspace 5 && ${ensure-class}/bin/ensure-class-hyprland org.telegram.desktop Telegram
     bind = SUPER, 6, workspace, 6
     bind = SUPER, 7, workspace, 7
@@ -305,7 +305,7 @@ in
     windowrulev2 = workspace 5, class:^(TelegramDesktop)$
 
     # Border size for all windows
-    windowrulev2 = bordersize 1, class:.*
+    # windowrulev2 = bordersize 1, class:.*
 
     # Ignore maximize requests from apps
     windowrule = suppressevent maximize, class:.*
@@ -324,7 +324,6 @@ in
 
     exec-once = hyprctl plugin load ${hyprgrass}/lib/libhyprgrass.so 
     exec-once = hyprctl plugin load ${hyprexpo}/lib/libhyprexpo.so 
-    exec-once = hyprctl plugin load ${hyprbars}/lib/libhyprbars.so 
 
     plugin {
         hyprexpo {
@@ -344,18 +343,7 @@ in
             # Unset a gesture
             hyprexpo-gesture = 3, up, unset
         }
-        hyprbars {
-            # example config
-            bar_height = 20
-
-            # example buttons (R -> L)
-            # hyprbars-button = color, size, on-click
-            hyprbars-button = rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive
-            hyprbars-button = rgb(eeee11), 10, , hyprctl dispatch fullscreen 1
-
-            # cmd to run on double click of the bar
-            on_double_click = hyprctl dispatch fullscreen 1
-        }
+        
 
      touch_gestures {
       # The default sensitivity is probably too low on tablet screens,
@@ -418,6 +406,8 @@ in
     }
 
     }
+
+    workspace = w[tv1], gapsout:0, gapsin:0, bordersize:0, rounding:0
 
 
     #############################
