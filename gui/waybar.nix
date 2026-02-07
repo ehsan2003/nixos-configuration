@@ -55,6 +55,7 @@ in
           ipc = true;
           position = "bottom";
           height = 48;
+          
           "modules-left" = [ "sway/workspaces" ];
           "modules-center" = [ ];
           "modules-right" = (

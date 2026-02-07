@@ -48,12 +48,15 @@ in
     xdg.configFile."waybar-hyprland/config" = {
       text = builtins.toJSON (
         {
-          layer = "top";
           ipc = true;
           position = "bottom";
           height = 48;
           "start_hidden" = true;
-          "exclusive" = true;
+          on-sigusr1 = "show";
+          on-sigusr2 = "hide";
+
+          "layer" = "overlay";
+          "exclusive" = false;
 
           "modules-left" = [ "hyprland/workspaces" ];
           "modules-center" = [ ];

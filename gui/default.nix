@@ -82,6 +82,11 @@ in
         useGrimAdapter = true;
       };
     };
+    home.pointerCursor = {
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
+      size = 72;
+    };
     gtk = {
       enable = true;
       theme = {
@@ -102,6 +107,7 @@ in
     home.file.".config/hypr/hyprpaper.conf".text = ''
       preload = ~/.background-image
       wallpaper = eDP-1,~/.background-image
+      wallpaper = HDMI-A-1,~/.background-image
     '';
     home.file.aiderConfig = {
       target = ".config/aichat/config.yaml";

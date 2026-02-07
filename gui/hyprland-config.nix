@@ -24,7 +24,8 @@ in
     ################
 
     # Will be configured automatically or via hardware-configuration
-    monitor =,preferred,auto,auto
+    monitor = HDMI-A-1,preferred,auto,3
+    monitor = eDP-1,preferred,auto,1
 
 
     #################
@@ -147,7 +148,12 @@ in
 
 
     bindt = , Super_L, exec, pkill -SIGUSR1 .waybar-wrapped
-    bindrt = SUPER, Super_L, exec, pkill -SIGUSR1 .waybar-wrapped
+    bindrt = SUPER, Super_L, exec, pkill -SIGUSR2 .waybar-wrapped
+
+    layerrule = xray 1, waybar
+    layerrule = noanim, waybar
+    layerrule = blur, waybar
+    layerrule = ignorezero, waybar
 
     # Terminal
     bind = SUPER, Return, exec, alacritty
