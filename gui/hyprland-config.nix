@@ -24,7 +24,7 @@ in
     ################
 
     # Will be configured automatically or via hardware-configuration
-    monitor = HDMI-A-1,preferred,auto,3
+    monitor = HDMI-A-1,preferred,auto,2.5
     monitor = eDP-1,preferred,auto,1
 
 
@@ -150,10 +150,11 @@ in
     bindt = , Super_L, exec, pkill -SIGUSR1 .waybar-wrapped
     bindrt = SUPER, Super_L, exec, pkill -SIGUSR2 .waybar-wrapped
 
-    layerrule = xray 1, waybar
+
     layerrule = noanim, waybar
     layerrule = blur, waybar
     layerrule = ignorezero, waybar
+    layerrule = animation slide, waybar
 
     # Terminal
     bind = SUPER, Return, exec, alacritty
@@ -268,7 +269,7 @@ in
     bind = SUPER, mouse_up, workspace, e-1
 
     # Move/resize windows with mainMod + LMB/RMB and dragging
-    bindm = SUPER, mouse:272, movewindow
+    # bindm = SUPER, mouse:272, movewindow
     bindm = SUPER, mouse:273, resizewindow
 
 
@@ -310,7 +311,6 @@ in
     windowrule = suppressevent maximize, class:.*
 
     # Fix some dragging issues with XWayland
-    windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 
 
     #########################

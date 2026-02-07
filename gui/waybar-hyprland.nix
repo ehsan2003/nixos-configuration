@@ -50,12 +50,13 @@ in
         {
           ipc = true;
           position = "bottom";
-          height = 48;
+          height = 32;
           "start_hidden" = true;
           on-sigusr1 = "show";
           on-sigusr2 = "hide";
 
           "layer" = "overlay";
+          passthru = false;
           "exclusive" = false;
 
           "modules-left" = [ "hyprland/workspaces" ];

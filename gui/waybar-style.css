@@ -1,6 +1,6 @@
 * {
     font-family: "JetBrains Mono Nerd Font", monospace;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 500;
     min-height: 0;
     margin: 0;
@@ -76,13 +76,18 @@ window#waybar.hidden {
     color: #6C7086;
     border: none;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 14px;
     min-width: 28px;
 }
 
 #workspaces button:hover {
     background: rgba(137, 180, 250, 0.15);
     color: #CDD6F4;
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, #89B4FA 0%, #74C7EC 100%);
+    color: #1E1E2E;
 }
 
 #workspaces button.focused {
@@ -216,7 +221,7 @@ window#waybar.hidden {
 #clock {
     background: linear-gradient(135deg, rgba(137, 180, 250, 0.2) 0%, rgba(203, 166, 247, 0.15) 100%);
     font-weight: 700;
-    font-size: 16px;
+    font-size: 13px;
     letter-spacing: 0.5px;
 }
 
