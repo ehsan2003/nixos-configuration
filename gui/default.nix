@@ -153,6 +153,7 @@ in
     xdg-desktop-portal-wlr
     wvkbd
     pavucontrol
+    xfce.thunar
 
   ];
   services.xserver.desktopManager.runXdgAutostartIfNone = true;
