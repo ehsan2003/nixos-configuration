@@ -45,7 +45,7 @@ let
 in
 {
   home-manager.users.${userName} = {
-    xdg.configFile."waybar-hyprland/config" = {
+    xdg.configFile."waybar/config" = {
       text = builtins.toJSON (
         {
           ipc = true;
@@ -221,7 +221,7 @@ in
         }
       );
     };
-    xdg.configFile."waybar-hyprland/style.css".source = ./waybar-style.css;
+    xdg.configFile."waybar/style.css".source = ./waybar-style.css;
   };
 
 }

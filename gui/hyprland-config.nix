@@ -1,9 +1,11 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 let
-  is-tab = (config.networking.hostName == "nixos-new-laptop");
   hyprgrass = pkgs.hyprlandPlugins.hyprgrass;
   hyprexpo = pkgs.hyprlandPlugins.hyprexpo;
-  hyprbars = pkgs.hyprlandPlugins.hyprbars;
   notitrans-fa = pkgs.callPackage ./notitrans-fa.nix { };
   notitrans-en = pkgs.callPackage ./notitrans-en.nix { };
   notitrans-dict = pkgs.callPackage ./notitrans-dict.nix { };
@@ -43,7 +45,7 @@ in
     exec-once = ${pkgs.hyprpaper}/bin/hyprpaper
 
     # Waybar with Hyprland-specific config
-    exec-once = ${pkgs.waybar}/bin/waybar -c ~/.config/waybar-hyprland/config && pkill -SIGUSR1 .waybar-wrapped
+    exec-once = ${pkgs.waybar}/bin/waybar  && pkill -SIGUSR1 .waybar-wrapped
 
 
     #####################
@@ -111,7 +113,7 @@ in
     #############
 
     input {
-        kb_layout = us${if config.userConfiguration.persianLayout then ",ir" else ""}
+        kb_layout = us${pkgs.lib.optionalString config.userConfiguration.persianLayout ",ir"}
         kb_options = eurosign:e,caps:escape,grp:shifts_toggle
 
         follow_mouse = 1

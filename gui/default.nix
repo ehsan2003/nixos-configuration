@@ -9,7 +9,7 @@ let
 in
 {
   imports = [
-    ./waybar-hyprland.nix
+    ./waybar.nix
     ./rofi.nix
     ./firefox.nix
     ./media.nix
@@ -152,6 +152,7 @@ in
     xdg-desktop-portal
     xdg-desktop-portal-wlr
     wvkbd
+    pavucontrol
 
   ];
   services.xserver.desktopManager.runXdgAutostartIfNone = true;
