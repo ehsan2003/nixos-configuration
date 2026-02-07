@@ -5,15 +5,10 @@
   ...
 }:
 let
-  tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor.nix { };
-  tablet-mode-monitor-hyprland = pkgs.callPackage ./tablet-mode-monitor-hyprland.nix {
-    enable-persian = config.userConfiguration.persianLayout;
-  };
   userName = config.userConfiguration.name;
 in
 {
   imports = [
-    ./waybar.nix
     ./waybar-hyprland.nix
     ./rofi.nix
     ./firefox.nix
@@ -29,7 +24,7 @@ in
       };
     };
     wlr.enable = true;
-    # Add the WLR backend for Sway/Wayland
+    # Add the WLR backend for Hyprland/Wayland
     extraPortals = with pkgs; [
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk # Recommended for GTK file dialogs
@@ -50,12 +45,6 @@ in
   console = {
     font = "Lat2-Terminus16";
     useXkbConfig = true; # use xkbOptions in tty.
-  };
-
-  # Enable Sway (Wayland)
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
   };
 
   # Enable Hyprland (Wayland)
@@ -94,11 +83,6 @@ in
         package = pkgs.materia-theme;
       };
     };
-    home.file.".config/sway/config".text =
-      (import ./sway-config.nix {
-        pkgs = pkgs;
-        config = config;
-      }).text;
     home.file.".config/hypr/hyprland.conf".text =
       (import ./hyprland-config.nix {
         pkgs = pkgs;
@@ -151,11 +135,6 @@ in
 
     xarchiver
     unstable.telegram-desktop
-    # Sway packages
-    sway
-    swayidle
-    swaylock
-    swaybg
     # Hyprland packages
     hyprland
     hyprlandPlugins.hyprgrass
@@ -173,8 +152,6 @@ in
     xdg-desktop-portal
     xdg-desktop-portal-wlr
     wvkbd
-    tablet-mode-monitor
-    tablet-mode-monitor-hyprland
 
   ];
   services.xserver.desktopManager.runXdgAutostartIfNone = true;

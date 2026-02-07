@@ -9,9 +9,7 @@ let
   notitrans-dict = pkgs.callPackage ./notitrans-dict.nix { };
   search-select = pkgs.callPackage ./search-select.nix { };
   ensure-class = pkgs.callPackage ./ensure-class-hyprland.nix { };
-  tablet-mode-monitor = pkgs.callPackage ./tablet-mode-monitor-hyprland.nix {
-    enable-persian = config.userConfiguration.persianLayout;
-  };
+
 in
 {
   target = ".config/hypr/hyprland.conf";
@@ -46,16 +44,6 @@ in
 
     # Waybar with Hyprland-specific config
     exec-once = ${pkgs.waybar}/bin/waybar -c ~/.config/waybar-hyprland/config && pkill -SIGUSR1 .waybar-wrapped
-
-    ${
-      if is-tab then
-        ''
-          # Tablet mode monitor
-          exec-once = ${tablet-mode-monitor}/bin/tablet-mode-monitor
-        ''
-      else
-        ""
-    }
 
 
     #####################
