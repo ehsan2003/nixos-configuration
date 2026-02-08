@@ -10,7 +10,8 @@ let
   notitrans-en = pkgs.callPackage ./notitrans-en.nix { };
   notitrans-dict = pkgs.callPackage ./notitrans-dict.nix { };
   search-select = pkgs.callPackage ./search-select.nix { };
-  ensure-class = pkgs.callPackage ./ensure-class-hyprland.nix { };
+  ensure-class-pkg = pkgs.callPackage ./ensure-class-hyprland.nix { };
+  ensure-class = "${ensure-class-pkg}/bin/ensure-class-hyprland";
 
 in
 {
@@ -137,6 +138,10 @@ in
     # $mod = Mod4 (Super/Windows key)
 
 
+
+    bind = SUPER SHIFT, s,movetoworkspace, special
+    bind = SUPER , s,togglespecialworkspace
+    bind = SUPER , s,exec , ${ensure-class} sterm "alacritty --class sterm"
     bindt = , Super_L, exec, pkill -SIGUSR1 .waybar-wrapped
     bindrt = SUPER, Super_L, exec, pkill -SIGUSR2 .waybar-wrapped
 
@@ -147,7 +152,10 @@ in
     layerrule = animation slide, waybar
 
     # Terminal
-    bind = SUPER, Return, exec, alacritty
+    bind = SUPER, Return, exec, alacritty --class sterm
+
+    # bind = SUPER, Return, specialworkspace, special
+    bind = SUPER SHIFT, Return, exec, alacritty
 
     # Kill focused window
     bind = SUPER SHIFT, Q, killactive,
@@ -213,11 +221,11 @@ in
     bind = SUPER SHIFT, E, exec, wlogout --protocol layer-shell
 
     # Workspace switching (with ensure-class)
-    bind = SUPER, 1, exec, hyprctl dispatch workspace 1 && ${ensure-class}/bin/ensure-class-hyprland glrnvim glrnvim
-    bind = SUPER, 2, exec, hyprctl dispatch workspace 2 && ${ensure-class}/bin/ensure-class-hyprland firefox firefox
-    bind = SUPER, 3, exec, hyprctl dispatch workspace 3 && ${ensure-class}/bin/ensure-class-hyprland Alacritty alacritty
-    bind = SUPER, 4, exec, hyprctl dispatch workspace 4 && ${ensure-class}/bin/ensure-class-hyprland aider "alacritty --class=aider --config-file=${./alacritty-ai-theme.toml}"
-    bind = SUPER, 5, exec, hyprctl dispatch workspace 5 && ${ensure-class}/bin/ensure-class-hyprland org.telegram.desktop Telegram
+    bind = SUPER, 1, exec, hyprctl dispatch workspace 1 && ${ensure-class} glrnvim glrnvim
+    bind = SUPER, 2, exec, hyprctl dispatch workspace 2 && ${ensure-class} firefox firefox
+    bind = SUPER, 3, exec, hyprctl dispatch workspace 3 && ${ensure-class} Alacritty alacritty
+    bind = SUPER, 4, exec, hyprctl dispatch workspace 4 && ${ensure-class} aider "alacritty --class=aider --config-file=${./alacritty-ai-theme.toml}"
+    bind = SUPER, 5, exec, hyprctl dispatch workspace 5 && ${ensure-class} org.telegram.desktop Telegram
     bind = SUPER, 6, workspace, 6
     bind = SUPER, 7, workspace, 7
     bind = SUPER, 8, workspace, 8
@@ -287,6 +295,7 @@ in
     ##############################
 
     # Workspace assignments
+    windowrulev2 = workspace special, class:^(sterm)$
     windowrulev2 = workspace 1, class:^(glrnvim)$
     windowrulev2 = workspace 2, class:^(firefox)$
     windowrulev2 = workspace 3, class:^(Alacritty)$
