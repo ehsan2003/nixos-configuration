@@ -57,6 +57,7 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    enableHidpi = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -153,9 +154,9 @@ in
     xdg-desktop-portal-wlr
     wvkbd
     pavucontrol
-    xfce.thunar
 
   ];
+  programs.thunar.enable = true;
   services.xserver.desktopManager.runXdgAutostartIfNone = true;
   i18n.inputMethod = {
     type = "fcitx5";

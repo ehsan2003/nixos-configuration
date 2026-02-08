@@ -315,6 +315,10 @@ in
     exec-once = hyprctl plugin load ${hyprgrass}/lib/libhyprgrass.so 
     exec-once = hyprctl plugin load ${hyprexpo}/lib/libhyprexpo.so 
 
+    # windowrulev2=move 0 0,class:(flameshot),title:(flameshot)
+    # windowrulev2=pin,class:(flameshot),title:(flameshot)
+    # windowrulev2=fullscreenstate,class:(flameshot),title:(flameshot)
+    # windowrulev2=float,class:(flameshot),title:(flameshot)
     plugin {
         hyprexpo {
             columns = 3
