@@ -410,7 +410,17 @@ in
 
     }
 
-    workspace = w[tv1], gapsout:0, gapsin:0, bordersize:0, rounding:0
+     workspace = w[tv1]s[false], gapsout:0, gapsin:0, bordersize:0, rounding:0
+     workspace = s[true], gapsout:80 20 20 80, gapsin:10, bordersize:2, rounding:10,active_opacity:0.9, inactive_opacity:0.4
+
+
+
+# workspace = w[tv1]s[false], gapsout:0, gapsin:0
+# workspace = f[1]s[false], gapsout:0, gapsin:0
+# windowrule =w[tv1]s[false], bordersize 0, match:float 0
+# windowrule =w[tv1]s[false], rounding 0, match:float 0
+# windowrule =f[1]s[false], bordersize 0, match:float 0
+# windowrule =f[1]s[false], rounding 0, match:float 0
 
 
     #############################
