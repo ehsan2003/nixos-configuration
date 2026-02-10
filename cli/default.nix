@@ -10,6 +10,7 @@ let
   urls = (import ./uri-short.nix pkgs);
   secrets = config.userConfiguration.secrets;
   alert = (import ./alert.nix pkgs) secrets;
+  pgbkp = pkgs.callPackage ./pgbkp/default.nix {postgresql = pkgs.postgresql_16 ;};
   userName = config.userConfiguration.name;
 in
 {
@@ -110,6 +111,7 @@ in
         name = "ai";
         text = ''${alacritty}/bin/alacritty --title "aider" '';
       })
+      pgbkp
     ])
     ++ [
       nix-alien.packages.${"x86_64-linux"}.nix-alien
