@@ -316,6 +316,10 @@ in
     ### XWAYLAND ###
     #########################
 
+    binds {
+      hide_special_on_workspace_change = true	
+    }
+
     xwayland {
         use_nearest_neighbor = false
     }
@@ -415,12 +419,12 @@ in
 
 
 
-# workspace = w[tv1]s[false], gapsout:0, gapsin:0
-# workspace = f[1]s[false], gapsout:0, gapsin:0
-# windowrule =w[tv1]s[false], bordersize 0, match:float 0
-# windowrule =w[tv1]s[false], rounding 0, match:float 0
-# windowrule =f[1]s[false], bordersize 0, match:float 0
-# windowrule =f[1]s[false], rounding 0, match:float 0
+    # workspace = w[tv1]s[false], gapsout:0, gapsin:0
+    # workspace = f[1]s[false], gapsout:0, gapsin:0
+    # windowrule =w[tv1]s[false], bordersize 0, match:float 0
+    # windowrule =w[tv1]s[false], rounding 0, match:float 0
+    # windowrule =f[1]s[false], bordersize 0, match:float 0
+    # windowrule =f[1]s[false], rounding 0, match:float 0
 
 
     #############################
