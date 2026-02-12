@@ -35,7 +35,7 @@ in
         settings = {
           env = {
             ANTHROPIC_DEFAULT_HAIKU_MODEL = "glm-4.7";
-            ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-5";
+            ANTHROPIC_DEFAULT_SONNET_MODEL = "glm-4.7";
             ANTHROPIC_DEFAULT_OPUS_MODEL = "glm-5";
             https_proxy = "http://localhost:1080";
             ANTHROPIC_AUTH_TOKEN = secrets.ANTHROPIC_AUTH_TOKEN;
