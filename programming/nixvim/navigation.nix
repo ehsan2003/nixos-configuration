@@ -55,7 +55,7 @@
       };
       show_on_autocmd = false; # event to trigger cybu (eg. "BufEnter")
     };
-    display_time = 300; # time the cybu window is displayed
+    display_time = 700; # time the cybu window is displayed
     exclude = [
       # filetypes, cybu will not be active
       "neo-tree"

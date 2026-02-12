@@ -316,6 +316,10 @@ in
     ### XWAYLAND ###
     #########################
 
+    binds {
+      hide_special_on_workspace_change = true	
+    }
+
     xwayland {
         use_nearest_neighbor = false
     }
@@ -324,6 +328,10 @@ in
     exec-once = hyprctl plugin load ${hyprgrass}/lib/libhyprgrass.so 
     exec-once = hyprctl plugin load ${hyprexpo}/lib/libhyprexpo.so 
 
+    # windowrulev2=move 0 0,class:(flameshot),title:(flameshot)
+    # windowrulev2=pin,class:(flameshot),title:(flameshot)
+    # windowrulev2=fullscreenstate,class:(flameshot),title:(flameshot)
+    # windowrulev2=float,class:(flameshot),title:(flameshot)
     plugin {
         hyprexpo {
             columns = 3
@@ -406,7 +414,17 @@ in
 
     }
 
-    workspace = w[tv1], gapsout:0, gapsin:0, bordersize:0, rounding:0
+     workspace = w[tv1]s[false], gapsout:0, gapsin:0, bordersize:0, rounding:0
+     workspace = s[true], gapsout:80 20 20 80, gapsin:10, bordersize:2, rounding:10,active_opacity:0.9, inactive_opacity:0.4
+
+
+
+    # workspace = w[tv1]s[false], gapsout:0, gapsin:0
+    # workspace = f[1]s[false], gapsout:0, gapsin:0
+    # windowrule =w[tv1]s[false], bordersize 0, match:float 0
+    # windowrule =w[tv1]s[false], rounding 0, match:float 0
+    # windowrule =f[1]s[false], bordersize 0, match:float 0
+    # windowrule =f[1]s[false], rounding 0, match:float 0
 
 
     #############################
