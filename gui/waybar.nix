@@ -108,9 +108,9 @@ in
           };
           network = {
             format = "{ifname}";
-            format-wifi = " {ipaddr} - {essid} ({signalStrength}%) ▼{bandwidthDownOctets:>} ▲{bandwidthUpOctets:>}";
-            format-ethernet = " {ipaddr} (Wired) ▼{bandwidthDownBits:>} ▲{bandwidthUpBits:>}";
-            format-disconnected = " Disconnected";
+            format-wifi = "{ipaddr}|{essid}({signalStrength}%) ▼{bandwidthDownOctets:>} ▲{bandwidthUpOctets:>}";
+            format-ethernet = "{ipaddr} (Wired) ▼{bandwidthDownBits:>} ▲{bandwidthUpBits:>}";
+            format-disconnected = "Disconnected";
             interval = 3;
             tooltip = false;
           };

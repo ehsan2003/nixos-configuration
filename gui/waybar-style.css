@@ -35,7 +35,7 @@ window#waybar.hidden {
 #workspaces,
 #mode,
 #window {
-    padding: 4px 8px;
+    padding: 4px;
     margin: 2px 2px;
     background: rgba(69, 71, 90, 0.3);
     border-radius: 12px;
@@ -70,7 +70,7 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-    padding: 4px 8px;
+    padding: 4px;
     margin: 2px 1px;
     background: transparent;
     color: #6C7086;
@@ -230,13 +230,13 @@ window#waybar.hidden {
     background: linear-gradient(135deg, #F38BA8 0%, #EBA0AC 100%);
     color: #1E1E2E;
     font-weight: 700;
-    padding: 4px 8px;
+    padding: 4px;
 }
 
 /* Tray */
 #tray {
     margin: 2px 2px;
-    padding: 4px 8px;
+    padding: 4px;
     background: rgba(69, 71, 90, 0.3);
     border-radius: 12px;
     border: 1px solid rgba(137, 180, 250, 0.1);
@@ -262,7 +262,7 @@ tooltip {
     background: rgba(30, 30, 46, 0.95);
     border: 1px solid rgba(137, 180, 250, 0.3);
     border-radius: 12px;
-    padding: 4px 8px;
+    padding: 4px;
 }
 
 tooltip label {
