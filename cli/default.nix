@@ -84,6 +84,7 @@ in
       unrar-wrapper
       unzip
       ripgrep
+      sd
       fd
       bat
       jcal
