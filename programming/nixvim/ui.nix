@@ -37,6 +37,7 @@
   };
   plugins.neo-tree.enable = true;
   plugins.neo-tree.settings.filesystem.filtered_items.visible = true;
+  plugins.neo-tree.settings.filesystem.use_libuv_file_watcher = true;
 
   plugins.noice.enable = true;
   plugins.noice.settings.presets = {

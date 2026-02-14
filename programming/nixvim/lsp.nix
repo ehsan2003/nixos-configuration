@@ -4,6 +4,8 @@
   plugins.ts-autotag.enable = true;
   plugins.typst-vim.enable = true;
   plugins.nvim-autopairs.enable = true;
+  extraPlugins = [ pkgs.vimPlugins.nvim-lsp-file-operations ];
+
   plugins = {
     none-ls = {
       enable = true;
@@ -270,5 +272,7 @@
   extraConfigLua = ''
     local cmp=require('cmp')
     cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done { tex = false })
+
+    require("lsp-file-operations").setup()
   '';
 }
